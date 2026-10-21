@@ -1,0 +1,34 @@
+.d-root.d-temporary-mode.d-chatgpt-home .d-composer-wrap{top:31%;bottom:auto;left:50%;right:auto;transform:translateX(-50%);width:min(960px,calc(100% - 80px))}
+.d-root.d-temporary-mode .d-home-heading{margin-bottom:18px}
+.d-root .d-temporary-description{text-align:center;font-size:22px;line-height:32px;color:var(--d-muted,#aaa);margin:0 -40px 34px}
+.d-temporary-mode.d-chatgpt-home .d-header-temporary-badge{display:none}
+.d-temporary-intro{position:fixed;inset:0;margin:auto;width:min(720px,calc(100vw - 32px));max-height:calc(100dvh - 32px);padding:0;border:0;border-radius:18px;background:#2d2d2d;color:#f5f5f5;font:inherit;overflow:auto;box-shadow:0 16px 64px #0003}
+.d-temporary-intro::backdrop{background:#0005}
+.d-temporary-intro-art{position:relative;height:240px;display:grid;place-items:center;background:radial-gradient(ellipse at 32% 15%,#a6a4b2a8,transparent 43%),radial-gradient(ellipse at 85% 100%,#a8a4b3a1,transparent 45%),linear-gradient(115deg,#0b3777,#292365 68%,#514779);overflow:hidden}
+.d-temporary-intro-art>span{display:grid;place-items:center;width:96px;height:96px;border-radius:28px;background:#343434;border:1px solid #ffffff15;color:#fff}
+.d-root .d-temporary-intro .d-temporary-intro-close{position:absolute;right:16px;top:16px;display:grid;place-items:center;width:36px;height:36px;border:0;border-radius:50%;background:transparent;color:#fff;cursor:pointer}
+.d-temporary-intro-close:hover{background:#ffffff20}
+.d-temporary-intro-body{text-align:center;padding:60px 44px 58px}
+.d-root .d-temporary-intro-body h2{font-size:30px;line-height:1.3;font-weight:600;margin:0 0 16px}
+.d-root .d-temporary-intro-body p{font-size:20px;line-height:1.6;color:#a6a6a6;margin:0 0 36px}
+.d-root .d-temporary-intro .d-temporary-intro-continue{border:0;background:#fff;color:#333;font:inherit;font-size:20px;padding:12px 32px;border-radius:999px;cursor:pointer;min-height:52px}
+.d-temporary-intro button:focus-visible{outline:2px solid #5fa9ff;outline-offset:4px}
+html[data-client-theme=light] .d-temporary-intro{background:#fff;color:#171717}
+html[data-client-theme=light] .d-root .d-temporary-intro-body p{color:#666}
+html[data-client-theme=light] .d-root .d-temporary-intro .d-temporary-intro-continue{background:#171717;color:#fff}
+@media(max-width:600px){.d-temporary-intro-art{height:140px}.d-temporary-intro-body{padding:26px 24px}.d-root .d-temporary-intro-body h2{font-size:25px}.d-root .d-temporary-intro-body p{font-size:17px;margin-bottom:24px}.d-root.d-temporary-mode.d-chatgpt-home .d-composer-wrap{top:27%;width:calc(100% - 48px)}.d-root .d-temporary-description{font-size:17px;margin-bottom:24px}.d-temporary-mode .d-home-disclaimer{padding:0 16px;font-size:14px}}
+
+.d-root .d-temporary-intro-art>span svg{width:48px;height:48px}
+
+.d-root.d-temporary-mode .d-home-disclaimer{font-size:18px;line-height:26px;padding:0 24px}
+.d-root.d-temporary-mode .d-temporary-btn{position:absolute;right:17px;top:90px;width:32px;height:42px;border-radius:50%;background:transparent;color:#eee}
+.d-root.d-temporary-mode .d-temporary-btn svg{width:28px;height:28px}
+.d-root.d-temporary-mode .d-send:disabled{opacity:.55;cursor:default}
+.d-temporary-personalization{position:absolute;top:90px;right:76px;z-index:5;font-size:20px}
+.d-root .d-temporary-personalization>button{display:flex;align-items:center;gap:10px;min-height:42px;color:inherit;padding:0 4px;border-radius:8px}
+.d-root .d-temporary-personalization>button:hover{background:var(--d-hover,#ffffff0a)}
+.d-temporary-personalization-options{position:absolute;right:0;top:50px;width:340px;max-width:calc(100vw - 32px);background:var(--d-sidebar,#212121);border:1px solid var(--d-border,#3d3d3d);border-radius:18px;padding:12px;box-shadow:0 12px 40px #0004}
+.d-temporary-personalization-options label{display:flex;align-items:center;gap:12px;justify-content:space-between;padding:12px 6px;font-size:17px}
+.d-temporary-personalization-options small{display:block;color:var(--d-muted,#999);font-size:14px;line-height:20px;margin-top:4px}
+.d-root .d-temporary-personalization-options p{font-size:14px;line-height:21px;color:var(--d-muted,#999);margin:10px 6px 6px}
+@media(max-width:600px){.d-root .d-temporary-description{margin-left:0;margin-right:0}.d-temporary-personalization{right:60px}.d-root.d-temporary-mode .d-home-disclaimer{font-size:15px;line-height:22px}}

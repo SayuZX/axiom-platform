@@ -1,0 +1,19 @@
+/* Content scrolls beneath the chrome; gradient masks avoid rectangular cutoffs.
+   Use semantic colors so both light and dark keep the same fade geometry. */
+.m-conversation-header{position:absolute;inset:0 0 auto;height:calc(69.3px + env(safe-area-inset-top));padding-top:calc(12.1px + env(safe-area-inset-top));background:none!important;z-index:3}
+.m-conversation-header::before{content:"";position:absolute;inset:0;pointer-events:none;background:var(--m-bg);backdrop-filter:blur(8px);mask-image:linear-gradient(#000,transparent)}
+.m-conversation-header>*{position:relative}
+.m-conversation-header{pointer-events:none}
+.m-conversation-header>button,.m-conversation-header>.m-header-pill{pointer-events:auto}
+.m-app:not(.m-home) .m-messages{padding-top:81.3px}
+.m-sidebar{padding:0;--m-sidebar-top:calc(70px + env(safe-area-inset-top));--m-sidebar-bottom:calc(120px + env(safe-area-inset-bottom))}
+.m-sidebar>header{position:absolute;inset:0 0 auto;height:var(--m-sidebar-top);padding:env(safe-area-inset-top) 24px 0 32px;z-index:2}
+.m-sidebar>header::before{content:"";position:absolute;inset:0 0 -20px;background:var(--m-panel);mask-image:linear-gradient(#000 20%,transparent);backdrop-filter:blur(6px);pointer-events:none;z-index:-1}
+.m-sidebar>header,.m-app .m-sidebar>footer{pointer-events:none}
+.m-sidebar>header>button,.m-sidebar>footer>button{pointer-events:auto}
+.m-sidebar-scroll{height:100%;margin:0;padding:var(--m-sidebar-top) 24px var(--m-sidebar-bottom) 32px;mask-image:linear-gradient(transparent,#000 55px,#000 calc(100% - 130px),transparent calc(100% - 8px));overflow-x:hidden}
+.m-app .m-sidebar>footer{position:absolute;inset:auto 0 0;margin:0;padding:12px 24px calc(32px + env(safe-area-inset-bottom)) 32px;background:none;z-index:2}
+html[data-client-theme] .m-app .m-sidebar>footer{background:none}
+.m-app .m-sidebar>footer::before{content:"";position:absolute;inset:-32px 0 0;background:var(--m-panel);mask-image:linear-gradient(transparent,#000);pointer-events:none;z-index:-1}
+.m-app .m-sidebar-history button{width:calc(100% + 56px);margin-left:-32px;padding-left:32px;padding-right:24px;flex-shrink:0;border-radius:0}
+.m-app .m-sidebar-history button[aria-current=page]{background:var(--m-selected)}

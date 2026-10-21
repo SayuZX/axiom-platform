@@ -1,0 +1,19 @@
+/* Restore the SDK component layer where the shell's unlayered resets win. */
+.d-root input[type=checkbox]:not([role=switch]),.d-auth-page input[type=checkbox],.d-mini-chat input[type=checkbox]{appearance:auto}
+.d-root select,.d-auth-page select{appearance:auto}
+.d-root .d-rich-text,.d-mini-chat .d-rich-text{white-space:normal;font-family:var(--client-ui-font);font-size:var(--client-content-size,20px);line-height:1.65;min-width:0;overflow-wrap:anywhere;color:inherit;color-scheme:dark}
+html[data-client-theme=light] .d-rich-text{color-scheme:light}
+.d-root .d-rich-text :is(p,h1,h2,h3,h4,h5,h6){margin:revert-layer}
+.d-root .d-rich-text :is(h1,h2,h3,h4,h5,h6){font-size:revert-layer;font-weight:revert-layer;line-height:revert-layer}
+.d-root .d-rich-text button{all:revert-layer}
+.d-rich-text :is(code,pre){font-family:var(--client-code-font,var(--font-mono));font-size:var(--client-code-size,14px)}
+.d-rich-text pre{max-width:100%;tab-size:4}
+.d-rich-code-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:7px 12px;border-bottom:1px solid var(--color-border);font-size:14px;color:var(--color-text-secondary)}
+.d-rich-text .d-rich-code-header+pre{padding:14px 16px}
+.d-rich-text table{display:block;max-width:100%;overflow-x:auto}
+.d-rich-text a{color:var(--client-accent,#6ba5ff);text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+.d-rich-text img{display:block;max-width:100%;max-height:520px;object-fit:contain;border-radius:16px;margin:12px 0}
+.d-root .d-rich-text .d-rich-image-load,.d-mini-chat .d-rich-text .d-rich-image-load{display:inline-block;border:1px solid #555;border-radius:12px;padding:8px 12px;color:inherit;background:transparent;font:inherit;cursor:pointer}
+.d-rich-text :is(a,button):focus-visible{outline:2px solid var(--client-accent,#6ba5ff);outline-offset:3px}
+.d-rich-fallback{white-space:pre-wrap}
+.d-thinking-text .d-rich-text{font-size:inherit;line-height:inherit}

@@ -1,0 +1,38 @@
+/* Mobile-only motion; durations are reconstruction tuning, not recovered APK values. */
+.m-presence{display:contents}
+.m-presence .m-backdrop{animation:m-backdrop-in 240ms ease-out both}
+.m-presence .m-drawer{animation:m-drawer-in 320ms cubic-bezier(.2,.8,.2,1) both;will-change:transform}
+.m-presence .m-sheet{animation:m-sheet-in 320ms cubic-bezier(.2,.8,.2,1) both;will-change:transform}
+.m-presence.m-leaving .m-backdrop{animation:m-backdrop-out 240ms ease-in both}
+.m-presence.m-leaving .m-drawer{animation:m-drawer-out 240ms cubic-bezier(.4,0,1,1) both}
+.m-presence.m-leaving .m-sheet{animation:m-sheet-out 240ms cubic-bezier(.4,0,1,1) both}
+/* Fade the sidebar and scrim as one layer, so a dark rectangle cannot linger
+   behind the departing panel. Backdrops are hit areas, not pressable controls. */
+.m-presence.m-leaving .m-sidebar-overlay{animation:m-backdrop-out 240ms cubic-bezier(.4,0,1,1) both}
+.m-presence.m-leaving .m-sidebar-overlay>.m-backdrop{animation:none;opacity:1}
+.m-app .m-backdrop,.m-app .m-backdrop:active:not(:disabled){transform:none;transition:none;-webkit-tap-highlight-color:transparent}
+.m-app button{transition:background-color 140ms ease,color 140ms ease,opacity 140ms ease,transform 140ms ease}
+.m-app button:active:not(:disabled){transform:scale(.96)}
+.m-app .m-mode button[aria-selected=true]{transition:background-color 200ms ease}
+.m-app .m-composer{transition:min-height 220ms cubic-bezier(.2,.8,.2,1),border-radius 220ms ease,padding 220ms ease}
+.m-message{animation:m-message-in 180ms ease-out both}
+.m-conversation-header .m-header-pill{animation:m-header-in 220ms ease-out both}
+@keyframes m-drawer-in{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+@keyframes m-drawer-out{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+@keyframes m-sheet-in{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes m-sheet-out{from{transform:translateY(0)}to{transform:translateY(100%)}}
+@keyframes m-backdrop-in{from{opacity:0}to{opacity:1}}
+@keyframes m-backdrop-out{from{opacity:1}to{opacity:0}}
+@keyframes m-message-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes m-header-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.m-app *{animation:none!important;transition:none!important}.m-leaving .m-overlay{display:none}}
+html[data-reduce-motion=true] .m-app *{animation:none!important;transition:none!important}
+html[data-reduce-motion=true] .m-leaving .m-overlay{display:none}
+/* Header geometry stays constant when the first message replaces the home tabs. */
+.m-conversation-header{height:69.3px;padding:12.1px 14px}
+.m-app .m-conversation-header .m-round{width:45.1px;height:45.1px;min-height:45.1px;flex-shrink:0}
+.m-conversation-header .m-header-pill{height:45.1px;border:1px solid #484848;align-items:center}
+.m-app .m-conversation-header .m-header-pill button{width:45.1px;height:43.1px;min-height:43.1px;padding:10px}
+.m-conversation-header .m-header-pill svg{width:24px!important;height:24px!important}
+.m-conversation-header .m-header-pill svg[data-icon=dots]{transform:rotate(90deg);width:20px!important;height:20px!important}
+.m-conversation-header .m-round svg[data-icon=mobile-menu]{width:28px!important;height:28px!important}

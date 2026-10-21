@@ -1,0 +1,5 @@
+/* Official Apps SDK foundations. Existing shell styles follow this file. */
+@layer theme, base, components, utilities;
+@import "tailwindcss";
+@import "@openai/apps-sdk-ui/css";
+@source "../node_modules/@openai/apps-sdk-ui/dist/es";

@@ -1,0 +1,32 @@
+/* Supplied 614 × 1280 search capture normalized to 390 × 813 CSS pixels.
+   Do not scale text with viewport width: Android font scaling is separate. */
+.m-search-screen{position:relative;width:100%;height:100%;display:flex;flex-direction:column;background:var(--m-bg);padding-top:env(safe-area-inset-top);min-width:0}
+.m-search-results{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:6px 16px 20px;scrollbar-width:none}
+.m-search-results section{margin:0 0 24px}
+.m-search-results h2{font-size:18px;font-weight:500;line-height:24px;letter-spacing:0;margin:0 0 8px}
+.m-app .m-search-result{display:flex;width:100%;min-width:0;height:73.5px;min-height:73.5px;padding:0;gap:16px;font-size:18px;line-height:24px;font-weight:400;letter-spacing:0}
+.m-search-file-icon{width:41px;height:41px;border:1px solid #303030;border-radius:12px;display:grid;place-items:center;flex-shrink:0;color:#b9c8ef}
+.m-search-file-icon svg{width:23px!important;height:23px!important}
+.m-search-file-icon.m-kind-video-file{color:#ceb6ec}
+.m-search-result-copy{display:flex;flex-direction:column;min-width:0;flex:1;gap:0}
+.m-search-result-copy>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.m-search-result-copy small{font-size:14px;line-height:18px;color:#c4c4c4;letter-spacing:0}
+.m-search-footer{display:flex;align-items:center;gap:12px;padding:12px 34px max(34px,env(safe-area-inset-bottom));flex-shrink:0;background:var(--m-bg)}
+.m-search-footer label{display:flex;align-items:center;gap:16px;min-width:0;flex:1;height:49px;border-radius:28px;background:var(--m-field);border:1px solid #484848;padding:0 15px;color:#b4b4b4}
+.m-search-footer label svg{width:22px!important;height:22px!important}
+.m-app .m-search-footer input{font-size:18px;line-height:24px;letter-spacing:0;font-weight:400;border:0;background:none;border-radius:0;padding:0;width:100%;height:100%;outline:0}
+.m-search-footer input::placeholder{color:#b4b4b4;opacity:1}
+.m-search-footer label:focus-within{border-color:#aaa}
+.m-app .m-search-footer>button{padding:10px;width:49px;height:49px;min-height:49px;border-radius:50%;border:1px solid #484848;justify-content:center;background:var(--m-field)}
+.m-search-footer>button svg{width:27px!important;height:27px!important}
+.m-search-filters{display:flex;gap:8px;padding:12px 16px;overflow:auto;flex-shrink:0;scrollbar-width:none}
+.m-app .m-search-filters button{border:1px solid #484848;border-radius:24px;font-size:14px;line-height:20px;min-height:38px;white-space:nowrap;padding:8px 14px}
+.m-search-filters button[aria-pressed=true]{background:var(--m-field)}
+.m-search-empty{font-size:14px;line-height:20px;color:var(--m-muted);margin:16px 0}
+.m-search-loading{display:grid;gap:24px;margin-top:20px}
+.m-search-loading span{height:20px;width:70%;border-radius:5px;background:var(--m-field)}
+.m-search-preview{overflow:auto;flex:1;min-height:0;padding:16px}
+.m-search-preview p{color:var(--m-muted);font-size:14px;line-height:20px}
+.m-search-preview pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px;line-height:22px}
+html[data-client-theme=light] .m-search-result-copy small{color:#666}
+@media(max-width:350px){.m-search-footer{padding-left:16px;padding-right:16px;gap:8px}}

@@ -1,0 +1,22 @@
+/* The Chat presentation has a compact capsule composer; Work keeps its stacked controls. */
+.d-root.d-chat-mode .d-composer{
+  display:flex;align-items:center;flex-wrap:wrap;gap:16px;
+  min-height:66px;padding:11px 12px 11px 20px;border-radius:34px;
+}
+.d-root.d-chat-mode .d-composer textarea{
+  flex:1;order:0;width:auto;min-width:80px;min-height:30px;height:30px;max-height:120px;
+  line-height:30px;padding:0;margin:0;font-size:20px;
+}
+.d-root.d-chat-mode .d-composer-toolbar{display:contents}
+.d-root.d-chat-mode .d-composer-toolbar>.d-button{
+  order:-1;width:24px;height:32px;min-width:24px;min-height:32px;
+  margin:0;border-radius:50%;
+}
+.d-root.d-chat-mode .d-composer-right{flex-shrink:0;gap:19px;margin-left:auto}
+.d-root.d-chat-mode .d-model{font-size:20px!important;gap:14px}
+.d-root.d-chat-mode .d-model>span{color:#999}
+.d-root.d-chat-mode .d-attachments{order:-2;flex:0 0 100%;margin:0 0 6px}
+.d-root.d-chat-mode .d-home-suggestions{margin:36px 20px 0}
+.d-root.d-chat-mode .d-home-suggestions>button{gap:18px;padding-left:0;padding-right:0;font-size:20px;line-height:30px;min-height:60px}
+.d-root .d-temporary{position:absolute;right:17px;top:90px;width:32px;height:42px;border-radius:50%;color:#eee;z-index:4}
+.d-root .d-temporary svg{width:24px;height:24px}

@@ -1,0 +1,32 @@
+.m-message-files{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;max-width:100%;justify-content:flex-end}
+.m-app .m-attachments{overflow-x:auto;overflow-y:visible;padding:8px 4px 4px;margin:0 0 8px;gap:10px;scrollbar-width:none}
+.m-file-card{position:relative;flex-shrink:0;max-width:100%;width:240px;border:1px solid var(--m-border);border-radius:18px;background:var(--m-field);color:var(--m-text)}
+.m-app .m-file-card .m-file-open{display:flex;align-items:center;width:100%;height:68px;min-height:68px;padding:12px;gap:10px;border-radius:inherit;opacity:1;overflow:hidden}
+.m-file-label{display:flex;flex-direction:column;min-width:0;gap:2px}
+.m-file-label strong{font-size:14px;font-weight:500;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+.m-file-label small{font-size:12px;color:var(--m-muted)}
+.m-file-type{display:grid;place-items:center;width:36px;height:40px;flex-shrink:0;background:color-mix(in srgb,var(--m-text) 8%,transparent);border-radius:8px}
+.m-file-type svg{width:22px;height:22px}
+.m-file-media{width:220px;height:220px;border-radius:22px;overflow:visible}
+.m-file-media.m-file-pending{width:80px;height:80px;border-radius:16px}
+.m-app .m-file-media .m-file-open{height:100%;min-height:0;padding:0;position:relative}
+.m-file-media :is(img,video){width:100%;height:100%;object-fit:cover}
+.m-file-play{position:absolute;inset:0;display:grid;place-items:center;color:white;text-shadow:0 1px 6px #000;font-size:28px;background:#0002}
+.m-app .m-file-card .m-file-remove{position:absolute;right:-6px;top:-6px;width:24px;height:24px;min-width:24px;min-height:24px;padding:4px;border:2px solid var(--m-bg);border-radius:50%;background:var(--m-text);color:var(--m-bg);justify-content:center;z-index:1}
+.m-file-remove svg{width:14px!important;height:14px!important}
+.m-app .m-media-preview{position:fixed;inset:0;z-index:25;background:#000;color:white;display:flex;flex-direction:column;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.m-media-preview header{height:64px;display:flex;align-items:center;gap:12px;padding:0 14px;flex-shrink:0}
+.m-media-preview header span{font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.m-app .m-media-preview header button{width:44px;height:44px;min-height:44px;padding:10px;justify-content:center;flex-shrink:0}
+.m-media-preview>img,.m-media-preview>video{flex:1;min-height:0;width:100%;object-fit:contain}
+.m-media-preview>img{background:white}
+/* Restore the installed Apps SDK markdown typography under mobile's resets. */
+.m-app .d-rich-text{font-size:16px;line-height:1.6;min-width:0;white-space:normal;color:var(--m-text);--client-code-size:13px}
+.m-app .d-rich-text :is(p,h1,h2,h3,h4,h5,h6,ul,ol,li,blockquote,hr,table,th,td){margin:revert-layer;padding:revert-layer}
+.m-app .d-rich-text :is(h1,h2,h3,h4,h5,h6){font-size:revert-layer;font-weight:revert-layer;line-height:revert-layer}
+.m-app .d-rich-text :is(ul,ol){list-style:revert-layer}
+.m-app .d-rich-text button{all:revert-layer}
+.m-app .d-rich-text pre{font-size:13px;line-height:1.55;overflow-x:auto;white-space:pre;max-width:100%}
+.m-app .d-rich-text :not(pre)>code{font-size:.875em}
+.m-app .d-rich-code-header{font-size:12px;line-height:20px}
+.m-app .d-rich-text table{display:block;overflow-x:auto;max-width:100%;font-size:14px}
