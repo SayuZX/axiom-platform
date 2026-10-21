@@ -1,0 +1,55 @@
+AXIOM CREATIVE PROPRIETARY LICENSE
+
+Copyright (c) 2026 the respective AXIOM CREATIVE rights holders.
+All rights reserved, except where a separate license expressly applies.
+
+1. Scope
+
+These terms apply only to original AXIOM CREATIVE source code, documentation,
+artwork, and other material for which the applicable rights holder has authority
+to impose these terms (the "AXIOM Material"). They do not apply to third-party
+material or components distributed under a separate license.
+
+2. No implied permission
+
+Possession of, access to, or receipt of the AXIOM Material does not grant a license
+to use, reproduce, modify, distribute, sublicense, sell, or create derivative works
+from it, except as permitted by applicable law or a separate written agreement.
+Authorized users remain subject to the scope of their written authorization.
+
+3. Modification and renaming
+
+Without prior written permission from the applicable rights holder, you may not:
+(a) modify, adapt, translate, or create derivative works of the AXIOM Material;
+(b) rename or rebrand the project, product, or its AXIOM-owned components;
+(c) remove, replace, obscure, or misrepresent AXIOM names, copyright notices,
+    attribution, ownership notices, or license terms; or
+(d) publish, redistribute, transfer, sublicense, or sell the AXIOM Material.
+
+No rights to trademarks, service marks, logos, or trade names are granted.
+A permission request does not constitute permission. Written authorization must
+identify the material, permitted activity, and any conditions or limitations.
+
+4. Third-party and separately licensed components
+
+Existing third-party licenses and notices remain valid and must be retained.
+For example, portal/LICENSE contains an MIT license with its own copyright
+notice. This license does not restrict rights independently granted under that
+license or another applicable component license, and does not retroactively
+revoke permissions granted by earlier releases under different terms.
+Where a component is separately licensed, its license governs that component.
+
+5. Permission requests
+
+Contact the repository maintainer, SayuZX, at https://github.com/SayuZX through
+an available written contact channel or a repository issue. Authorization must
+come from the applicable rights holder or a representative authorized to grant it.
+
+6. Warranty and liability
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE AXIOM MATERIAL IS PROVIDED
+"AS IS", WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+THE RIGHTS HOLDERS SHALL NOT BE LIABLE FOR CLAIMS, DAMAGES, OR OTHER LIABILITY
+ARISING FROM THE MATERIAL OR ITS USE, EXCEPT WHERE LIABILITY CANNOT LAWFULLY
+BE EXCLUDED OR A SEPARATE WRITTEN AGREEMENT PROVIDES OTHERWISE.
