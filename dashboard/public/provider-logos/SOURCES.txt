@@ -1,0 +1,12 @@
+codebuddy.svg and codex.svg: LobeHub Icons
+https://github.com/lobehub/lobe-icons/tree/05a9b8c41e4735a4a2b6d2f1e43574bd8ec6c8cb/packages/static-svg/icons
+License: LICENSE (MIT); brand marks remain their respective owners' trademarks.
+Provider aliases: https://github.com/decolua/9router/tree/master/open-sse/providers/registry
+cbai = CodeBuddy international; cbcn = CodeBuddy CN; cx = OpenAI Codex.
+atria.png: official Atria documentation favicon, observed at https://docs.tryatria.com/docs/quick-start.
+https://files.readme.io/70d9f41547baab9104e066f2b6d76f0114afa8360b1976a7e890f815205ee51b-Tiktok_app.png
+atr = Atria. Brand asset remains its owner's trademark.
+openai.svg, deepseek.svg, gemini.svg, zai.svg, hunyuan.svg, kimi.svg, xiaomimimo.svg, minimax.svg, qwen.svg: existing brand marks distributed by LobeHub Icons (MIT), retrieved 2026-10-18.
+Source: https://github.com/lobehub/lobe-icons/tree/master/packages/static-svg/icons
+Pricing presentation: model-family logos and readable names; original API IDs retained for copying and requests.
+Logo rendering: original image assets, no CSS mask or recoloring; white backing keeps monochrome marks legible in both themes.
