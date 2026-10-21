@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import { createHmac } from 'node:crypto';
+import { scopedKey, internalHeaders } from './axiom-chat-bridge.mjs';
+const keys=[{id:'mine',usable:true,allowedModels:['ax/*'],blockedModels:['ax/blocked']},{id:'expired',usable:false,allowedModels:null,blockedModels:null}];
+const catalog=[{id:'ax/valid'},{id:'ax/blocked'},{id:'other/valid'}];
+assert.equal(scopedKey(keys,'mine','ax/valid',catalog).id,'mine');
+for(const [id,model] of [['foreign','ax/valid'],['expired','ax/valid'],['mine','ax/blocked'],['mine','other/valid'],['mine','ax/missing']]) assert.throws(()=>scopedKey(keys,id,model,catalog));
+const secret=Buffer.alloc(32,7);
+const headers=internalHeaders({customerId:'customer-1',keyId:'mine',key:'sk-private-secret'},secret,1792330000000);
+const token=headers['x-axiom-identity'];
+assert.equal(createHmac('sha256',secret).update(token).digest('hex'),headers['x-axiom-signature']);
+assert.deepEqual(JSON.parse(Buffer.from(token,'base64url').toString()),{customerId:'customer-1',keyId:'mine',key:'sk-private-secret',iat:1792330000000,nonce:JSON.parse(Buffer.from(token,'base64url').toString()).nonce});
+assert.throws(()=>internalHeaders({customerId:'x'},Buffer.alloc(2)));
+console.log('Customer ownership, model policy and Ruby signature contract passed');
