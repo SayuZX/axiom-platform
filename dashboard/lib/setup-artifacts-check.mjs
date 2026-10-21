@@ -1,0 +1,37 @@
+import assert from 'node:assert/strict';
+import { setupArtifact, setupTargets } from './setup-artifacts.mjs';
+const models = [{ id: 'ax/glm-5.2', name: 'GLM 5.2' }, { id: 'ax/Atria-Dawn', name: 'Atria Dawn' }];
+const key = 'sk-test-private-123';
+assert.deepEqual(setupTargets.map(target => target.id), ['openclaw', 'cursor', 'claude', 'codex', 'hermes', 'omp', 'node']);
+for (const target of setupTargets) {
+  const file = setupArtifact(target.id, key, models);
+  assert.ok(file.filename && file.content.includes(key) && models.every(model => file.content.includes(model.id)));
+  assert.ok(file.instruction && file.instruction.length < 180);
+}
+const openclaw = JSON.parse(setupArtifact('openclaw', key, models).content);
+assert.equal(openclaw.models.providers.axiom.baseUrl, 'https://ai.axiomcreative.xyz/v1');
+assert.deepEqual(openclaw.models.providers.axiom.models.map(model => model.id), models.map(model => model.id));
+assert.equal(openclaw.agents.defaults.model.primary, `axiom/${models[0].id}`);
+const claude = JSON.parse(setupArtifact('claude', key, models).content);
+assert.equal(claude.env.ANTHROPIC_BASE_URL, 'https://ai.axiomcreative.xyz');
+assert.equal(claude.env.ANTHROPIC_AUTH_TOKEN, key);
+assert.deepEqual(claude.modelPicker.options.map(option => option.model), models.map(model => model.id));
+const codex = setupArtifact('codex', key, models).content;
+assert.match(codex, /wire_api = "responses"/);
+assert.match(codex, /base_url = "https:\/\/ai\.axiomcreative\.xyz\/v1"/);
+assert.match(codex, /model_provider = "axiom"/);
+assert.match(codex, /Authorization = "Bearer sk-test-private-123"/);
+assert.ok(models.every(model => codex.includes(`# ${model.id}`)));
+assert.ok(models.every(model => setupArtifact('hermes', key, models).content.includes(`- "${model.id}"`)));
+assert.ok(models.every(model => setupArtifact('omp', key, models).content.includes(`id: "${model.id}"`)));
+const node = setupArtifact('node', key, models).content;
+assert.match(node, /fetch\(/);
+assert.match(node, /https:\/\/ai\.axiomcreative\.xyz\/v1\/chat\/completions/);
+assert.match(node, /--list/);
+assert.deepEqual(JSON.parse(node.match(/const models = (\[[^;]+\]);/)[1]), models.map(model => model.id));
+assert.throws(() => setupArtifact('node', 'invalid\nheader', models));
+assert.throws(() => setupArtifact('node', key, [{ id: 'bad\nname' }]));
+assert.throws(() => setupArtifact('node', key, [models[0], models[0]]));
+assert.throws(() => setupArtifact('unknown', key, models));
+assert.throws(() => setupArtifact('node', key, []));
+console.log('Seven setup downloads, model identity and private key validation passed');
