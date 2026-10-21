@@ -1,0 +1,45 @@
+.announcement-content{white-space:normal;overflow-wrap:anywhere;line-height:1.8}.announcement-content :is(h2,h3,h4){margin:1.6em 0 .6em;line-height:1.35}.announcement-content p{margin:.8em 0}.announcement-content :is(ul,ol){padding-left:1.6em;margin:1em 0;list-style-position:outside}.announcement-content ul{list-style-type:disc}.announcement-content ol{list-style-type:decimal}.announcement-content li+li{margin-top:.4em}.announcement-content blockquote{margin:1.2em 0;padding:.4em 1em;border-left:3px solid var(--dash-muted,#77818d);background:var(--dash-soft,#80808010)}.announcement-content code{font-family:ui-monospace,monospace;font-size:.88em;padding:.15em .35em;border-radius:4px;background:var(--dash-soft,#80808018)}.announcement-content pre{padding:16px;overflow:auto;border:1px solid var(--dash-border,#80808050);border-radius:8px}.announcement-content pre code{padding:0;background:transparent;white-space:pre}.announcement-content hr{border:0;border-top:1px solid var(--dash-border,#80808050);margin:1.8em 0}.announcement-table{max-width:100%;overflow:auto;margin:1em 0}.announcement-table table{border-collapse:collapse;width:100%}.announcement-table :is(th,td){border:1px solid var(--dash-border,#80808050);padding:10px 14px;text-align:left}.announcement-table th{background:var(--dash-soft,#80808010)}.announcement-content .contains-task-list{list-style:none;padding-left:0}.announcement-content .task-list-item input{width:16px;height:16px;min-height:0;margin-right:8px;vertical-align:middle}.announcement-content a{text-decoration:underline;text-underline-offset:3px}.announcement-content :focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.axiom-site .announcement-content{font-size:15px;line-height:1.8}.axiom-site .announcement-content h2{font:700 26px/1.3 inherit;font-family:inherit;font-size:26px;font-weight:700;line-height:1.3;letter-spacing:-.5px;margin:32px 0 14px}.axiom-site .announcement-content h3{font-family:inherit;font-size:21px;font-weight:650;line-height:1.4;margin:26px 0 12px;letter-spacing:-.2px}.axiom-site .announcement-content h4{font-family:inherit;font-size:17px;font-weight:650;line-height:1.5;margin:22px 0 10px}.axiom-site .announcement-content :is(p,li){font-size:15px;line-height:1.8}.axiom-site .announcement-content ul:not(.contains-task-list){list-style:none;padding-left:22px}.axiom-site .announcement-content ul:not(.contains-task-list)>li{position:relative;padding-left:2px}.axiom-site .announcement-content ul:not(.contains-task-list)>li:before{content:'';position:absolute;left:-17px;top:.75em;width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.7}.axiom-site .announcement-content ol{list-style:decimal;padding-left:24px}.axiom-site .announcement-content li::marker{color:var(--dash-muted,#78828c);font-size:.85em}.axiom-site .announcement-content> :first-child{margin-top:0}.axiom-site .announcement-content h5,.axiom-site .announcement-content h6{font-family:inherit;font-size:16px;line-height:1.5;margin:20px 0 8px}@media(max-width:640px){.axiom-site .announcement-content h2{font-size:23px}.axiom-site .announcement-content h3{font-size:19px}.axiom-site .announcement-content h4{font-size:16px}.axiom-site .announcement-content :is(p,li){font-size:14px}}
+
+
+
+/* Claude Platform doc styling enhancements */
+.announcement-table {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 1.5em 0;
+  border: 1px solid var(--dash-border, rgba(128,128,128,0.25));
+  border-radius: 8px;
+  background: var(--dash-surface, rgba(128,128,128,0.03));
+}
+.announcement-table table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+.announcement-table th {
+  background: var(--dash-soft, rgba(128,128,128,0.08));
+  font-weight: 650;
+  color: var(--dash-text, inherit);
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--dash-border, rgba(128,128,128,0.25));
+  text-align: left;
+  white-space: nowrap;
+}
+.announcement-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--dash-border, rgba(128,128,128,0.15));
+  vertical-align: top;
+}
+.announcement-table tr:last-child td {
+  border-bottom: none;
+}
+.announcement-table tr:hover td {
+  background: rgba(128,128,128,0.04);
+}
+.announcement-content hr {
+  border: 0;
+  border-top: 1px solid var(--dash-border, rgba(128,128,128,0.25));
+  margin: 2em 0;
+}
