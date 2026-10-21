@@ -1,0 +1,106 @@
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import CustomerShell, { CustomerAlert, CustomerHero, loginHref } from '../components/CustomerShell';
+import { useCustomerSession } from '../components/SiteHeader';
+import { errorLabel, request, rupiah } from '../merchant/components/ui';
+
+const number = (value) => new Intl.NumberFormat('id-ID').format(value);
+const validPrice = (item) => Number.isSafeInteger(item.price) && item.price > 0 && item.currency === 'IDR';
+export default function Buy() {
+  const router = useRouter();
+  const session = useCustomerSession();
+  const [catalog, setCatalog] = useState(null);
+  const [selected, setSelected] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [reload, setReload] = useState(0);
+  const [busy, setBusy] = useState(false);
+  const [logoutBusy, setLogoutBusy] = useState(false);
+  const flight = useRef(false);
+  const walletAttempt = useRef(null);
+  useEffect(() => {
+    const controller = new AbortController(); setLoading(true); setError('');
+    request('/commerce-api/packages', { signal: controller.signal }).then((value) => {
+      if (typeof value.configured !== 'boolean' || !Array.isArray(value.packages)) throw new Error('Katalog paket belum tersedia.');
+      setCatalog(value);
+      const linked = new URLSearchParams(window.location.search).get('package');
+      setSelected((previous) => value.packages.some((item) => String(item.id) === (previous || linked)) ? previous || linked : '');
+    }).catch((failure) => { if (!controller.signal.aborted) { setCatalog(null); setError(errorLabel(failure)); } }).finally(() => { if (!controller.signal.aborted) setLoading(false); });
+    return () => controller.abort();
+  }, [reload]);
+  const chosen = catalog?.packages.find((item) => String(item.id) === selected);
+  const payable = catalog?.configured && chosen && validPrice(chosen);
+  const next = selected ? `/buy?package=${encodeURIComponent(selected)}` : '/buy';
+  function selectPackage(value) {
+    setSelected(value);
+    window.history.replaceState(null, '', `/buy?package=${encodeURIComponent(value)}`);
+  }
+  async function logout() {
+    setLogoutBusy(true); setError('');
+    try { await session.logout(); } catch (failure) { setError(errorLabel(failure)); }
+    finally { setLogoutBusy(false); }
+  }
+  async function buy(event) {
+    event.preventDefault();
+    if (!payable || flight.current || logoutBusy || session.loading || session.error) return;
+    if (!session.customer) { router.push(loginHref(next)); return; }
+    flight.current = true; setBusy(true); setError('');
+    try {
+      const order = await request('/commerce-api/orders', { method: 'POST', body: { package_id: chosen.id } });
+      if (typeof order.id !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(order.id)) throw new Error('Respons invoice tidak lengkap. Periksa pesanan di akun sebelum mencoba pembayaran lagi.');
+      router.push(`/checkout/${encodeURIComponent(order.id)}`);
+    } catch (failure) {
+      if (failure.status === 401) { session.reload(); router.push(loginHref(next)); }
+      else setError(errorLabel(failure));
+    } finally { flight.current = false; setBusy(false); }
+  }
+  async function buyWithBalance() {
+    if (!chosen || !validPrice(chosen) || flight.current || logoutBusy || session.loading || session.error) return;
+    if (!session.customer) { router.push(loginHref(next)); return; }
+    if (walletAttempt.current?.package_id !== chosen.id) walletAttempt.current = {package_id:chosen.id,request_id:crypto.randomUUID()};
+    flight.current=true;setBusy(true);setError('');
+    try {
+      const order=await request('/wallet-api/purchase',{method:'POST',body:walletAttempt.current});
+      if(!order.id)throw new Error('Periksa daftar pesanan sebelum mengulangi pembelian saldo.');
+      window.dispatchEvent(new Event('wallet-updated'));
+      router.push(`/checkout/${encodeURIComponent(order.id)}`);
+    } catch(failure) { setError(errorLabel(failure));if(failure.status===401)router.push(loginHref(next)); }
+    finally{flight.current=false;setBusy(false);}
+  }
+  return <CustomerShell view="buy" session={session} next={next} commerce={loading ? 'loading' : !catalog ? 'unavailable' : catalog.configured ? 'configured' : 'unconfigured'}>
+    <CustomerHero tag="PAKET TOKEN / BAYAR DENGAN QRIS" title={<>BIG IDEAS.<br/>START HERE.</>}>Pilih tenaga untuk ide berikutnya. Satu akun pelanggan, paket pilihan Anda, dan pembayaran QRIS tanpa ribet akun GoPay Merchant.</CustomerHero>
+    <div className="customer-store wrap">
+      <div className="customer-section-heading"><div><span className="micro-label">01 / PILIH PAKET ANDA</span><h2>LESS LIMITS. MORE BUILDING.</h2></div><a className="small-button" href="/pricing">LIHAT MODEL & TARIF ↗</a></div>
+      <CustomerAlert>{error || session.error}</CustomerAlert>{session.error && <button className="small-button" onClick={session.reload}>Periksa sesi lagi</button>}
+      {!loading && !catalog && <button className="small-button" onClick={() => setReload((value) => value + 1)}>Muat ulang katalog</button>}
+      {loading && <CustomerAlert info>Memuat paket dan memeriksa kesiapan pembayaran…</CustomerAlert>}
+      {catalog && !catalog.configured && <CustomerAlert info>Pembayaran situs belum diaktifkan. Belum ada QRIS atau pembayaran yang dibuat.</CustomerAlert>}
+      {catalog?.packages.length === 0 && <CustomerAlert info>Belum ada paket token tersedia. Silakan periksa kembali nanti.</CustomerAlert>}
+      <div className="customer-buy-layout"><fieldset className="customer-packages" disabled={busy || logoutBusy}><legend className="customer-sr-only">Pilih satu paket token</legend>{catalog?.packages.map((item, index) => {
+        const valid = validPrice(item);
+        const active = selected === String(item.id);
+        return <label key={item.id} className={`customer-package customer-card package-tone-${index % 3}${active ? ' is-selected' : ''}${!valid ? ' is-unavailable' : ''}`}>
+          <span className="customer-package-top"><span className="eyebrow white">{item.badge || (item.isPopular ? 'PILIHAN POPULER' : `PAKET ${String(index + 1).padStart(2, '0')}`)}</span><input type="radio" name="package" value={item.id} checked={active} onChange={() => selectPackage(String(item.id))} disabled={!valid} aria-label={`Pilih paket ${item.name}`}/></span>
+          <span className="customer-package-name">{item.name}</span><span className="customer-package-description">{item.description || 'Paket akses API AXIOM AI.'}</span><strong className="customer-price">{valid ? rupiah(item.price) : 'Harga belum tersedia'}</strong>
+          {valid && Number.isSafeInteger(item.tokenLimit) && item.tokenLimit > 0 && <span className="customer-muted">Rp{number(Math.round(item.price * 100000000 / item.tokenLimit) / 100)} / 1 juta token · bayar sekali per paket</span>}
+          <span className="customer-package-facts"><span>Token paket<strong>{Number.isSafeInteger(item.tokenLimit) && item.tokenLimit >= 0 ? number(item.tokenLimit) : 'Belum dipublikasikan'}</strong></span><span>Masa berlaku<strong>{Number.isSafeInteger(item.validDays) && item.validDays > 0 ? `${item.validDays} hari` : 'Belum dipublikasikan'}</strong></span>{Number.isSafeInteger(item.rpmLimit) && <span>Request / menit<strong>{item.rpmLimit === 0 ? 'Tanpa batas khusus' : number(item.rpmLimit)}</strong></span>}</span>
+          {Array.isArray(item.features) && item.features.length > 0 && <span className="customer-package-features">{item.features.filter((feature) => typeof feature === 'string').map((feature, i) => <span key={i}>✓ {feature}</span>)}</span>}
+          <span className="customer-muted">Diizinkan: {!item.allowedModels?.length || item.allowedModels.includes('*') ? 'Semua model' : item.allowedModels.join(', ')}. Diblokir: {!item.blockedModels?.length ? 'Tidak ada' : item.blockedModels.includes('*') ? 'Semua model' : item.blockedModels.join(', ')}. Blokir diutamakan.</span>
+          <span className="customer-selection">{active ? 'PAKET TERPILIH' : valid ? 'PILIH PAKET' : 'BELUM TERSEDIA'} <span aria-hidden="true">{active ? '✓' : '↗'}</span></span>
+        </label>;
+      })}</fieldset>
+      <aside className="customer-card customer-summary"><span className="eyebrow yellow">02 / RINGKASAN PESANAN</span><h2>MAKE IT<br/>HAPPEN.</h2>
+        {session.loading ? <CustomerAlert info>Memeriksa akun pelanggan…</CustomerAlert> : session.customer ? <div className="customer-identity"><span className="micro-label">MASUK SEBAGAI</span><strong>{session.customer.name}</strong><span>{session.customer.email}</span><div><a className="customer-text-link" href="/account">Akun & pesanan</a><button className="customer-text-button" disabled={busy || logoutBusy} onClick={logout}>{logoutBusy ? 'Keluar…' : 'Keluar'}</button></div></div> : !session.error && <p>Masuk atau daftar akun pelanggan untuk melanjutkan. Invoice tersimpan di akun Anda, bukan hanya di tab ini.</p>}
+        <form onSubmit={buy} aria-busy={busy}><dl className="customer-summary-details"><div><dt>Paket</dt><dd>{chosen?.name || 'Pilih paket dahulu'}</dd></div><div><dt>Total</dt><dd>{chosen ? rupiah(chosen.price) : '—'}</dd></div></dl>
+          {!session.loading && !session.error && !session.customer ? <a className="button yellow" href={loginHref(next)}>MASUK UNTUK MEMBELI ↗</a> : <button className="button yellow" disabled={loading || !payable || busy || logoutBusy || session.loading || !!session.error}>{busy ? 'MEMBUAT INVOICE…' : catalog && !catalog.configured ? 'PEMBAYARAN BELUM TERSEDIA' : 'BUAT INVOICE QRIS ↗'}</button>}
+          {session.customer && <button className="button white" type="button" onClick={buyWithBalance} disabled={loading || !chosen || busy || logoutBusy || !!session.error}>BELI DENGAN SALDO ↗</button>}
+          <p className="customer-muted">{session.customer ? 'QRIS membuat invoice untuk dibayar di aplikasi. Beli dengan Saldo langsung mendebit harga paket satu kali dari saldo situs.' : 'Masuk tidak otomatis membuat invoice. Setelah kembali, periksa pilihan paket dan konfirmasi sendiri.'}</p>
+        </form><div className="customer-summary-note"><strong>Nominal pas. Akses jelas.</strong><p>Harga paket dapat dibayar melalui QRIS atau saldo situs. API key tersedia setelah pembayaran terkonfirmasi.</p><a className="customer-text-link" href="/account/billing">Isi saldo & lihat tagihan ↗</a></div>
+        <div className="customer-summary-note"><strong>Kuota transparan.</strong><p>Token input dan output dijumlahkan sesuai laporan pemakaian router, termasuk input cache yang dilaporkan. Tidak ada pengali harga model atau debit Rupiah tambahan per permintaan.</p><p>RPM adalah batas permintaan per menit, bukan jaminan kapasitas provider. Model mengikuti katalog dan ketersediaan upstream. Masa aktif dimulai setelah paket diaktifkan.</p><a className="customer-text-link" href={chosen ? `/calculator?package=${encodeURIComponent(chosen.id)}` : '/calculator'}>Hitung kebutuhan paket ↗</a></div>
+      </aside></div>
+      <ol className="customer-purchase-steps customer-steps"><li><span>01</span><div><strong>Pilih paket & masuk</strong><p>Gunakan akun pelanggan AXIOM.</p></div></li><li><span>02</span><div><strong>Konfirmasi & scan QRIS</strong><p>Bayar nominal sesuai invoice.</p></div></li><li><span>03</span><div><strong>Mulai membangun</strong><p>Buka akses API dari pesanan yang aktif.</p></div></li></ol>
+    </div>
+  </CustomerShell>;
+}
