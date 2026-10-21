@@ -1,0 +1,43 @@
+/* Public landing, catalog, and calculator; customer dashboard stays separate. */
+.axiom-site .public-intro{padding-top:56px;max-width:900px}
+.axiom-site .public-intro h2{font-size:clamp(24px,3vw,36px);line-height:1.25}
+.axiom-site .public-intro p{margin-top:18px}
+.axiom-site .public-intro .small-button{margin-top:20px}
+.axiom-site .faq-list summary>span{display:grid;place-items:center;flex:0 0 28px;width:28px;height:28px;align-self:center;transform-origin:center}
+.axiom-site:is(.view-home,.view-pricing,.view-calculator) .menu-toggle{display:inline-grid;place-items:center;padding:0;line-height:1;flex-shrink:0}
+@media(max-width:800px){
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) :is(.menu-toggle,.admin-link,.theme-control select,.mobile-nav a,.button,.small-button,.copy-button,.provider-filters button,.token-presets button,.model-use,.back-top){min-height:44px;min-width:44px}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .menu-toggle{width:44px;height:44px}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .admin-link{display:inline-flex;align-items:center;justify-content:center}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .mobile-nav{top:100%;max-height:calc(100dvh - 100px);overflow-y:auto}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) :is(input,select){font-size:16px;max-width:100%;min-width:0}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) :is(.feature-copy,.feature-art,.model-card,.calculator-grid>*,.token-control,.cost-result,.mascot-message,.device-model>div){min-width:0}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) :is(.model-card,.device-model,.feature-copy,.faq-list,.commerce-copy,.cost-result,.public-intro){overflow-wrap:anywhere}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) :is(.terminal-art,.token-controls select,.calculator-model select){max-width:100%;min-width:0}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .terminal-art code{overflow-wrap:anywhere}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .faq-list summary{min-height:44px;font-size:14px;gap:12px}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .faq-list p{font-size:13px}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .footer-top nav a{display:flex;align-items:center;min-height:44px;font-size:12px}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .benefit-card>a{display:inline-flex;align-items:center;min-height:44px}
+}
+@media(max-width:560px){
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .hero-eyebrow{flex-wrap:wrap}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .hero-description{font-size:14px}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .hero-actions{flex-wrap:wrap}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .dashboard-pair{flex-direction:column;align-items:center;gap:24px}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .dashboard-device{width:100%;max-width:340px;padding:18px}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) :is(.device-heading strong,.device-model strong,.router-banner strong){font-size:14px}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) :is(.device-model small,.device-domain,.device-notice,.device-nav,.device-month){font-size:11px}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .device-actions{flex-wrap:wrap}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .device-actions a{display:flex;align-items:center;justify-content:center;min-height:44px;font-size:12px;padding:8px}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .mascot-links{flex-wrap:wrap}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) :is(.mascot-links a,.mascot-message .mini-pill){display:inline-flex;align-items:center;min-height:44px;font-size:11px}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .qris-banner{width:100%;max-width:320px;margin-right:0}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .faq-intro h2{max-width:none}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .faq-mascot{position:static;margin-top:20px}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .filter-field{flex-wrap:wrap;gap:8px}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .filter-field select{width:100%}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .cost-result dl>div{flex-wrap:wrap;gap:6px;font-size:12px}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .token-presets{flex-wrap:wrap}
+  .axiom-site:is(.view-home,.view-pricing,.view-calculator) .public-intro{padding-top:36px}
+}
