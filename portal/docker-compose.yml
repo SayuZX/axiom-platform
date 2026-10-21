@@ -1,0 +1,53 @@
+# Linux host networking keeps the existing merchant bridge on loopback.
+# Docker Desktop cannot reach a Windows loopback bridge through this profile.
+services:
+  merchant-console:
+    build:
+      context: .
+      dockerfile: apps/merchant-console/Dockerfile
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      BACKEND_URL: http://127.0.0.1:3083
+      NEXT_TELEMETRY_DISABLED: '1'
+  payment-core:
+    build:
+      context: .
+      dockerfile: apps/payment-core/Dockerfile
+    network_mode: host
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      RACK_ENV: production
+      DATA_DIR: /var/lib/axiom
+      MERCHANT_CONNECTION_FILE: /run/secrets/merchant-connection.json
+      POLICY_CONFIG_FILE: /run/secrets/policy-config.json
+    volumes:
+      - payment-data:/var/lib/axiom
+      - ${MERCHANT_CONNECTION_FILE:?Set absolute merchant connection path}:/run/secrets/merchant-connection.json:ro
+      - ${POLICY_CONFIG_FILE:?Set absolute private policy configuration path}:/run/secrets/policy-config.json:ro
+  email-worker: &worker
+    build:
+      context: .
+      dockerfile: apps/payment-core/Dockerfile
+    command: [ruby, apps/payment-core/bin/worker, --channel=email]
+    network_mode: host
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      RACK_ENV: production
+      DATA_DIR: /var/lib/axiom
+      MERCHANT_CONNECTION_FILE: /run/secrets/merchant-connection.json
+      POLICY_CONFIG_FILE: /run/secrets/policy-config.json
+    volumes:
+      - payment-data:/var/lib/axiom
+      - ${MERCHANT_CONNECTION_FILE:?Set absolute merchant connection path}:/run/secrets/merchant-connection.json:ro
+      - ${POLICY_CONFIG_FILE:?Set absolute private policy configuration path}:/run/secrets/policy-config.json:ro
+  telegram-worker:
+    <<: *worker
+    command: [ruby, apps/payment-core/bin/worker, --channel=telegram]
+  payment-worker:
+    <<: *worker
+    command: [ruby, apps/payment-core/bin/worker, --channel=payments]
+volumes:
+  payment-data:
