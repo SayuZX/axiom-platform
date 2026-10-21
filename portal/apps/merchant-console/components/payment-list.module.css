@@ -1,0 +1,31 @@
+.ledger { overflow: hidden; }
+.results { min-width: 0; }
+.statusFilters { display: flex; flex-wrap: wrap; gap: 6px; padding: 20px 24px 0; }
+.statusFilters button { border: 1px solid transparent; border-radius: 7px; background: transparent; color: var(--muted); font: inherit; padding: 10px 14px; cursor: pointer; }
+.statusFilters button[aria-pressed='true'] { background: var(--ink); color: var(--paper); }
+.statusFilters button:hover:not([aria-pressed='true']) { background: var(--stone); color: var(--ink); }
+.searchBar { display: flex; align-items: end; gap: 10px; padding: 20px 24px 24px; border-bottom: 1px solid var(--line); }
+.searchBar label { flex: 1; max-width: 520px; min-width: 0; }
+.rowActions { display: flex; gap: 12px; white-space: nowrap; }
+.rowActions a, .cardActions a { font-size: 13px; font-weight: 600; text-underline-offset: 4px; }
+.mobileCards { display: none; }
+.statusFilters button:focus-visible, .cardActions a:focus-visible { outline: 2px solid var(--clay); outline-offset: 3px; }
+@media (max-width: 760px) {
+  .statusFilters { padding: 16px 16px 0; gap: 4px; }
+  .statusFilters button { flex: 1 1 calc(50% - 4px); padding: 9px 8px; font-size: 12px; }
+  .searchBar { padding: 16px; flex-wrap: wrap; }
+  .searchBar label { flex-basis: 100%; max-width: none; }
+  .searchBar > button { flex: 1; }
+  .desktopTable { display: none; }
+  .mobileCards { display: grid; list-style: none; padding: 0; margin: 0; }
+  .transactionCard { min-width: 0; padding: 20px 16px; border-bottom: 1px solid var(--line); }
+  .cardHeading { display: flex; align-items: start; justify-content: space-between; gap: 10px; }
+  .cardHeading > :first-child { min-width: 0; overflow-wrap: anywhere; }
+  .cardHeading > :last-child { flex-shrink: 0; }
+  .cardDate, .customer { margin: 5px 0 0; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
+  .amounts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 20px 0; }
+  .amounts dt { font-size: 11px; color: var(--muted); }
+  .amounts dd { margin: 5px 0 0; font-size: 12px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+  .amounts > :last-child dd { font-weight: 700; }
+  .cardActions { display: flex; justify-content: space-between; gap: 12px; padding-top: 14px; border-top: 1px solid var(--line); }
+}
