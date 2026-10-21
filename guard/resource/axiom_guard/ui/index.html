@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#181a1b"><title>AXIOM GUARD</title>
+<link rel="stylesheet" href="./styles.css"><link rel="stylesheet" href="./management.css"><link rel="stylesheet" href="./automation.css"><link rel="stylesheet" href="./protection.css">
+<link rel="stylesheet" href="./fullconfig.css"><script src="./fullconfig.js" defer></script>
+<link rel="stylesheet" href="./logs.css"><script src="./logs.js" defer></script>
+<link rel="stylesheet" href="./drains.css"><script src="./drains.js" defer></script>
+<link rel="stylesheet" href="./resource-control.css"><script src="./resource-control.js" defer></script>
+<link rel="stylesheet" href="./compact.css"><script src="./nui.js" defer></script>
+<script src="./management.js" defer></script><script src="./automation.js" defer></script><script src="./protection.js" defer></script><script src="./app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<section id="login" class="login-shell" hidden>
+<form id="login-form" class="card login-card">
+<div class="brand"><span data-icon="shield"></span><span>AXIOM <b>GUARD</b></span></div>
+<h1>Secure your server.</h1><p>Sign in with your account password.</p>
+<label for="password">Password</label><input id="password" name="password" type="password" autocomplete="current-password" required minlength="8" maxlength="128">
+<button type="submit" class="primary">Sign in</button><p id="login-error" role="alert"></p>
+<p class="muted small">Each account has its own password. No username is required.</p>
+</form></section>
+<div id="workspace" class="workspace" hidden>
+<header class="mobile-header"><button id="menu-open" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false"><span data-icon="menu"></span></button><a class="brand" href="#dashboard" aria-label="Dashboard"><span data-icon="shield"></span></a><button id="mobile-notifications" aria-label="Notifications"><span data-icon="bell"></span></button></header>
+<button id="menu-backdrop" class="menu-backdrop" aria-label="Close navigation" hidden></button>
+<aside id="sidebar" class="sidebar" aria-label="Main navigation">
+<div class="sidebar-header"><a class="brand" href="#dashboard" aria-label="AXIOM GUARD dashboard"><span data-icon="shield"></span><span>AXIOM <b>GUARD</b></span></a><button id="menu-close" aria-label="Close menu"><span data-icon="close"></span></button></div>
+<nav id="navigation" aria-label="Main navigation"></nav>
+<div class="sidebar-bottom"><div class="account-line"><span data-icon="user"></span><span id="account-name">Owner</span><button id="settings" aria-label="Settings"><span data-icon="settings"></span></button></div><div class="server-line"><span id="server-status" class="status">Connecting</span><button id="logout" aria-label="Sign out" title="Sign out"><span data-icon="leave"></span></button></div><p id="server-name" class="sr-only">Waiting for server</p></div>
+</aside>
+<main id="main" tabindex="-1">
+<header class="page-header"><div><h1 id="page-title">Dashboard</h1><p id="page-subtitle">General information about your server</p></div><div class="header-tools"><span id="mode" class="badge">Connecting</span><span id="time-range" class="time-range"><span data-icon="clock"></span>24h</span></div></header>
+<div id="notice" role="status" aria-live="polite" hidden></div>
+<div id="content"></div><footer><span>AXIOM GUARD</span><span id="updated">Waiting for live data</span></footer>
+</main></div>
+<dialog id="dialog" aria-labelledby="dialog-title"><div id="dialog-content"></div><button id="dialog-close" class="subtle">Close</button></dialog>
+</body></html>
