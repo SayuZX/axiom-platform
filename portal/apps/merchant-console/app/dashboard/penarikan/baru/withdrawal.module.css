@@ -1,0 +1,49 @@
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; margin: 0 0 28px; padding: 0; border-bottom: 1px solid var(--line); }
+.steps li { display: flex; align-items: center; gap: 12px; padding: 0 16px 18px 0; color: var(--muted); border-bottom: 2px solid transparent; }
+.steps li > span { display: grid; place-items: center; width: 30px; height: 30px; flex-shrink: 0; border: 1px solid var(--line); border-radius: 50%; font-size: 12px; }
+.steps li strong { font-weight: 500; font-size: 13px; }
+.steps li[aria-current='step'] { border-color: var(--clay); color: var(--ink); }
+.steps li[aria-current='step'] > span { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.steps li[data-complete='true'] > span { background: var(--stone); color: var(--ink); }
+.workspace { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(240px, 1fr); gap: 32px; align-items: start; }
+.formPanel { min-width: 0; padding: 30px; }
+.sectionHeading { margin-bottom: 8px; }
+.sectionHeading h2, .summary h2 { margin: 0 0 8px; font-family: var(--serif); font-size: 26px; font-weight: 400; letter-spacing: -.5px; line-height: 1.2; }
+.sectionHeading p { margin: 0; color: var(--muted); font-size: 13px; max-width: 55ch; }
+.guidance { margin: -6px 0 0; font-size: 12px; color: var(--muted); line-height: 1.6; }
+.actions { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding-top: 12px; margin-top: 8px; border-top: 1px solid var(--line); }
+.actions > :only-child { margin-left: auto; }
+.amountInput { font-size: 30px; font-variant-numeric: tabular-nums; min-height: 76px; }
+.reviewAmount { display: grid; gap: 7px; padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+.reviewAmount span { color: var(--muted); font-size: 13px; }
+.reviewAmount strong { font-size: clamp(26px, 3vw, 38px); font-weight: 500; letter-spacing: -1px; font-variant-numeric: tabular-nums; }
+.summary { min-width: 0; padding: 8px 0; }
+.summary h2 { font-size: 22px; }
+.summary dl { margin: 24px 0; }
+.summary dl > div { display: grid; gap: 5px; margin-bottom: 20px; }
+.summary dt { color: var(--muted); font-size: 12px; }
+.summary dd { margin: 0; font-size: 14px; overflow-wrap: anywhere; }
+.summary .summaryTotal { padding-top: 20px; border-top: 1px solid var(--line); }
+.summaryTotal dd { font-size: 24px; font-variant-numeric: tabular-nums; letter-spacing: -.6px; }
+.transferNote { border-left: 2px solid var(--clay); padding-left: 16px; margin-bottom: 24px; }
+.transferNote strong { font-size: 12px; font-weight: 600; }
+.transferNote p { font-size: 12px; color: var(--muted); margin: 8px 0 0; line-height: 1.6; }
+.summary > a { font-size: 13px; text-underline-offset: 4px; }
+@media (max-width: 800px) {
+  .workspace { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .summary { padding: 0 4px; }
+  .summary dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0; }
+  .summary dl > div { margin: 0; }
+  .summary .summaryTotal { padding: 0; border: 0; }
+  .summaryTotal dd { font-size: 20px; }
+}
+@media (max-width: 480px) {
+  .steps { margin-bottom: 20px; }
+  .steps li { align-items: start; flex-direction: column; gap: 8px; padding: 0 8px 12px 0; }
+  .steps li strong { font-size: 11px; line-height: 1.4; }
+  .steps li > span { width: 26px; height: 26px; }
+  .formPanel { padding: 20px 16px; }
+  .sectionHeading h2 { font-size: 24px; }
+  .actions > :is(button, a) { flex: 1 1 100%; }
+  .actions > :only-child { margin-left: 0; }
+}
