@@ -1,0 +1,30 @@
+[package]
+name = "gopaym-api"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+aes-gcm = "0.10"
+axum = "0.7"
+base64 = "0.22"
+bcrypt = "0.16"
+chrono = { version = "0.4", features = ["serde"] }
+cookie_store = { version = "0.21", features = ["serde_json"] }
+dotenvy = "0.15"
+hex = "0.4"
+hmac = "0.12"
+rand = "0.8"
+redis = { version = "0.27", features = ["tokio-comp", "connection-manager"] }
+md5 = "0.7"
+reqwest = { version = "0.12", default-features = false, features = ["json", "cookies", "rustls-tls"] }
+reqwest_cookie_store = "0.8"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+sqlx = { version = "0.8", default-features = false, features = ["runtime-tokio-rustls", "mysql", "chrono", "uuid", "json", "macros", "migrate"] }
+thiserror = "2"
+tokio = { version = "1", features = ["full"] }
+tower-http = { version = "0.6", features = ["cors", "trace"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+uuid = { version = "1", features = ["v4", "serde"] }

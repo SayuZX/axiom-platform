@@ -1,0 +1,9 @@
+{
+  "tunnel_id": "22dcb24b-29cd-42c7-8e2a-40ec4188c1f2",
+  "hostname": "portal.axiomcreative.xyz",
+  "service": "http://127.0.0.1:3084",
+  "originRequest": {
+    "connectTimeout": 10,
+    "httpHostHeader": "portal.axiomcreative.xyz"
+  }
+}

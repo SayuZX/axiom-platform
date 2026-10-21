@@ -1,0 +1,11 @@
+/* Keep glyphs at their real size while the container and input positions move.
+   Grid-area switching made the first focus jump before min-height could animate. */
+.m-app .m-footer .m-composer{position:relative;display:block;padding:0;min-height:0;height:max(49.5px,calc(var(--m-input-height,34px) + 14px));overflow:clip;transition:width 240ms cubic-bezier(.2,.8,.2,1),height 240ms cubic-bezier(.2,.8,.2,1),border-radius 240ms ease}
+.m-app .m-composer textarea{position:absolute;left:44px;top:50%;transform:translateY(-50%);width:calc(100% - 136px);margin:0;align-self:auto;padding:3px 3px 3px 5.5px;transition:left 240ms cubic-bezier(.2,.8,.2,1),top 240ms cubic-bezier(.2,.8,.2,1),width 240ms cubic-bezier(.2,.8,.2,1),transform 240ms cubic-bezier(.2,.8,.2,1),padding 240ms ease}
+.m-app .m-composer>button{position:absolute;bottom:8px;margin:0}
+.m-app .m-composer>button[aria-label="Attach files"]{left:8px}
+.m-app .m-composer>button[aria-label="Dictate"]{right:60px}
+.m-app .m-composer>.m-send{position:absolute;right:10px;bottom:8px;margin:0}
+.m-app .m-composer-expanded .m-composer{height:max(96px,calc(var(--m-input-height,36px) + 56px))}
+.m-app .m-composer-expanded .m-composer textarea{left:8px;top:10px;transform:translateY(0);width:calc(100% - 16px);padding:4px 8px}
+.m-footer{transition:padding-bottom 240ms cubic-bezier(.2,.8,.2,1)}

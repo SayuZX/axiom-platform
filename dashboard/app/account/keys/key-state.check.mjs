@@ -1,0 +1,23 @@
+import assert from 'node:assert/strict';
+import { keyStatus, keyQuota, matchesKey } from './key-state.mjs';
+
+const now = Date.parse('2026-10-14T12:00:00Z');
+const active = { id: 'key-123', name: 'Production', isActive: true, tokenLimit: 100, tokensUsed: 25, remainingTokens: 75 };
+assert.equal(keyStatus(active, now), 'active');
+assert.equal(keyStatus({ ...active, isActive: false, expired: true, exhausted: true }, now), 'revoked');
+assert.equal(keyStatus({ ...active, expiresAt: new Date(now).toISOString(), exhausted: true }, now), 'expired');
+assert.equal(keyStatus({ ...active, expired: true }, now), 'expired');
+assert.equal(keyStatus({ ...active, tokensUsed: 100 }, now), 'exhausted');
+assert.equal(keyStatus({ ...active, exhausted: true }, now), 'exhausted');
+assert.deepEqual(keyQuota(active), { limit: 100, used: 25, remaining: 75, percent: 75 });
+assert.deepEqual(keyQuota({ ...active, tokensUsed: 150, remainingTokens: 0 }), { limit: 100, used: 150, remaining: 0, percent: 0 });
+assert.equal(keyQuota({ ...active, remainingTokens: 200 }).percent, 100);
+assert.equal(keyQuota({ ...active, remainingTokens: null }).remaining, 75);
+assert.equal(keyQuota({ ...active, tokenLimit: 0 }).percent, null);
+assert.equal(keyQuota({ ...active, tokenLimit: null }).remaining, null);
+assert.equal(matchesKey(active, '  PRODUCTION ', 'active', now), true);
+assert.equal(matchesKey(active, 'KEY-123', 'all', now), true);
+assert.equal(matchesKey({ ...active, key: 'private-secret' }, 'private-secret', 'all', now), false);
+assert.equal(matchesKey(active, '', 'revoked', now), false);
+assert.equal(matchesKey({ ...active, name: null }, 'production', 'all', now), false);
+console.log('Key status, quota, and safe filtering checks passed.');

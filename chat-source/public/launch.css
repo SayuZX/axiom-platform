@@ -1,0 +1,7 @@
+#launch-splash{display:none}
+html[data-mobile-launch=true] #launch-splash{position:fixed;inset:0;z-index:100;background:#000;display:grid;place-items:center}
+html[data-mobile-launch=true][data-client-theme=light] #launch-splash{background:#fff}
+#launch-splash img{width:76px;height:76px;object-fit:contain;filter:invert(1);animation:supergpt-launch 1.3s ease-in-out infinite alternate}
+html[data-client-theme=light] #launch-splash img{filter:none}
+@keyframes supergpt-launch{from{opacity:.55;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){#launch-splash img{animation:none}}

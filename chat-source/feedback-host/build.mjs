@@ -1,0 +1,24 @@
+import { createRequire } from 'node:module';
+import { readFile, mkdir, writeFile, copyFile } from 'node:fs/promises';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+const here = dirname(fileURLToPath(import.meta.url));
+const repo = process.env.AXIOM_SDK_REPO || '/tmp/supergpt-source';
+const require = createRequire(join(repo, 'package.json'));
+const { build } = require('esbuild');
+const { compile } = require('@tailwindcss/node');
+const sdk = dirname(require.resolve('@openai/apps-sdk-ui/css'));
+const tokenFiles = ['variables-primitive.css', 'variables-semantic.css', 'variables-components.css'];
+const tokens = (await Promise.all(tokenFiles.map(file => readFile(join(sdk, file), 'utf8')))).join('\n');
+const compiler = await compile('@layer theme, base, components, utilities;\n' + tokens, { base: sdk, onDependency() {} });
+const tokenCSS = compiler.build([]);
+const options = { absWorkingDir: here, entryPoints: ['runtime.tsx'], outfile: join(here, 'dist/axiom-feedback.js'), bundle: true, write: false, minify: true, format: 'esm', platform: 'browser', target: ['es2022'], jsx: 'automatic', nodePaths: [join(repo, 'node_modules')], loader: { '.module.css': 'local-css' }, define: { 'process.env.NODE_ENV': '"production"' }, legalComments: 'eof' };
+const first = await build({ ...options, define: { ...options.define, __AXIOM_CSS__: '""' } });
+const css = tokenCSS + '\n' + first.outputFiles.find(file => file.path.endsWith('.css')).text;
+const result = await build({ ...options, define: { ...options.define, __AXIOM_CSS__: JSON.stringify(css) } });
+await mkdir(join(here, 'dist'), { recursive: true });
+await writeFile(join(here, 'dist/axiom-feedback.js'), result.outputFiles.find(file => file.path.endsWith('.js')).contents);
+// Inspection artifact only: JS injects it inside Shadow DOM. Never link this CSS globally.
+await writeFile(join(here, 'dist/axiom-feedback.shadow.css'), css);
+await copyFile(join(sdk, '../../../LICENSE'), join(here, 'dist/apps-sdk-ui-LICENSE.txt'));
+console.log('dist/axiom-feedback.js (self-contained ESM); CSS embedded, no global stylesheet needed.');

@@ -1,0 +1,63 @@
+/* Numeric grid tracks let Chat/Work morph without swapping block/flex layouts. */
+.d-root{--d-motion-duration:260ms;--d-motion-easing:cubic-bezier(.22,1,.36,1)}
+.d-root .d-composer{
+  --d-input-height:59px;display:grid;grid-template-columns:32px minmax(0,1fr) auto;
+  grid-template-rows:auto auto minmax(0,var(--d-input-height)) minmax(0,55px);
+  gap:0 19px;align-items:center;
+  transition:grid-template-rows var(--d-motion-duration) var(--d-motion-easing),padding var(--d-motion-duration) var(--d-motion-easing),column-gap var(--d-motion-duration) var(--d-motion-easing);
+}
+.d-root .d-composer>.d-command-chips{grid-row:1;grid-column:1/-1}
+.d-root .d-composer>.d-attachments{grid-row:2;grid-column:1/-1;min-width:0}
+.d-root .d-composer>textarea{grid-row:3;grid-column:1/-1;min-width:0;align-self:start}
+.d-root .d-composer-toolbar{display:contents}
+.d-root .d-composer-toolbar>.d-button{grid-row:4;grid-column:1}
+.d-root .d-composer-toolbar>.d-approval{grid-row:4;grid-column:2;justify-self:start}
+.d-root .d-composer-right{grid-row:4;grid-column:3;margin-left:0;min-width:0}
+.d-root.d-chat-mode .d-composer{display:grid;grid-template-columns:24px minmax(0,1fr) auto;grid-template-rows:auto auto minmax(0,0px) minmax(0,42px);gap:0 16px}
+.d-root.d-chat-mode .d-composer>textarea{grid-row:4;grid-column:2;align-self:center;width:100%}
+.d-root.d-chat-mode .d-composer-right{margin-left:0}
+.d-home-mode::before{left:0;transform:translateX(0);transition:transform var(--d-motion-duration) var(--d-motion-easing)}
+.d-home-mode[data-mode=Work]::before{left:0;transform:translateX(calc(100% - 24px))}
+.d-home-mode>button:first-child::after{content:'Ask questions and explore ideas';position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%);width:max-content;padding:6px 14px;border:1px solid #414141;border-radius:14px;background:#2c2c2c;color:#eee;font-size:16px;line-height:26px;font-weight:400;pointer-events:none;opacity:0;visibility:hidden;transition:opacity .1s .45s,visibility 0s .45s}
+.d-home-mode>button:first-child:hover::after,.d-home-mode>button:first-child:focus-visible::after{opacity:1;visibility:visible}
+.d-disclosure{display:grid;grid-template-rows:1fr;opacity:1;transition:grid-template-rows var(--d-motion-duration) var(--d-motion-easing),opacity 160ms ease}
+.d-disclosure[data-open=false]{grid-template-rows:0fr;opacity:0}
+.d-disclosure>div{min-height:0;overflow:hidden}
+.d-root .d-section-toggle>svg{transition:transform 200ms var(--d-motion-easing),opacity 120ms ease}
+.d-history-row,.d-root .d-history-open{transition:background-color 120ms ease}
+.d-root .d-history-actions{display:flex;opacity:0;pointer-events:none;transition:opacity 120ms ease}
+.d-history-row:hover .d-history-actions,.d-history-row:focus-within .d-history-actions{opacity:1;pointer-events:auto}
+.d-root .d-history-open,.d-root .d-history-row:hover .d-history-open,.d-root .d-history-row:focus-within .d-history-open{padding-right:12px}
+.d-root .d-home-suggestions{transition:margin var(--d-motion-duration) var(--d-motion-easing)}
+.d-collapsed .d-history-options{display:none}
+.d-root .d-history-preview,.d-root .d-turn-preview{opacity:0;visibility:hidden;pointer-events:none;transform:translateX(-4px);transition:opacity 120ms ease,transform 160ms var(--d-motion-easing),top 130ms var(--d-motion-easing),visibility 0s 160ms}
+.d-root .d-history-preview[data-open=true],.d-root .d-turn-preview[data-open=true]{opacity:1;visibility:visible;transform:translateX(0);transition-delay:0s}
+.d-root .d-history-preview[data-open=true]{pointer-events:auto}
+.d-root .d-turn-rail> .d-turn-preview{pointer-events:none}
+.d-turn-position>button>span{transition:width 160ms var(--d-motion-easing),background-color 120ms ease}
+.d-turn-position>button.d-near>span{width:29px;background:#a7a7a7}
+.d-turn-position>button.d-near-next>span{width:20px;background:#777}
+.d-turn-position>button.d-preview-active>span{width:38px;background:#e6e6e6}
+@starting-style{
+  .d-root .d-history-preview[data-open=true],.d-root .d-turn-preview[data-open=true]{opacity:0;transform:translateX(-4px)}
+}
+@media(prefers-reduced-motion:reduce){
+  .d-root .d-composer,.d-home-mode::before,.d-disclosure,.d-root .d-section-toggle>svg,.d-root .d-history-preview,.d-root .d-turn-preview,.d-turn-position>button>span,.d-root .d-history-actions,.d-root .d-home-suggestions{transition:none}
+}
+
+/* Clip only the title, never the action buttons. Short titles stay still. */
+.d-history-title-clip{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.d-history-title-text{display:inline-block;min-width:100%;white-space:nowrap;transform:translateX(0)}
+.d-root .d-history-row:is(:hover,:focus-within) .d-history-open{padding-right:84px}
+.d-history-row:is(:hover,:focus-within) .d-history-title-clip[data-overflow=true]{text-overflow:clip}
+@media(prefers-reduced-motion:no-preference){
+ html:not([data-reduce-motion=true]) .d-history-row:is(:hover,:focus-within) .d-history-title-clip[data-overflow=true] .d-history-title-text{animation:d-history-title-travel var(--history-duration) linear .65s infinite alternate}
+ @keyframes d-history-title-travel{0%,15%{transform:translateX(0)}85%,100%{transform:translateX(var(--history-travel))}}
+}
+/* An opaque composer footer with a short fade above it, including multi-line input. */
+.d-chat-active .d-composer-wrap{isolation:isolate}
+.d-chat-active .d-composer-wrap::before{content:'';position:absolute;z-index:-1;left:-100vw;right:-100vw;top:-96px;bottom:-64px;background:linear-gradient(to bottom,transparent 0,var(--d-bg) 32px,var(--d-bg) 100%);pointer-events:none}
+.d-chat-active .d-composer{position:relative;box-shadow:none}
+.d-composer-status{position:absolute;top:-62px;left:0;right:0;height:46px;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.d-root .d-composer-status .d-scroll-latest{position:static;transform:rotate(180deg);pointer-events:auto}
+.d-root.d-chat-active .d-composer-status .d-chat-disclaimer{position:static;margin:0;font-size:13px;line-height:20px;text-align:center;color:#888;pointer-events:none}

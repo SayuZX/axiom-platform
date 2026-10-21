@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+require_relative '../lib/axiom/interfaces/http/app'
+if ENV['TUNNEL_ONLY']=='true' && !%w[127.0.0.1 ::1].include?(ENV.fetch('HOST','127.0.0.1'))
+  abort 'Tunnel origin API must bind to loopback.'
+end
+Rackup::Handler::WEBrick.run(Axiom::App,Host:ENV.fetch('HOST','127.0.0.1'),Port:Integer(ENV.fetch('PORT','3083')),AccessLog:[]) do |server|
+  trap('INT') { server.shutdown }; trap('TERM') { server.shutdown }
+end

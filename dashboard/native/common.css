@@ -1,0 +1,148 @@
+/* AXIOM AI visual layer for native allxd9router 0.5.75. No auth or billing logic changes. */
+@font-face { font-family: AxiomAntonio; src: url('/fonts/antonio.woff2') format('woff2'); font-weight: 400 700; font-display: swap; }
+@font-face { font-family: AxiomJakarta; src: url('/fonts/jakarta.woff2') format('woff2'); font-weight: 400 800; font-display: swap; }
+:root {
+  color-scheme: light;
+  --ax-ink: #131413; --ax-blue: #dceeff; --ax-yellow: #ffdf39; --ax-purple: #e5c8fa; --ax-green: #75dfb3; --ax-orange: #ff642b;
+  --color-bg: #f7fafb; --color-bg-alt: #eaf4ff; --color-bg-base: #fff; --color-bg-subtle: #edf4fc; --color-bg-hover: #e5effa;
+  --color-surface: #fff; --color-surface-2: #f3f7fc; --color-surface-3: #e8eff7; --color-sidebar: #fff;
+  --color-border: #131413; --color-border-subtle: #d5dce1;
+  --color-text: #131413; --color-text-main: #131413; --color-text-primary: #131413; --color-text-secondary: #394754; --color-text-muted: #536270; --color-text-subtle: #536270;
+  --color-primary: #131413; --color-primary-hover: #294564;
+  --color-brand-50: #fffcef; --color-brand-100: #fff4b4; --color-brand-200: #ffec87; --color-brand-300: #746019; --color-brand-400: #ffdf39; --color-brand-500: #ffdf39; --color-brand-600: #efd02c; --color-brand-700: #92700d; --color-brand-800: #564608; --color-brand-900: #342d0c;
+  --font-sans: AxiomJakarta, Arial, sans-serif;
+  --shadow-soft: 3px 4px 0 #131413; --shadow-elevated: 6px 7px 0 #131413; --shadow-elev: 6px 7px 0 #131413; --shadow-warm: 3px 4px 0 #131413; --shadow-focus: 0 0 0 3px #295ee738;
+}
+html.dark {
+  color-scheme: dark;
+  --ax-ink: #e9eef8; --ax-blue: #243750; --ax-yellow: #746222; --ax-purple: #423452; --ax-green: #1c493d;
+  --color-bg: #101620; --color-bg-alt: #152030; --color-bg-base: #101620; --color-bg-subtle: #1c2839; --color-bg-hover: #29394e;
+  --color-surface: #182130; --color-surface-2: #1e2a3c; --color-surface-3: #28364a; --color-sidebar: #182130;
+  --color-border: #3b4b63; --color-border-subtle: #303e54;
+  --color-text: #e9eef8; --color-text-main: #e9eef8; --color-text-primary: #e9eef8; --color-text-secondary: #c4cede; --color-text-muted: #a3b1c8; --color-text-subtle: #a3b1c8;
+  --color-primary: #a0b7ff; --color-primary-hover: #bed0ff;
+  --color-brand-50: #1e2a43; --color-brand-100: #263855; --color-brand-200: #344d77; --color-brand-300: #658be1; --color-brand-400: #93b0ff; --color-brand-500: #5279e7; --color-brand-600: #4165c8; --color-brand-700: #3452a9; --color-brand-800: #2d437e; --color-brand-900: #243656;
+  --shadow-soft: 0 4px 18px #0002; --shadow-elevated: 0 10px 32px #0004; --shadow-elev: 0 10px 32px #0004; --shadow-warm: 0 4px 18px #0002;
+}
+/* Native dark utility classes retain control; branded hardcoded colors are light-only. */
+html:not(.dark) {
+body { font-family: AxiomJakarta, Arial, sans-serif !important; color: var(--ax-ink) !important; }
+body::selection { background: var(--ax-yellow); color: var(--ax-ink); }
+button, input, select, textarea { font-family: inherit; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 3px solid #295ee7 !important; outline-offset: 3px !important; }
+button:disabled, input:disabled, select:disabled { cursor: not-allowed; }
+.text-text-primary, .text-text-secondary, .text-text-main { color: var(--ax-ink) !important; }
+.text-text-muted { color: #536270 !important; }
+.bg-brand-500, .bg-primary { background: var(--ax-yellow) !important; color: var(--ax-ink) !important; }
+.bg-brand-500:hover, .bg-primary:hover { background: #ffe967 !important; }
+.landing-grid { background-image: radial-gradient(#29527e18 1px, transparent 1px) !important; background-size: 22px 22px !important; opacity: .6 !important; }
+
+/* Native dashboard chrome remains intact; only presentation is shared across pages. */
+aside:has(nav a[href='/dashboard/billing']) { background: #fff !important; border-right: 2px solid var(--ax-ink) !important; backdrop-filter: none !important; }
+aside:has(nav a[href='/dashboard/billing']) > a, aside:has(nav a[href='/dashboard/billing']) > div { border-color: #d5dce1; }
+aside h1, aside h2 { font-family: AxiomJakarta, Arial, sans-serif !important; font-weight: 800 !important; color: var(--ax-ink) !important; }
+aside nav { padding: 16px 14px !important; }
+aside nav a, aside nav button { border: 1px solid transparent; border-radius: 13px !important; color: #445462 !important; font-size: 12px !important; min-height: 42px; margin-bottom: 5px; }
+aside nav a:hover, aside nav button:hover { background: var(--ax-blue) !important; color: var(--ax-ink) !important; border-color: #131413 !important; }
+aside nav a.text-primary, aside nav a[class*='bg-primary'], aside nav a[class*='bg-brand'] { background: var(--ax-yellow) !important; border: 1.5px solid var(--ax-ink) !important; color: var(--ax-ink) !important; box-shadow: 2px 3px 0 #131413 !important; font-weight: 800 !important; }
+aside nav .material-symbols-outlined { color: inherit !important; }
+main > header { background: #fff !important; border-bottom: 2px solid var(--ax-ink) !important; backdrop-filter: none !important; min-height: 84px; padding-block: 16px !important; }
+main > header h1 { font-family: AxiomJakarta, Arial, sans-serif !important; font-weight: 800 !important; color: var(--ax-ink) !important; font-size: clamp(16px, 1.7vw, 24px) !important; }
+main > header button { border-radius: 999px !important; }
+main > header button[aria-label='Donate'] { color: #843c7c !important; background: #f8edf8 !important; border: 1px solid #caabd0 !important; }
+main > div.overflow-y-auto { background: #f7fafb; padding: clamp(20px, 3vw, 44px) !important; }
+main > div.overflow-y-auto > .max-w-7xl { width: 100%; min-width: 0; }
+main input:not([type='checkbox']):not([type='radio']):not([type='range']), main select, main textarea { background: #fff !important; color: var(--ax-ink) !important; border: 1.5px solid #131413 !important; border-radius: 12px !important; }
+main input::placeholder, main textarea::placeholder { color: #64727e !important; }
+main button { transition: background-color .15s, box-shadow .15s, color .15s; }
+main button[class*='bg-brand-500'] { border: 1.5px solid #131413 !important; border-radius: 999px !important; box-shadow: 2px 3px 0 #131413 !important; }
+main [role='dialog'], body > div[role='dialog'] { color: var(--ax-ink); }
+
+/* Login uses the original form and native password/SSO/reset workflows. */
+body > .min-h-screen:has(input[type='password']), body > div > .min-h-screen:has(input[type='password']) {
+  min-height: 100svh !important;
+  padding: 48px 28px !important;
+  background: var(--ax-blue) !important;
+  background-image: radial-gradient(ellipse at 10% 105%, #98c5fa 0 22%, transparent 22.3%), radial-gradient(ellipse at 88% -5%, #c8e3ff 0 24%, transparent 24.3%) !important;
+  overflow-x: clip;
+}
+.min-h-screen:has(> .max-w-md input[type='password']) > .max-w-md {
+  display: grid; grid-template-columns: 1.12fr 1fr; align-items: center; gap: clamp(42px, 6vw, 94px);
+  max-width: 1090px !important; width: 100%; padding-block: 55px;
+}
+.min-h-screen:has(> .max-w-md input[type='password']) > .max-w-md > .text-center {
+  text-align: left !important; margin: 0 !important; position: relative;
+}
+.min-h-screen:has(> .max-w-md input[type='password']) > .max-w-md > .text-center::before {
+  content: 'AXIOM AI / ADMIN ACCESS'; display: inline-block; background: #fff; color: #131413;
+  border: 2px solid #131413; border-radius: 999px; padding: 10px 16px; box-shadow: 3px 4px 0 #131413;
+  font: 700 10px/1.6 AxiomJakarta, Arial, sans-serif; letter-spacing: 1.2px; margin-bottom: 27px;
+}
+.min-h-screen:has(> .max-w-md input[type='password']) > .max-w-md > .text-center::after {
+  content: 'ONE GATEWAY. YOUR CONTROL.'; display: block; font: 700 11px/1.8 AxiomJakarta, Arial, sans-serif; letter-spacing: 1.7px; margin-top: 32px;
+}
+.min-h-screen:has(> .max-w-md input[type='password']) h1 {
+  font-family: AxiomAntonio, Impact, sans-serif !important; font-size: clamp(68px, 8vw, 108px) !important; line-height: 1.05 !important;
+  font-weight: 700 !important; text-transform: uppercase; letter-spacing: -3px !important; color: #131413 !important; margin-bottom: 24px !important;
+}
+.min-h-screen:has(> .max-w-md input[type='password']) > .max-w-md > .text-center p { color: #344759 !important; font-size: 16px !important; line-height: 1.9 !important; max-width: 330px; }
+.min-h-screen:has(> .max-w-md input[type='password']) > .max-w-md > .bg-surface {
+  background: #fff !important; border: 2px solid #131413 !important; border-radius: 30px !important; box-shadow: 8px 10px 0 #131413 !important; padding: 35px !important; position: relative;
+}
+.min-h-screen:has(> .max-w-md input[type='password']) > .max-w-md > .bg-surface::before {
+  content: 'WELCOME BACK'; display: block; font: 700 34px/1.2 AxiomAntonio, Impact, sans-serif; margin-bottom: 28px; letter-spacing: -.5px; color: #131413;
+}
+.min-h-screen:has(> .max-w-md input[type='password']) form { gap: 24px !important; }
+.min-h-screen:has(> .max-w-md input[type='password']) label { font-size: 12px !important; font-weight: 800 !important; letter-spacing: .4px; color: #131413 !important; }
+.min-h-screen:has(> .max-w-md input[type='password']) input {
+  min-height: 54px !important; border: 2px solid #131413 !important; background: #f7fafb !important; border-radius: 14px !important;
+  padding: 15px 16px !important; color: #131413 !important; font: 15px/1.5 AxiomJakarta, Arial, sans-serif !important;
+}
+.min-h-screen:has(> .max-w-md input[type='password']) input::placeholder { color: #657480 !important; }
+.min-h-screen:has(> .max-w-md input[type='password']) form button[type='submit'] {
+  min-height: 54px !important; background: #ffdf39 !important; color: #131413 !important; border: 2px solid #131413 !important;
+  border-radius: 999px !important; box-shadow: 4px 5px 0 #131413 !important; font: 800 13px/1.5 AxiomJakarta, Arial, sans-serif !important;
+  text-transform: uppercase; letter-spacing: .8px;
+}
+.min-h-screen:has(> .max-w-md input[type='password']) form button[type='submit']:hover { background: #ffe971 !important; }
+.min-h-screen:has(> .max-w-md input[type='password']) form p { line-height: 1.7; }
+.min-h-screen:has(> .max-w-md input[type='password']) form p.text-red-500 { color: #b32135 !important; background: #fff0f1; border: 1px solid #efb8c0; border-radius: 10px; padding: 10px 12px; }
+.min-h-screen:has(> .max-w-md input[type='password']) form code { background: #f1f4f7 !important; color: #384652 !important; padding: 3px 6px; border: 1px solid #ccd4dc; }
+
+
+@media (max-width: 900px) {
+  .min-h-screen:has(> .max-w-md input[type='password']) > .max-w-md { max-width: 500px !important; grid-template-columns: minmax(0,1fr); gap: 32px; padding-block: 12px; }
+  .min-h-screen:has(> .max-w-md input[type='password']) > .max-w-md > .text-center { text-align: center !important; }
+  .min-h-screen:has(> .max-w-md input[type='password']) > .max-w-md > .text-center p { margin-inline: auto; }
+  .min-h-screen:has(> .max-w-md input[type='password']) h1 { font-size: 70px !important; margin-bottom: 17px !important; }
+  .min-h-screen:has(> .max-w-md input[type='password']) > .max-w-md > .text-center::after { margin-top: 18px; font-size: 9px; }
+}
+@media (max-width: 600px) {
+  body > .min-h-screen:has(input[type='password']), body > div > .min-h-screen:has(input[type='password']) { padding: 30px 21px 42px !important; align-items: start !important; }
+  .min-h-screen:has(> .max-w-md input[type='password']) > .max-w-md > .bg-surface { padding: 26px 22px !important; border-radius: 23px !important; box-shadow: 5px 6px 0 #131413 !important; }
+  .min-h-screen:has(> .max-w-md input[type='password']) > .max-w-md > .text-center::before { font-size: 8px; padding: 8px 12px; margin-bottom: 20px; }
+  .min-h-screen:has(> .max-w-md input[type='password']) > .max-w-md > .text-center p { font-size: 13px !important; }
+  main > header { min-height: 72px; padding-inline: 16px !important; }
+  main > div.overflow-y-auto { padding: 22px 16px !important; }
+  main > header button[aria-label='Donate'] { padding-inline: 8px !important; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition: none !important; scroll-behavior: auto !important; } }
+}
+html.dark body { font-family: AxiomJakarta, Arial, sans-serif; background: var(--color-bg); color: var(--color-text); }
+html.dark :is(input, textarea, select) { color-scheme: dark; }
+html.dark :is(.bg-primary, .bg-brand-500) { background: #3159d5 !important; color: #fff !important; }
+/* Dashboard-only Fluent treatment; authentication pages retain their layout. */
+body:has(aside nav a[href^='/dashboard']){font-family:'Segoe UI',Arial,sans-serif!important;--color-bg:#f5f5f5;--color-surface:#fff;--color-sidebar:#ededed;--color-border:#ddd;--ax-ink:#242424}
+html.dark body:has(aside nav a[href^='/dashboard']){--color-bg:#202020;--color-surface:#292929;--color-sidebar:#191919;--color-border:#414141;--ax-ink:#f2f2f2}
+body:has(aside nav a[href^='/dashboard']) aside{background:var(--color-sidebar)!important;border-right:1px solid var(--color-border)!important}
+body:has(aside nav a[href^='/dashboard']) aside nav :is(a,button){border-radius:6px!important;font-size:13px!important;font-weight:400!important;min-height:38px;box-shadow:none!important;border-color:transparent!important;color:var(--ax-ink)!important}
+body:has(aside nav a[href^='/dashboard']) aside nav :is(a,button):hover{background:var(--color-surface)!important}
+body:has(aside nav a[href^='/dashboard']) aside nav a:is(.text-primary,[class*='bg-primary'],[class*='bg-brand']){background:var(--color-surface)!important;border-left:3px solid #0078d4!important;font-weight:600!important}
+body:has(aside nav a[href^='/dashboard']) main>header{background:var(--color-surface)!important;border-bottom:1px solid var(--color-border)!important;min-height:60px;padding-block:12px!important}
+body:has(aside nav a[href^='/dashboard']) main>header h1{font-family:inherit!important;font-size:20px!important;font-weight:600!important}
+body:has(aside nav a[href^='/dashboard']) main>div.overflow-y-auto{background:var(--color-bg)!important;padding:24px!important}
+body:has(aside nav a[href^='/dashboard']) main :is(input:not([type='checkbox']):not([type='radio']):not([type='range']),select,textarea){background:var(--color-surface)!important;color:var(--ax-ink)!important;border:1px solid var(--color-border)!important;border-radius:6px!important}
+body:has(aside nav a[href^='/dashboard']) main button[class*='bg-brand-500']{background:#0067b8!important;color:#fff!important;border:1px solid transparent!important;border-radius:6px!important;box-shadow:none!important}
+body:has(aside nav a[href^='/dashboard']) main table :is(th,td){padding:12px 14px;font-size:13px;border-color:var(--color-border)}
+@media(max-width:600px){body:has(aside nav a[href^='/dashboard']) main>div.overflow-y-auto{padding:16px!important}}
+body:has(aside nav a[href^='/dashboard']) aside nav a:focus-visible{outline:2px solid #0078d4!important;outline-offset:2px}

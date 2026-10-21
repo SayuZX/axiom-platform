@@ -1,0 +1,106 @@
+/* Shared desktop engine, adapted to a phone canvas without desktop scaling. */
+html[data-native-mobile=true] .d-setup{top:env(safe-area-inset-top)}
+.d-mobile.d-root{--client-ui-size:16px;--client-content-size:16px;--d-bg:#000;--d-sidebar:#171717;display:block;background:var(--d-bg);padding-top:env(safe-area-inset-top);overscroll-behavior:none}
+.d-mobile .d-titlebar,.d-mobile .d-rail{display:none}
+.d-mobile.d-root .d-main{position:absolute;inset:env(safe-area-inset-top) 0 0;margin:0;border:0;border-radius:0;background:var(--d-bg)}
+.d-mobile.d-root .d-sidebar{position:absolute;z-index:60;inset:env(safe-area-inset-top) auto 0 0;width:min(86vw,340px);height:auto;border:0;border-radius:0 20px 20px 0;padding-bottom:env(safe-area-inset-bottom);box-shadow:16px 0 48px #0005}
+.d-mobile.d-root.d-collapsed .d-sidebar{transform:translateX(-100%)}
+.d-mobile-sidebar-shade{position:absolute;inset:0;z-index:59;background:#0008!important;width:100%;height:100%}
+.d-mobile .d-sidebar-heading{height:64px;padding:0 20px}
+.d-mobile .d-sidebar-heading>button{font-size:22px;gap:8px}
+.d-mobile .d-brand-logo{width:25px;height:25px}
+.d-mobile .d-sidebar h3{font-size:14px;margin-top:24px}
+.d-mobile.d-root .d-history-open{font-size:16px}
+.d-mobile .d-history-preview{display:none}
+.d-mobile-navigation{display:flex;flex-wrap:wrap;gap:6px;padding:12px;border-bottom:1px solid var(--d-border)}
+.d-mobile.d-root .d-mobile-navigation button{padding:8px 12px;border-radius:20px;background:var(--d-hover);font-size:14px}
+.d-mobile .d-chat-header{height:64px;padding:0 12px;background:var(--d-bg)}
+.d-mobile.d-root .d-chat-heading{gap:10px;max-width:calc(100% - 90px)}
+.d-mobile.d-root .d-chat-heading>strong{font-size:16px;max-width:220px}
+.d-mobile .d-chat-header-actions>.d-button:not(.d-temporary-btn),.d-mobile .d-chat-header-actions>.d-divider,.d-mobile .d-header-temporary-badge{display:none}
+.d-mobile.d-chat-active .d-chat-heading>strong,.d-mobile.d-chat-active .d-chat-header-actions>.d-temporary-btn{display:none}
+.d-mobile.d-chat-active .d-chat-header-actions>.d-button:is([aria-label="New chat"],[aria-label="Conversation options"]){display:inline-flex;width:36px;height:36px;background:#252525;border-radius:20px}
+.d-mobile.d-root .d-chat-heading>.d-button,.d-mobile.d-root .d-temporary-btn{width:40px;height:40px;border-radius:50%;background:#252525}
+.d-mobile.d-root .d-temporary-btn{position:static;color:#ddd}
+.d-mobile .d-home-mode{top:12px;width:154px;height:40px;background:#303030}
+.d-mobile.d-root .d-home-mode>button{font-size:14px;font-weight:500}
+.d-mobile .d-home-mode::before{width:50%;border-radius:30px;background:#1e1e1e;border:0}
+.d-mobile .d-home-mode[data-mode=Work]::before{left:50%;transform:none}
+.d-mobile .d-home-mode>button::after{display:none}
+.d-mobile .d-conversation{height:calc(100% - 64px);padding:0 18px 240px;overscroll-behavior:contain}
+.d-mobile .d-thread{padding-top:8px}
+.d-mobile .d-user-message{font-size:16px;line-height:25px;padding:10px 16px;max-width:90%;margin:18px 0 32px auto;border-radius:24px}
+.d-mobile .d-assistant-message{font-size:16px;line-height:26px;margin-bottom:24px}
+.d-mobile .d-message-actions{font-size:12px;gap:12px;margin-bottom:24px}
+.d-mobile .d-message-actions svg{width:18px;height:18px}
+.d-mobile .d-turn-rail{display:none}
+.d-mobile.d-root .d-composer-wrap,.d-mobile.d-root.d-chatgpt-home .d-composer-wrap{left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));top:auto;width:auto;transform:none}
+.d-mobile.d-chatgpt-home .d-composer-wrap{display:flex;flex-direction:column}
+.d-mobile .d-composer-wrap>.d-home-heading{display:none}
+.d-mobile.d-root .d-composer{--d-input-height:28px;grid-template-columns:26px minmax(0,1fr) auto;grid-template-rows:auto auto 0 minmax(0,32px);column-gap:10px;padding:8px 10px;border-radius:28px;min-height:48px;background:#303030;border:0}
+.d-mobile.d-root.d-chat-mode .d-composer{--d-input-height:28px;grid-template-rows:auto auto 0 minmax(0,32px);padding:8px 10px;min-height:48px;column-gap:10px}
+.d-mobile.d-root .d-composer textarea{font-size:16px;line-height:26px;min-height:28px;max-height:144px;height:28px}
+.d-mobile.d-root .d-composer>textarea{grid-row:4;grid-column:2;align-self:center;width:100%}
+.d-mobile.d-root .d-composer .d-approval,.d-mobile .d-composer .d-active-model{display:none}
+.d-mobile .d-composer-right{gap:10px}
+.d-mobile.d-root .d-composer .d-button{min-width:28px;min-height:28px;width:28px;height:28px}
+.d-mobile.d-root .d-composer .d-send{width:32px;height:32px;min-width:32px;min-height:32px}
+.d-mobile .d-composer .d-button svg{width:20px;height:20px}
+.d-mobile.d-root .d-model{font-size:13px!important;gap:4px}
+.d-mobile .d-model svg{width:12px;height:12px}
+.d-mobile.d-root .d-approval{font-size:13px!important;gap:5px}
+.d-mobile .d-approval svg{width:18px;height:18px}
+.d-mobile .d-active-model{max-width:100px;overflow:hidden;text-overflow:ellipsis}
+.d-mobile .d-home-suggestions{order:-1;margin:0 6px 14px}
+.d-mobile.d-root .d-home-suggestions>button{font-size:14px;line-height:22px;min-height:42px;padding:0;gap:10px;overflow:hidden}
+.d-mobile .d-home-suggestions>button svg{width:18px;height:18px}
+.d-mobile .d-home-suggestions>button span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.d-mobile .d-home-disclaimer,.d-mobile .d-home-tools,.d-mobile .d-codex-context{display:none}
+.d-mobile .d-composer-status{top:-48px;height:34px}
+.d-mobile.d-root .d-composer-status .d-scroll-latest{width:34px;height:34px;min-height:34px}
+.d-mobile.d-root .d-composer-status .d-chat-disclaimer{font-size:10px;line-height:15px}
+.d-mobile .d-composer-wrap::before{top:-70px}
+.d-mobile .d-temporary-description{order:-1;margin:0 12px 160px;font-size:14px;line-height:22px;text-align:center}
+.d-mobile.d-root.d-temporary-mode.d-chatgpt-home .d-composer-wrap{top:auto;width:auto}
+.d-mobile.d-temporary-mode .d-home-heading{display:block;order:-2;font-size:22px;line-height:30px;margin-bottom:8px}
+.d-mobile .d-temporary-personalization{top:auto;bottom:140px;right:50%;transform:translateX(50%);font-size:14px}
+.d-mobile .d-temporary-personalization-options{right:50%;transform:translateX(50%);top:40px;width:290px}
+.d-mobile.d-root .d-popover{max-width:calc(100% - 24px);font-size:15px}
+.d-mobile.d-root .d-profile-menu{left:12px;bottom:12px;width:min(340px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto}
+.d-mobile .d-menurow{min-height:40px;font-size:15px}
+.d-mobile .d-experience-menu{left:12px;top:64px;width:280px;z-index:65}
+.d-mobile .d-effort-popover{max-width:calc(100% - 24px)}
+.d-mobile.d-root .d-chat-error{font-size:13px;margin-bottom:12px}
+.d-mobile.d-root .d-mobile-page-header{height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 16px}
+.d-mobile .d-settings-page{height:calc(100% - 56px);padding:16px;overflow:auto}
+.d-mobile .d-settings-content{max-width:100%}
+.d-mobile .d-settings-row{gap:12px;flex-wrap:wrap;align-items:flex-start;padding:16px 0}
+.d-mobile .d-settings-row>div:first-child{min-width:0;width:auto}
+.d-mobile .d-settings-control{min-width:0;max-width:100%;flex-wrap:wrap;gap:8px}
+.d-mobile .d-settings-stat-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.d-mobile .d-endpoint-page{padding:16px;height:calc(100% - 56px)}
+.d-mobile .d-endpoint-layout{display:block}
+.d-mobile .d-endpoint-page h1{font-size:25px;line-height:34px}
+.d-mobile .d-endpoint-page>header{display:block;margin-bottom:20px}
+.d-mobile .d-endpoint-form{padding:0}
+.d-mobile .d-endpoint-profiles{margin-bottom:20px}
+.d-mobile .d-collection-host{height:calc(100% - 56px)}
+.d-mobile .d-page{padding:20px 16px}
+.d-mobile .d-plugin-grid{grid-template-columns:1fr;gap:24px}
+.d-mobile .d-navigation-palette{inset:12px;width:auto;height:calc(100% - 24px);transform:none;border-radius:20px}
+.d-mobile .d-navigation-results button{font-size:16px;min-height:44px}
+.d-mobile .d-navigation-palette>input{font-size:16px}
+.d-mobile .d-toast{max-width:calc(100% - 24px);font-size:14px;bottom:80px}
+@media(max-width:768px){
+ .d-setup{padding:16px;font-size:16px}
+ .d-auth-page .d-setup-dialog{width:100%;padding:70px 12px 24px}
+ .d-auth-wordmark{font-size:17px}
+ .d-auth-wordmark .d-brand-logo{width:24px;height:24px}
+ .d-auth-page .d-name-form{width:100%;max-width:380px;margin:auto}
+ .d-auth-page .d-name-form input{font-size:16px}
+ .d-auth-page .d-auth-footnote{font-size:12px}
+ .d-auth-page .d-endpoint-page{padding:0;height:auto}
+ .d-temporary-intro{position:fixed;inset:auto 0 0;width:100%;max-width:100%;margin:0;border-radius:24px 24px 0 0}
+ .d-temporary-intro-art{height:160px}
+ .d-temporary-intro-body{padding:28px 24px calc(24px + env(safe-area-inset-bottom))}
+}

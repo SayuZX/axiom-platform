@@ -1,0 +1,236 @@
+.shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: center;
+  flex: 1;
+  width: 100%;
+  max-width: 1136px;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+  gap: clamp(40px, 7vw, 104px);
+}
+
+.story {
+  padding: 16px 0;
+}
+
+.story h1 {
+  max-width: 490px;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(34px, 3.5vw, 48px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -1.4px;
+}
+
+.story > div > p {
+  max-width: 390px;
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.workflow {
+  display: grid;
+  gap: 24px;
+  margin: 40px 0 32px;
+  padding: 0;
+  list-style: none;
+}
+
+.workflow li {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.workflow li > span {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--clay);
+  border-radius: 50%;
+  color: var(--ink);
+  font-size: 12px;
+}
+
+.workflow h2 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.workflow p {
+  max-width: 330px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.story footer {
+  max-width: 390px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.main {
+  width: 100%;
+  min-width: 0;
+}
+
+.panel {
+  width: 100%;
+  max-width: 432px;
+  margin: 0 auto;
+  padding: 36px;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--clay);
+  border-radius: 14px;
+  background: var(--paper);
+}
+
+.panel > h2 {
+  margin: 0;
+  font-size: 25px;
+  font-weight: 550;
+  letter-spacing: -0.6px;
+}
+
+.panel > p {
+  margin: 10px 0 26px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.fields {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.fields label {
+  font-size: 13px;
+}
+
+.fields input:not([type='checkbox']) {
+  margin-top: 7px;
+  min-height: 46px;
+}
+
+.fields > button {
+  width: 100%;
+  min-height: 46px;
+  margin-top: 4px;
+}
+
+.fields:disabled input {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.passwordField {
+  min-width: 0;
+}
+
+.passwordControl {
+  position: relative;
+}
+
+.passwordControl input {
+  padding-right: 112px;
+}
+
+.passwordToggle {
+  position: absolute;
+  top: 9px;
+  right: 2px;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 6px;
+  color: var(--secondary);
+  background: transparent;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.passwordToggle:hover:not(:disabled) {
+  background: var(--stone);
+}
+
+.passwordToggle:disabled {
+  cursor: wait;
+}
+
+.panel :is(input, button, a):focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.capsLock {
+  margin: 7px 0 0;
+  color: var(--secondary);
+  font-size: 12px;
+}
+
+@media (max-width: 760px) {
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+    align-content: center;
+    gap: 28px;
+    padding: 28px 20px 40px;
+  }
+
+  .story {
+    width: 100%;
+    max-width: 432px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .story h1 {
+    font-size: 32px;
+    letter-spacing: -0.8px;
+  }
+
+  .story > div > p {
+    margin-top: 12px;
+    font-size: 14px;
+  }
+
+  .workflow,
+  .story footer {
+    display: none;
+  }
+
+  .panel {
+    padding: 28px 24px;
+  }
+}
+
+@media (max-width: 380px) {
+  .shell {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .panel {
+    padding: 24px 18px;
+  }
+
+  .panel > h2 {
+    font-size: 23px;
+  }
+}

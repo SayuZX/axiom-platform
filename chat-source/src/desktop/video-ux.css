@@ -1,0 +1,117 @@
+/* Behaviors observed in the user-supplied 2026-10-16 13:27:50 recording.
+   Hover delays and easing are estimates, not measured frame-exact timing. */
+.d-button[data-tooltip]::after{display:none!important}
+.d-tooltip{position:fixed;z-index:60;pointer-events:none;display:flex;align-items:center;gap:15px;white-space:nowrap;padding:7px 16px;border:1px solid #3b3b3b;border-radius:18px;background:#2c2c2c;color:#eee;font-size:18px;line-height:28px;box-shadow:0 4px 14px #0002;animation:d-tooltip-in .1s ease-out}
+.d-tooltip-top{transform:translate(-50%,-100%)}
+.d-tooltip-bottom{transform:translateX(-50%)}
+.d-tooltip-right{transform:translateY(-50%)}
+.d-tooltip kbd{font:inherit;font-size:16px;color:#999}
+@keyframes d-tooltip-in{from{opacity:0}to{opacity:1}}
+.d-more-row{position:relative;display:flex;align-items:center;border-radius:15px;min-height:43px}
+.d-more-row:hover,.d-more-row:focus-within{background:#ffffff0c}
+.d-more-row>button:first-child{display:flex;align-items:center;gap:12px;flex:1;min-width:0;padding:8px 12px;border-radius:15px;font-size:19px}
+.d-more-row>button:first-child:hover{background:transparent}
+.d-more-row>button:first-child>svg{width:22px;height:22px}
+.d-more-row .d-nav-pin{width:32px;height:32px;margin-right:5px;opacity:0;color:#929292}
+.d-more-row:hover .d-nav-pin,.d-more-row:focus-within .d-nav-pin,.d-more-row .d-is-pinned{opacity:1}
+.d-nav-pin svg{width:18px;height:18px}
+.d-nav-pin.d-is-pinned svg{fill:currentColor;stroke-width:1.2}
+.d-history-list{display:flex;flex-direction:column;overflow:visible;position:relative;padding:0 12px}
+.d-history-list>.d-navrow{flex-shrink:0}
+.d-history-scroll{min-height:0;flex:1;overflow:auto;scrollbar-width:thin;scrollbar-color:#333 transparent}
+.d-history-section{display:flex;align-items:center;justify-content:space-between;padding:0 12px;margin:27px 0 14px;min-height:30px;color:#858585}
+.d-history-section.d-recents-section{margin-top:31px;margin-bottom:13px}
+.d-root .d-section-toggle{display:flex;align-items:center;gap:9px;font-size:20px;font-weight:600;color:#858585;min-height:30px}
+.d-section-toggle>svg{visibility:hidden;width:16px;height:16px;transition:transform .12s ease}
+.d-section-toggle[aria-expanded=false]>svg{transform:rotate(-90deg)}
+.d-history-section:hover .d-section-toggle>svg,.d-history-section:focus-within .d-section-toggle>svg{visibility:visible}
+.d-section-tools{display:flex;gap:12px;opacity:0;transition:opacity .1s ease}
+.d-history-section:hover .d-section-tools,.d-history-section:focus-within .d-section-tools{opacity:1}
+.d-section-tools>.d-button{width:28px;height:28px;min-width:28px;min-height:28px;border-radius:7px}
+.d-section-tools svg{width:21px;height:21px}
+.d-root .d-project-row{display:flex;align-items:center;gap:12px;padding:9px 12px;width:100%;border-radius:12px;font-size:20px}
+.d-project-row:hover{background:#2c2c2c}
+.d-history-options{position:absolute;z-index:12;left:18px;top:220px;background:#2c2c2c;border:1px solid #414141;border-radius:16px;padding:6px;width:290px;box-shadow:0 8px 22px #0003}
+.d-history-options>button{display:flex;align-items:center;justify-content:space-between;gap:15px;width:100%;border-radius:10px;padding:9px 12px;font-size:18px}
+.d-history-options>button:hover{background:#ffffff0a}
+.d-history-chat-options{z-index:14;width:300px;padding:6px;background:#292929f7;border:1px solid #3b3b3b;border-radius:23px;box-shadow:0 12px 28px #0005}
+.d-history-chat-options>button{display:flex;align-items:center;gap:12px;width:100%;height:44px;padding:10px 12px;border-radius:11px;font-size:18px;line-height:24px;text-align:left}
+.d-history-chat-options>button>span{flex:1;white-space:nowrap}
+.d-history-chat-options>button>small{margin-left:auto;font-size:14px;color:#999;white-space:nowrap}
+.d-history-chat-options>button>svg{flex-shrink:0}
+.d-history-chat-options>button>span+svg{margin-left:auto;transform:rotate(-90deg);color:#999}
+.d-history-chat-options>button.d-history-delete{color:#ff5d5d}
+.d-history-chat-options>button:disabled{cursor:not-allowed}
+.d-history-chat-options>button:hover,.d-history-chat-options>button:focus-visible{background:#ffffff0a;outline:none}
+.d-history-chat-options>hr{height:1px;margin:5px 8px;background:#454545;border:0}
+.d-history-preview{pointer-events:auto}
+.d-history-preview p>svg{stroke-width:1.7}
+.d-turn-rail{top:17%;max-height:60%;gap:3px;overflow:visible}
+.d-turn-preview{max-height:170px}
+.d-chat-message{position:relative}
+.d-chat-message-user{margin:30px 0 80px}
+.d-chat-message-user>.d-user-message{margin:0 0 0 auto}
+.d-chat-message-assistant{margin:0 0 40px}
+.d-chat-message-assistant>.d-assistant-message{margin:0}
+.d-root .d-live-actions{position:relative;gap:15px;margin:12px 0 0;color:#888;min-height:28px;font-size:17px}
+.d-live-actions>.d-button{width:25px;height:28px;min-width:25px;min-height:28px;border-radius:7px;transition:background .12s ease}
+.d-live-actions>.d-button:hover{background:#ffffff0a}
+.d-live-actions>.d-button>svg{width:21px;height:21px}
+.d-chat-message-user .d-user-actions{position:absolute;right:0;top:100%;opacity:0;pointer-events:none;transition:opacity .12s ease}
+.d-chat-message-user:hover .d-user-actions,.d-chat-message-user:focus-within .d-user-actions{opacity:1;pointer-events:auto}
+.d-live-actions time{font-size:17px;font-variant-numeric:tabular-nums;color:#888}
+.d-live-actions:not(.d-user-actions)>time{opacity:0}
+.d-chat-message:hover .d-live-actions>time,.d-chat-message:focus-within .d-live-actions>time{opacity:1}
+.d-message-editor{background:#2d2d2d;border:1px solid #414141;border-radius:25px;padding:18px 20px}
+.d-message-editor textarea{display:block;width:100%;min-height:110px;font:inherit;line-height:1.55;resize:vertical;padding:0}
+.d-message-editor>div{display:flex;justify-content:flex-end;gap:12px;margin-top:15px}
+.d-message-editor button,.d-sketch-actions button{padding:8px 18px;border-radius:20px;background:#3d3d3d}
+.d-message-editor button:last-child{background:#eee;color:#222}
+.d-root button:disabled{opacity:.45;cursor:default}
+.d-root .d-response-menu{position:absolute;left:110px;bottom:36px;top:auto;min-width:200px;border-radius:16px;padding:6px;z-index:12}
+.d-response-menu>button{display:block;width:100%;padding:8px 12px;border-radius:10px;font-size:18px}
+.d-preview-card{position:relative;display:flex;align-items:center;gap:15px;min-height:100px;border:1px solid #343434;background:#222;border-radius:17px;padding:18px;margin-top:17px}
+.d-preview-icon{display:grid;place-items:center;width:60px;height:60px;border-radius:15px;background:#141414;color:#3bd4ed}
+.d-preview-icon>svg{width:30px;height:30px}
+.d-preview-card strong{display:block;font-size:20px;line-height:29px}
+.d-preview-card p{font-size:19px;line-height:28px;color:#aaa}
+.d-preview-card>button{display:flex;align-items:center;gap:12px;margin-left:auto;border:1px solid #3d3d3d;border-radius:16px;padding:6px 12px;font-size:19px;color:#eee;background:#282828}
+.d-preview-card>button>svg{width:16px;height:16px;color:#999}
+.d-root .d-preview-menu{position:absolute;right:16px;top:calc(100% - 10px);width:240px;border-radius:15px;padding:6px}
+.d-preview-menu>a,.d-preview-menu>button{display:block;width:100%;padding:8px 12px;text-decoration:none;border:0;color:#eee;font-size:18px;line-height:28px;border-radius:10px}
+.d-preview-menu>a:hover{background:#ffffff0c}
+.d-root .d-scroll-latest{position:absolute;left:50%;top:-62px;transform:translateX(-50%) rotate(180deg);width:46px;height:46px;border-radius:50%;border:1px solid #393939;background:#191919;color:#eee;z-index:4}
+.d-scroll-latest>svg{width:23px;height:23px}
+.d-root .d-composer-add{right:auto;bottom:auto;border-radius:30px;padding:6px;overflow:auto;scrollbar-width:thin;scrollbar-color:#494949 transparent;background:#2d2d2df7}
+.d-composer-add>p{font-size:19px;color:#999;padding:5px 12px 6px;line-height:29px}
+.d-composer-add>p:not(:first-child){padding-top:13px}
+.d-composer-add>button{width:100%;min-height:43px;padding:7px 12px;display:flex;align-items:center;gap:12px;border-radius:24px;text-align:left;font-size:19px;color:#c3c3c3;line-height:29px}
+.d-composer-add>button>svg{width:22px;height:22px;color:#aaa}
+.d-composer-add>button>svg[data-icon=sketch]{color:#00bca5}
+.d-composer-add>button>span{flex-shrink:0}
+.d-composer-add>button>small{color:#828282;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.d-composer-add>button.d-add-default{background:#ffffff0a;color:#eee}
+.d-composer-add:has(button:hover)>button.d-add-default,.d-composer-add:has(button:focus-visible)>button.d-add-default{background:transparent}
+.d-composer-add>button:hover,.d-composer-add>button:focus-visible{background:#ffffff0b}
+.d-command-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.d-command-chips>button{display:flex;align-items:center;gap:8px;font-size:16px;border:1px solid #555;border-radius:15px;padding:3px 9px;color:#ccc}
+.d-command-chips svg{width:16px;height:16px}
+.d-file-preview{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:15px;color:#aaa}
+.d-file-preview>svg{width:42px;height:42px}
+.d-file-preview>span{font-size:16px;overflow-wrap:anywhere;text-align:center}
+.d-sketch-dialog{width:min(960px,90%);padding:24px;border:1px solid #414141;border-radius:24px;background:#252525}
+.d-sketch-dialog>.d-row{justify-content:space-between;margin-bottom:18px}
+.d-sketch-dialog canvas{width:100%;height:auto;display:block;background:#fff;border-radius:14px;touch-action:none;cursor:crosshair}
+.d-sketch-actions{display:flex;justify-content:flex-end;gap:12px;margin-top:16px}
+.d-sketch-actions button:last-child{background:#eee;color:#222}
+.d-root .d-home-heading{margin:0 0 22px}
+.d-button:focus-visible,.d-more-row>button:focus-visible{outline-offset:2px}
+@media(prefers-reduced-motion:reduce){.d-root *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+.d-codex-response-status{color:#888;font-size:20px;line-height:30px}
+.d-codex-response-working{padding-bottom:12px;margin-bottom:26px;border-bottom:1px solid #2c2c2c}
+@media(prefers-reduced-motion:no-preference){
+ .d-codex-response-thinking>span{display:inline-block;background:linear-gradient(110deg,#777 20%,#d5d5d5 45%,#777 70%);background-size:250% 100%;background-clip:text;-webkit-background-clip:text;color:transparent;animation:d-codex-thinking-shimmer 2s linear infinite}
+ @keyframes d-codex-thinking-shimmer{from{background-position:150% 0}to{background-position:-150% 0}}
+}
+html[data-reduce-motion=true] .d-codex-response-thinking>span{animation:none;background:none;color:#888}

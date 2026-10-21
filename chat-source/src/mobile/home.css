@@ -1,0 +1,44 @@
+/* Home geometry normalized from the supplied 614 × 1280 captures to 390 × 813.
+   Android density is not inferred from a screenshot. Native TempChatIcon is 24. */
+/* Scope the installed Apps SDK UI semantic font token to mobile, avoiding
+   Tailwind's merged default font token. No proprietary font file is implied. */
+.m-app{--font-sans:ui-sans-serif,-apple-system,system-ui,"Segoe UI","Noto Sans","Helvetica","Arial","Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol",sans-serif;font-family:var(--font-sans);--m-home-edge:12.1px;--m-home-rest-bottom:34.3px}
+.m-home-header{position:relative;height:69.3px;padding:12.1px 14px;gap:0}
+.m-app .m-home-header .m-round{width:45.1px;height:45.1px;min-height:45.1px;padding:8px;background:#303030;flex-shrink:0}
+.m-home-header .m-round svg{width:24px!important;height:24px!important}
+.m-home-header .m-round svg[data-icon=mobile-menu]{width:28px!important;height:28px!important}
+.m-home-header .m-round:last-child{margin-left:auto}
+.m-home-header .m-mode{position:absolute;left:50%;transform:translateX(-50%);width:175.3px;height:45.1px;padding:4px;background:#414141}
+.m-app .m-home-header .m-mode button{font-size:14px;line-height:20px;min-height:0;font-weight:400;letter-spacing:0}
+.m-footer{padding-left:var(--m-home-edge);padding-right:var(--m-home-edge);padding-bottom:calc(12.1px + env(safe-area-inset-bottom))}
+.m-footer-home:not(.m-composer-engaged){padding-bottom:max(var(--m-home-rest-bottom),env(safe-area-inset-bottom))}
+.m-footer-home:not(.m-composer-engaged) .m-composer{width:calc(100% - 44.4px);min-height:49.5px}
+.m-suggestions{margin:0 14.6px 16px}
+.m-app .m-suggestions button{height:49px;min-height:49px;font-size:18px;line-height:25px;letter-spacing:0;gap:14.6px;font-weight:400}
+.m-suggestions svg{width:21px!important;height:21px!important}
+/* Match the entire row, including the blank interaction extent around Send. */
+.m-composer{grid-template-columns:36px minmax(0,1fr) 36px 48px;padding:6px 8px;min-height:49px}
+.m-app .m-composer textarea{font-weight:400;letter-spacing:0;overflow-y:auto;padding-left:5.5px}
+.m-app .m-composer .m-send{margin-right:2px}
+.m-app .m-composer .m-send-empty{background:#5b5b5b;color:#b8b8b8;opacity:1}
+.m-composer-expanded .m-composer textarea{padding-left:8px}
+.m-home.m-temporary .m-messages{display:flex;padding:0 24px;overflow:auto}
+.m-temporary-home{width:100%;height:auto;flex:1;align-self:center;padding:0;transform:translateY(10px)}
+.m-temporary-home h1{font-size:22px;line-height:28px;font-weight:500;margin:0 0 8px}
+.m-temporary-home p{font-size:14px;line-height:20px;margin:0;color:#aaa;max-width:290px}
+.m-app .m-temporary-home .m-learn-more{font-size:14px;line-height:20px;color:#aaa;text-decoration:underline;padding:0;min-height:28px}
+.m-app .m-temporary-home .m-personalization{font-size:14px;line-height:20px;padding:8px 12px;margin-top:22px;gap:8px;min-height:36px}
+.m-temporary-sheet{padding:0 24px calc(24px + env(safe-area-inset-bottom));overflow:hidden}
+.m-temporary-sheet .m-temporary-art{height:180px;margin:0 -24px 24px;border-radius:26px 26px 0 0;background:radial-gradient(ellipse at 20% 10%,#a4a8bcaa,transparent 55%),radial-gradient(ellipse at 95% 90%,#aaa1b2aa,transparent 50%),linear-gradient(120deg,#073269,#252362 60%,#605081)}
+.m-temporary-sheet .m-temporary-art svg{width:72px!important;height:72px!important}
+.m-temporary-sheet h2{font-size:22px;line-height:28px;margin:0 0 16px;font-weight:600;text-align:center}
+.m-temporary-sheet p{font-size:15px;line-height:22px;margin:0 auto 30px;max-width:300px;text-align:center}
+.m-temporary-sheet .m-primary{margin:0;min-height:48px}
+.m-app .m-temporary-sheet .m-sheet-close{width:32px;height:32px;min-height:32px;padding:7px;border-radius:50%;background:#474c55aa}
+.m-temporary-sheet .m-sheet-close svg{width:18px;height:18px}
+.m-sheet .m-personalization-option{display:flex;align-items:center;justify-content:space-between;min-height:52px;gap:16px}
+.m-personalization-option input{width:22px;height:22px;accent-color:#2861df}
+html[data-client-theme=light] .m-home-header .m-round{background:var(--m-field);border-color:#ddd}
+html[data-client-theme=light] .m-home-header .m-mode{background:#ddd}
+html[data-client-theme=light] .m-suggestions button,html[data-client-theme=light] .m-temporary-home p,html[data-client-theme=light] .m-temporary-home .m-learn-more{color:#666}
+@media(max-width:340px){.m-home-header .m-mode{width:156px}.m-app .m-suggestions button{font-size:16px}}

@@ -1,0 +1,17 @@
+{
+  "name": "axiom-payment",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Axiom merchant console and Ruby payment core",
+  "scripts": {
+    "start": "node operations/run.cjs start",
+    "dev": "node operations/run.cjs dev",
+    "api": "node operations/run.cjs api",
+    "worker": "node operations/run.cjs worker",
+    "build": "npm --prefix apps/merchant-console run build",
+    "test": "node operations/run.cjs test"
+  },
+  "engines": {
+    "node": ">=24.13.0"
+  }
+}

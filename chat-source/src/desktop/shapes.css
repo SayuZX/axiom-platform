@@ -1,0 +1,40 @@
+/* Shared corner geometry. Keep the existing reference layout and hit-area centers. */
+.d-root{
+  --d-icon-stroke:1.7;
+  --d-radius-control:12px;
+  --d-radius-rail:16px;
+  --d-radius-row:15px;
+  --d-radius-popover:24px;
+  --d-radius-composer:34px;
+}
+.d-root svg[data-icon]{stroke-linecap:round;stroke-linejoin:round;shape-rendering:geometricPrecision}
+/* The approved Plugins symbol is a filled asset, not a stroked line icon. */
+.d-root svg[data-icon=plugin]{fill:currentColor;stroke:none;shape-rendering:auto}
+.d-rail svg[data-icon=plugin]{width:27px;height:27px}
+.d-rail .d-button[aria-label=Plugins]{border-radius:var(--d-radius-rail)}
+.d-rail>.d-button{border-radius:var(--d-radius-rail)}
+.d-root .d-button{border-radius:var(--d-radius-control)}
+.d-root .d-rail>.d-button{border-radius:var(--d-radius-rail)}
+.d-root .d-history-row,.d-root .d-history-open{border-radius:var(--d-radius-row)}
+.d-root .d-composer{border-radius:var(--d-radius-composer)}
+.d-root .d-composer-toolbar>.d-button{width:42px;height:42px;min-width:42px;border-radius:50%;margin-left:-5px;margin-right:-5px}
+.d-root .d-composer-right>.d-button:not(.d-send){width:42px;height:42px;min-width:42px;margin-left:-5px;margin-right:-5px;border-radius:50%}
+.d-root .d-send,.d-root .d-download,.d-root .d-profile,.d-root .d-scroll-latest{border-radius:50%}
+.d-root .d-model{border-radius:999px;padding:6px 13px;margin:-6px -13px}
+.d-root .d-approval{border-radius:999px;padding:6px 12px;margin:-6px -12px}
+.d-root .d-model:hover,.d-root .d-approval:hover{background:#ffffff0a}
+.d-root .d-chat-header .d-button{border-radius:14px}
+.d-root .d-section-tools .d-button,.d-root .d-history-actions .d-button{border-radius:8px}
+.d-root .d-more-row,.d-root .d-more-row>button:first-child{border-radius:15px}
+.d-root .d-action-wrapper>button{border-radius:10px}
+.d-root .d-response-menu,.d-root .d-preview-menu{border-radius:18px}
+.d-root .d-response-menu>button,.d-root .d-preview-menu>button,.d-root .d-preview-menu>a{border-radius:12px}
+.d-root .d-modal,.d-root .d-sketch-dialog{border-radius:var(--d-radius-popover)}
+.d-window-controls>span{width:20px;height:24px;display:inline-flex;align-items:center;justify-content:center}
+.d-window-controls svg{stroke-width:1.6}
+.d-plugin-mark>svg{color:#bbb}
+.d-brand-badge{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;flex-shrink:0;border-radius:9px;background:#fff}
+.d-root .d-message-actions>button svg,.d-root .d-history-actions>button svg{stroke-width:1.65}
+.d-root .d-navrow svg{stroke-width:1.7}
+.d-root .d-live-actions>.d-button{border-radius:8px}
+.d-root .d-home-mode>button,.d-root .d-home-tools>button{border-radius:999px}

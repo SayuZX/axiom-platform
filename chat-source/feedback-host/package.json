@@ -1,0 +1,10 @@
+{
+  "name": "axiom-global-notices",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "test:browser": "node browser-check.mjs"
+  },
+  "description": "AXIOM AI global feedback: SDK Alert/Button, Shadow DOM isolation, queued native confirmations. Success/error notices auto-dismiss independently 5 seconds after delivery; manual dismiss cancels expiry. Confirmations wait for user input. Build uses AXIOM_SDK_REPO dependencies; deploy dist/axiom-feedback.js to public/axiom-feedback.js. Never link the inspection-only shadow CSS globally. SDK MIT notice emitted beside bundle."
+}

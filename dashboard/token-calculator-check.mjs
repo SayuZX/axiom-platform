@@ -1,0 +1,57 @@
+// Run: node token-calculator-check.mjs (pure arithmetic; no network or database).
+import assert from 'node:assert/strict';
+import { estimatePackage, packageAllowsModel, validCalculatorPackage } from './lib/token-calculator.mjs';
+
+const pkg = { id: 'fixture', name: 'Fixture', currency: 'IDR', price: 59000, tokenLimit: 20000000, validDays: 30, rpmLimit: 60, tpmLimit: 0, allowedModels: null };
+const estimate = (values = {}, plan = pkg) => estimatePackage(plan, { input: '10000', output: '3000', requests: '1', ...values });
+const close = (actual, expected) => assert.ok(Math.abs(actual - expected) < 1e-9, `${actual} != ${expected}`);
+const request = estimate();
+assert.deepEqual(request.errors, {});
+assert.equal(request.perRequest, 13000);
+close(request.perRequestCost, 38.35);
+close(request.perMillionCost, 2950);
+assert.equal(request.requestCapacity, 1538);
+assert.equal(request.remaining, 19987000);
+close(request.quotaShare, 0.065);
+const workload = estimate({ requests: '1539' });
+assert.equal(workload.totalTokens, 20007000);
+assert.equal(workload.remaining, -7000);
+close(workload.workloadCost, 59020.65);
+const exact = estimate({ input: '20000000', output: '0' });
+assert.equal(exact.remaining, 0);
+assert.equal(exact.workloadCost, pkg.price);
+assert.equal(exact.requestCapacity, 1);
+const emptyWorkload = estimate({ requests: '0' });
+assert.equal(emptyWorkload.totalTokens, 0);
+assert.equal(emptyWorkload.workloadCost, 0);
+assert.equal(emptyWorkload.remaining, pkg.tokenLimit);
+assert.equal(estimate({ input: '0', output: '1' }).perRequest, 1);
+assert.ok(estimate({ input: '0', output: '0' }).errors.total);
+for (const key of ['input', 'output', 'requests']) {
+  for (const value of ['', ' ', '-1', '1.5', 'NaN', 'Infinity', '1e3', '1,000', '9007199254740992']) assert.ok(estimate({ [key]: value }).errors[key], `${key}: ${value}`);
+}
+assert.ok(estimate({ input: String(Number.MAX_SAFE_INTEGER), output: '1' }).errors.total);
+assert.ok(estimate({ input: '4503599627370496', output: '0', requests: '2' }).errors.total);
+const boundary = estimate({ input: '9007199254740990', output: '0' }, { ...pkg, price: 1, tokenLimit: Number.MAX_SAFE_INTEGER });
+assert.equal(boundary.requestCapacity, 1);
+assert.equal(boundary.remaining, 1);
+assert.ok(estimate({ input: String(Number.MAX_SAFE_INTEGER), output: '0' }, { ...pkg, tokenLimit: 1 }).errors.total);
+assert.equal(validCalculatorPackage({ ...pkg, tokenLimit: 0 }), false);
+assert.equal(validCalculatorPackage({ ...pkg, currency: 'USD' }), false);
+assert.equal(estimate({}, null).perRequest, 13000);
+assert.equal(estimate({}, null).perRequestCost, undefined);
+assert.equal(packageAllowsModel(pkg, 'provider/model'), true);
+const restricted = { ...pkg, allowedModels: ['provider/model'] };
+assert.equal(packageAllowsModel(restricted, 'provider/model'), true);
+assert.equal(packageAllowsModel(restricted, 'model'), false);
+assert.equal(packageAllowsModel(restricted, 'provider/Model'), true);
+assert.equal(packageAllowsModel(restricted, 'other/model'), false);
+assert.equal(packageAllowsModel({ ...pkg, allowedModels: [] }, 'provider/model'), true);
+assert.equal(packageAllowsModel({ ...pkg, allowedModels: ['*'] }, 'provider/model'), true);
+const blockOnly = { ...pkg, blockedModels: ['model'] };
+assert.equal(packageAllowsModel(blockOnly, 'provider/model'), false);
+assert.equal(packageAllowsModel(blockOnly, 'provider/model-review'), true);
+assert.equal(packageAllowsModel({ ...restricted, blockedModels: ['model'] }, 'provider/model'), false);
+assert.equal(packageAllowsModel({ ...pkg, blockedModels: ['*'] }, 'provider/anything'), false);
+assert.equal(validCalculatorPackage({ ...pkg, blockedModels: ['Display Name'] }), false);
+console.log('PASS: raw tokens, IDR amortization, workload/quota boundaries, invalid input, native model access.');

@@ -1,0 +1,111 @@
+/* Mobile owns its layout. Only endpoint forms and rich text use shared components. */
+.m-app{--m-bg:#000;--m-panel:#212121;--m-text:#eee;--m-muted:#929292;--m-field:#303030;position:fixed;inset:0;width:100%;color:var(--m-text);background:var(--m-bg);font:16px/1.5 var(--font-sans,system-ui,sans-serif);overflow:hidden;isolation:isolate}
+html[data-client-theme=light] .m-app{--m-bg:#fff;--m-panel:#f3f3f3;--m-text:#171717;--m-muted:#666;--m-field:#eee}
+.m-app *{box-sizing:border-box}
+.m-app button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;display:inline-flex;align-items:center;gap:12px;min-height:44px;text-align:left;padding:8px 12px}
+.m-app button:disabled{opacity:.4;cursor:default}
+.m-app button:focus-visible,.m-app input:focus-visible,.m-app select:focus-visible,.m-app textarea:focus-visible{outline:2px solid #629aff;outline-offset:3px}
+.m-app input,.m-app textarea,.m-app select{font:inherit;color:inherit;background:var(--m-field);border:1px solid #80808040;border-radius:12px;padding:12px;min-width:0;max-width:100%}
+.m-app svg{flex-shrink:0}
+.m-content{height:100%;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top)}
+.m-header{height:70px;flex-shrink:0;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--m-bg);z-index:2}
+.m-app .m-round{width:44px;height:44px;min-height:44px;border-radius:50%;border:1px solid #484848;justify-content:center;background:var(--m-field);padding:8px}
+.m-round svg{width:28px!important;height:28px!important}
+.m-round svg[data-icon=mobile-menu]{width:32px!important;height:32px!important}
+.m-mode{display:flex;background:#404040;border-radius:28px;padding:4px;width:176px;height:44px;flex-shrink:0}
+.m-app .m-mode button{width:50%;min-height:36px;padding:0;border-radius:24px;font-size:15px;font-weight:400;justify-content:center;gap:0}
+.m-mode button[aria-selected=true]{background:var(--m-panel)}
+.m-header-pill{display:flex;border-radius:28px;background:var(--m-panel);overflow:hidden}
+.m-app .m-header-pill button{width:40px;min-height:40px;padding:9px}
+.m-messages{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:12px 20px 24px;scrollbar-width:thin}
+.m-message{margin:0 0 30px;overflow-wrap:anywhere;font-size:16px;line-height:1.65}
+.m-user{display:flex;justify-content:flex-end;margin-bottom:38px}
+.m-bubble{background:#193f74;border-radius:25px;padding:10px 18px;max-width:90%;color:#f4f6fa;white-space:pre-wrap}
+.m-app .d-rich-text{font:inherit;line-height:inherit;color:inherit}
+.m-app .d-rich-text pre{max-width:100%;overflow:auto}
+.m-message-actions{margin:6px -10px 0;color:var(--m-muted)}
+.m-attached{display:flex;gap:8px;align-items:center;font-size:13px;padding-top:5px}
+.m-waiting{height:26px;display:flex;align-items:center}
+.m-waiting span{width:14px;height:14px;border-radius:50%;background:#2f75d6;animation:m-pulse 1.4s ease-in-out infinite}
+@keyframes m-pulse{50%{opacity:.55;transform:scale(.85)}}
+.m-footer{position:relative;padding:0 12px calc(12px + env(safe-area-inset-bottom));background:var(--m-bg);flex-shrink:0;z-index:2}
+.m-footer-home:not(.m-composer-engaged){padding-bottom:max(34px,env(safe-area-inset-bottom))}
+.m-footer::before{content:"";position:absolute;left:0;right:0;top:-28px;height:28px;background:linear-gradient(transparent,var(--m-bg));pointer-events:none}
+.m-suggestions{margin:0 16px 16px;display:grid;gap:0}
+.m-app .m-suggestions button{font-size:17.5px;font-weight:400;color:#c7c7c7;padding:0;min-height:49px;gap:14px}
+.m-suggestions svg{color:var(--m-text);width:20px!important;height:20px!important}
+.m-suggestions span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.m-composer{display:grid;grid-template-columns:36px minmax(0,1fr) 36px 48px;align-items:center;gap:0;min-height:49px;padding:6px 8px;border-radius:27px;background:var(--m-field);border:1px solid #484848;width:100%;margin:0 auto}
+.m-footer-home:not(.m-composer-engaged) .m-composer{width:calc(100% - 44px)}
+.m-app .m-composer button{padding:4px;min-width:32px;min-height:32px;width:32px;height:32px;justify-content:center}
+.m-composer button>svg{width:26px!important;height:26px!important}
+.m-app .m-composer textarea{align-self:center;resize:none;background:none;border:0;outline:none;padding:3px 3px;font-size:18px;line-height:28px;height:34px;max-height:136px;min-width:0;width:100%;border-radius:0;caret-color:#4b87fa;scrollbar-width:none}
+.m-composer textarea::-webkit-scrollbar{display:none}
+.m-composer textarea::placeholder{color:#b2b2b2}
+/* APK reference: ect0.o = 32 visual size; ect0.r = 48 interaction extent.
+   The transparent hit area must not enlarge the reference composer layout. */
+.m-app .m-composer .m-send{position:relative;background:#2861df;color:white;border-radius:50%;width:32px;height:32px;min-height:32px;min-width:32px;margin:0;justify-self:end}
+.m-composer .m-send::after{content:"";position:absolute;width:48px;height:48px;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%}
+.m-composer .m-send>svg{width:23px!important;height:23px!important}
+.m-composer-expanded .m-composer{grid-template-rows:minmax(42px,auto) 34px;row-gap:4px;min-height:96px;padding:8px 8px 6px;border-radius:26px}
+.m-composer-expanded .m-composer textarea{grid-column:1/-1;grid-row:1;padding:4px 8px;height:36px;align-self:start;margin-top:2px}
+.m-composer-expanded .m-composer button{grid-row:2}
+.m-composer-expanded .m-composer button[aria-label="Attach files"]{grid-column:1}
+.m-composer-expanded .m-composer button[aria-label="Dictate"]{grid-column:3}
+.m-composer-expanded .m-composer .m-send{grid-column:4}
+.m-app .m-to-bottom{position:absolute;top:-50px;left:calc(50% - 21px);width:42px;height:42px;min-height:42px;border:1px solid #80808050;border-radius:50%;background:var(--m-panel);justify-content:center;transform:rotate(180deg);padding:9px;z-index:3}
+.m-error{background:#4d2525;border:1px solid #834040;color:#ffc5c5;border-radius:16px;padding:12px;margin-bottom:10px;font-size:13px}
+.m-error>div{display:flex;justify-content:flex-end}
+.m-error button{font-size:13px;min-height:36px}
+.m-attachments{display:flex;overflow:auto;gap:8px;margin-bottom:8px}
+.m-app .m-attachments button{font-size:12px;background:var(--m-panel);border-radius:10px;min-height:36px;white-space:nowrap}
+.m-overlay{position:absolute;inset:0;z-index:10;display:flex}
+.m-app .m-backdrop{position:absolute;inset:0;width:100%;height:100%;background:#0009;border-radius:0;padding:0}
+.m-drawer{position:relative;display:flex;flex-direction:column;width:min(86%,360px);height:100%;background:var(--m-panel);border-radius:0 22px 22px 0;padding:calc(12px + env(safe-area-inset-top)) 16px calc(12px + env(safe-area-inset-bottom));box-shadow:16px 0 40px #0005}
+.m-drawer header{display:flex;align-items:center;gap:10px;height:50px;margin-bottom:12px}
+.m-drawer header button{margin-left:auto;padding:8px}
+.m-brand{width:28px;height:28px;object-fit:contain;filter:invert(1)}
+html[data-client-theme=light] .m-brand{filter:none}
+.m-drawer>input{border:0;border-radius:24px;font-size:15px;padding:10px 16px}
+.m-drawer nav{display:grid;padding:16px 0;border-bottom:1px solid #80808025}
+.m-drawer nav button{padding-left:4px;font-size:15px}
+.m-drawer nav button span{margin-left:auto;font-size:10px}
+.m-drawer-history{flex:1;min-height:0;overflow:auto;margin:0 -6px;padding:0 6px}
+.m-drawer-history>p{font-size:14px;color:var(--m-muted)}
+.m-history h2{font-size:13px;font-weight:500;color:var(--m-muted);margin:24px 0 8px}
+.m-app .m-history button{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%;padding:10px 0;font-size:15px}
+.m-drawer footer{padding-top:12px}
+.m-app .m-new-chat{background:#2355a0;color:#fff;border-radius:28px;width:100%;justify-content:center}
+.m-app .m-profile{font-size:14px;width:100%;padding:14px 0 0}
+.m-profile span{width:32px;height:32px;border-radius:50%;background:#735f4c;display:grid;place-items:center;font-size:12px;color:#fff}
+.m-sheet{position:relative;margin:auto 0 0;width:100%;max-height:88%;overflow:auto;background:var(--m-panel);border-radius:26px 26px 0 0;padding:30px 24px calc(24px + env(safe-area-inset-bottom));box-shadow:0 -10px 60px #0003}
+.m-app .m-sheet-close{position:absolute;right:12px;top:12px;z-index:1;width:40px;justify-content:center;padding:8px}
+.m-sheet h1,.m-sheet h2{font-size:23px;line-height:1.4;margin:16px 36px 18px 0;font-weight:600}
+.m-sheet h3{font-size:13px;color:var(--m-muted);margin:20px 0 6px}
+.m-sheet p{color:var(--m-muted);font-size:15px;line-height:1.6}
+.m-sheet>button:not(.m-sheet-close),.m-sheet section>button{width:100%}
+.m-app .m-primary{width:100%;background:#eee;color:#171717;border-radius:28px;justify-content:center;margin-top:24px}
+.m-sheet label{display:grid;gap:8px}
+.m-sheet .m-brand{width:48px;height:48px}
+.m-model-option{overflow-wrap:anywhere}
+.m-model-option[aria-pressed=true]{background:#80808020;border-radius:12px}
+.m-temporary-home{display:flex;height:100%;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px}
+.m-temporary-home h1{font-size:25px;font-weight:500;margin:16px 0 8px}
+.m-temporary-home p{font-size:14px;color:var(--m-muted);max-width:320px}
+.m-temporary-art{height:150px;display:grid;place-items:center;border-radius:16px;background:radial-gradient(at 5% 25%,#0d4b9a,transparent 70%),radial-gradient(at 100% 90%,#665194,#242159)}
+.m-notice{position:absolute;bottom:calc(95px + env(safe-area-inset-bottom));left:16px;right:16px;padding:12px 16px;background:var(--m-text);color:var(--m-bg);border-radius:14px;z-index:30;font-size:14px;box-shadow:0 3px 20px #0005}
+.m-settings{padding:16px 24px 40px;overflow:auto;flex:1}
+.m-settings h1{font-size:26px;font-weight:600;margin:8px 0}
+.m-settings h2{font-size:13px;color:var(--m-muted);margin:28px 0 12px}
+.m-settings label{display:grid;gap:8px;margin:18px 0;font-size:14px}
+.m-settings label textarea{min-height:100px}
+.m-settings>button{display:flex;width:100%;padding:14px 0;gap:14px}
+.m-settings>button span{margin-left:auto;font-size:12px;max-width:45%;overflow-wrap:anywhere}
+.m-settings p{font-size:14px;color:var(--m-muted)}
+.m-settings>.m-brand{vertical-align:middle;margin-right:12px}
+.m-endpoints{flex:1;overflow:auto;min-height:0;--d-bg:var(--m-bg);--d-hover:var(--m-field);--d-fg:var(--m-text);--d-border:#80808040}
+.m-app .m-endpoints .d-endpoint-page{height:auto;overflow:visible;padding:20px 18px 40px;color:var(--m-text);font-size:14px}
+.m-app .m-endpoints .d-endpoint-layout{display:block}
+.m-app .m-endpoints .d-endpoint-page h1{font-size:24px}
+.m-app .m-endpoints button,.m-app .m-endpoints input{font-size:14px}
+@media(prefers-reduced-motion:reduce){.m-waiting span{animation:none}}

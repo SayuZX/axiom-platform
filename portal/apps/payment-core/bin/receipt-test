@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+# Windows deployment: built-in Windows PowerShell 5.1 + System.Drawing + Segoe UI.
+# From payment-core, with service environment loaded:
+#   bundle exec ruby bin/receipt-test C:/Temp/axiom-receipt-test.png
+#   bundle exec ruby bin/receipt-test C:/Temp/axiom-receipt-test.png --send-owner <configured Telegram admin ID>
+# Sends only an unmistakable TEST image. No database opened; no financial writes.
+# The explicit owner ID must occur in TELEGRAM_ADMIN_IDS. Never blindly retry a
+# timed-out send: Telegram may have accepted it before the response was lost.
+ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../Gemfile',__dir__)
+require 'bundler/setup'
+require_relative '../lib/axiom/config'
+require_relative '../lib/axiom/application/receipts/receipts'
+require_relative '../lib/axiom/infrastructure/integrations/telegram_api'
+output,flag,owner=ARGV
+abort 'Usage: ruby bin/receipt-test OUTPUT.png [--send-owner CONFIGURED_ADMIN_ID]' unless output && File.extname(output).downcase=='.png' && (ARGV.length==1 || (ARGV.length==3 && flag=='--send-owner'))
+if flag
+  abort 'Owner must be explicitly configured in TELEGRAM_ADMIN_IDS.' unless owner.match?(/\A[1-9]\d{0,19}\z/) && ENV.fetch('TELEGRAM_ADMIN_IDS','').split(',').map(&:strip).include?(owner)
+end
+document={title:'TEST - Bukan transaksi nyata',status:'TEST / TIDAK SAH',amount:'Rp0',rows:[['Referensi','TEST-AXIOM-RECEIPT'],['Penerima','TEST ****'],['Tujuan','Pemeriksaan gambar saja'],['Nominal nyata','Tidak ada transaksi'],['Waktu uji',Time.now.getlocal('+07:00').strftime('%d-%m-%Y %H:%M:%S WIB')]],footer:'TEST. Tidak membuktikan pembayaran atau transfer. Tidak mengubah saldo.'}
+png=Axiom::Receipts.render(document)
+File.binwrite(output,png)
+puts "TEST PNG written: #{output} (#{png.bytesize} bytes)"
+if flag
+  api=Axiom::TelegramAPI.new;api.verify!
+  result=api.call('sendPhoto',{chat_id:owner,caption:'TEST bukti PNG Axiom. Bukan transaksi nyata; tidak ada perubahan saldo.'},photo:png)
+  puts "TEST owner photo sent; message_id=#{result['message_id']}"
+end

@@ -1,0 +1,31 @@
+{
+  "name": "axiom-ai-web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0 <25"
+  },
+  "scripts": {
+    "dev": "next dev --turbopack --hostname 127.0.0.1 --port 3001",
+    "build": "next build --turbopack",
+    "start": "next start --hostname 127.0.0.1 --port 3001"
+  },
+  "dependencies": {
+    "@hugeicons/core-free-icons": "4.3.5",
+    "@hugeicons/react": "1.1.10",
+    "katex": "0.16.47",
+    "lowlight": "3.3.0",
+    "mysql2": "3.15.3",
+    "next": "16.3.8",
+    "pdf-parse": "2.4.5",
+    "qrcode": "1.5.4",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "react-markdown": "10.1.0",
+    "rehype-highlight": "7.0.2",
+    "rehype-katex": "7.0.1",
+    "remark-gfm": "4.0.1",
+    "remark-math": "6.0.0"
+  }
+}

@@ -1,0 +1,33 @@
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { DatabaseSync } from 'node:sqlite';
+
+// Run with Node 24: node lib/customer-logs.check.mjs. No production connections.
+const source = readFileSync(new URL('./customer-dashboard.mjs', import.meta.url), 'utf8');
+const body = source.slice(source.indexOf('export async function customerLogs('), source.indexOf('export async function customerPerformance(')).replace('export ', '');
+const db = new DatabaseSync(':memory:');
+db.exec(`CREATE TABLE apiKeys(id TEXT, key TEXT, name TEXT);
+CREATE TABLE usageHistory(id TEXT,timestamp TEXT,provider TEXT,model TEXT,promptTokens INTEGER,completionTokens INTEGER,status TEXT,apiKey TEXT);
+CREATE TABLE axiom_usage_ledger(request_id TEXT,api_key_id TEXT,model TEXT,requested_at INTEGER,input_tokens INTEGER,output_tokens INTEGER,debit_tokens INTEGER,sale_cost_idr REAL,billing_status TEXT,status TEXT);
+INSERT INTO apiKeys VALUES ('mine','secret-mine','Primary'),('other','secret-other','Other');
+INSERT INTO usageHistory VALUES ('u1','2026-10-19T10:00:00Z','cx','model-a',2,3,'success','secret-mine'),('u2','2026-10-19T11:00:00Z','cx','model-a',2,0,'error','secret-mine'),('private','2026-10-19T12:00:00Z','cx','model-a',9,9,'success','secret-other');
+INSERT INTO axiom_usage_ledger VALUES ('l1','mine','model-a',1792404000000,2,3,7,0.25,'billed','completed'),('private-ledger','other','model-a',1792404000000,9,9,18,1,'billed','completed');`);
+const customerLogs = new Function('routerDb','ownedIds','getSiteCatalog','modelDetails','fail', `${body}; return customerLogs;`)(() => db, async () => '["mine"]', async () => ({ models: [] }), row => ({ model: row.model, provider: row.provider, modelLabel: row.model }), (status, message) => Object.assign(new Error(message), { status }));
+const load = query => customerLogs({ id: 'customer' }, new URLSearchParams(query));
+const all = await load('');
+assert.equal(all.total, 3, 'Sources remain separate records, never paired by position/time/model');
+assert.equal(all.logs[0].id, 'router:u2');
+assert.equal(all.logs.filter(row => row.source === 'ledger').length, 1);
+assert.ok(all.logs.every(row => row.keyAlias === 'Primary'));
+assert.ok(!JSON.stringify(all).includes('secret-'));
+assert.ok(!JSON.stringify(all).includes('private'));
+assert.equal((await load('status=success')).total, 2);
+assert.equal((await load('status=error')).total, 1);
+assert.equal((await load('source=ledger')).total, 1);
+assert.equal((await load('model=absent')).total, 0);
+assert.equal((await load('page=999')).page, 1);
+assert.ok(all.logs.filter(row => row.source === 'router').every(row => row.debitTokens === null && row.saleCostIdr === null));
+await assert.rejects(load('source=invalid'), { status: 400 });
+await assert.rejects(load('page=-1'), { status: 400 });
+db.close();
+console.log('Customer log isolation, ordering, filters, pagination, absent billing: OK');

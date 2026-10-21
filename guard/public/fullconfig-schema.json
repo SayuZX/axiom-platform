@@ -1,0 +1,1380 @@
+{
+  "tabs": [
+    {
+      "id": "general",
+      "label": "General",
+      "fields": [
+        {
+          "key": "Anti god mode",
+          "label": "Anti god mode",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti god mode V2",
+          "label": "Anti god mode V2",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti god mode V3",
+          "label": "Anti god mode V3",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Player max health",
+          "label": "Player max health",
+          "type": "number",
+          "default": 200,
+          "options": [],
+          "unavailable": null,
+          "min": 0,
+          "max": 1000000,
+          "step": 1
+        },
+        {
+          "key": "Player max armour",
+          "label": "Player max armour",
+          "type": "number",
+          "default": 100,
+          "options": [],
+          "unavailable": null,
+          "min": 0,
+          "max": 1000000,
+          "step": 1
+        },
+        {
+          "key": "Aimbot detection",
+          "label": "Aimbot detection",
+          "type": "boolean",
+          "default": false,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Aimbot detection V2",
+          "label": "Aimbot detection V2",
+          "type": "boolean",
+          "default": false,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Aimbot weapon whitelist",
+          "label": "Aimbot weapon whitelist",
+          "type": "array",
+          "default": [
+            "OBJECT",
+            "WEAPON_SNOWBALL"
+          ],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Aimbot detection: Ignore custom recoil",
+          "label": "Aimbot detection: Ignore custom recoil",
+          "type": "boolean",
+          "default": false,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Aimbot detection sensitivity mode",
+          "label": "Aimbot detection sensitivity mode",
+          "type": "select",
+          "default": "Sensitive",
+          "options": [
+            "Default",
+            "Sensitive"
+          ],
+          "unavailable": null
+        },
+        {
+          "key": "Anti SilentAim",
+          "label": "Anti SilentAim",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti SilentAim V2",
+          "label": "Anti SilentAim V2",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "SilentAim whitelist",
+          "label": "SilentAim whitelist",
+          "type": "array",
+          "default": [
+            "GROUP_SHOTGUN",
+            "WEAPON_STUNGUN"
+          ],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti noclip",
+          "label": "Anti noclip",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti noclip speed threshold (in km/h)",
+          "label": "Anti noclip speed threshold (in km/h)",
+          "type": "number",
+          "default": 50,
+          "options": [],
+          "unavailable": null,
+          "min": 0,
+          "max": 1000000,
+          "step": 1
+        },
+        {
+          "key": "Anti invisible",
+          "label": "Anti invisible",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti spectate",
+          "label": "Anti spectate",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti freecam",
+          "label": "Anti freecam",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti freecam V2",
+          "label": "Anti freecam V2",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti freecam V3",
+          "label": "Anti freecam V3",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti freecam V5",
+          "label": "Anti freecam V5",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti super jump (server-sided)",
+          "label": "Anti super jump (server-sided)",
+          "type": "boolean",
+          "default": false,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti super jump",
+          "label": "Anti super jump",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Super jump detection time (in ms)",
+          "label": "Super jump detection time (in ms)",
+          "type": "number",
+          "default": 400,
+          "options": [],
+          "unavailable": null,
+          "min": 0,
+          "max": 1000000,
+          "step": 1
+        },
+        {
+          "key": "Anti fly",
+          "label": "Anti fly",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti vision modifiers",
+          "label": "Anti vision modifiers",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Player max run speed (in km/h)",
+          "label": "Player max run speed (in km/h)",
+          "type": "number",
+          "default": 45,
+          "options": [],
+          "unavailable": null,
+          "min": 0,
+          "max": 1000000,
+          "step": 1
+        },
+        {
+          "key": "Anti duplicate licenses",
+          "label": "Anti duplicate licenses",
+          "type": "boolean",
+          "default": false,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti teleport to waypoint",
+          "label": "Anti teleport to waypoint",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti ragdoll",
+          "label": "Anti ragdoll",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti hitbox modification",
+          "label": "Anti hitbox modification",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti no headshot",
+          "label": "Anti no headshot",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti plate swap",
+          "label": "Anti plate swap",
+          "type": "boolean",
+          "default": false,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti remote entity control",
+          "label": "Anti remote entity control",
+          "type": "select",
+          "default": "Full",
+          "options": [
+            "Light",
+            "Full",
+            "None"
+          ],
+          "unavailable": null
+        },
+        {
+          "key": "Disable networked sounds",
+          "label": "Disable networked sounds",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Max player kill distance",
+          "label": "Max player kill distance",
+          "type": "number",
+          "default": 500,
+          "options": [],
+          "unavailable": null,
+          "min": 0,
+          "max": 1000000,
+          "step": 1
+        },
+        {
+          "key": "Anti local vehicle spawner",
+          "label": "Anti local vehicle spawner",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti client vehicle spawner",
+          "label": "Anti client vehicle spawner",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti vehicle throwing",
+          "label": "Anti vehicle throwing",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Max voice proximity",
+          "label": "Max voice proximity",
+          "type": "number",
+          "default": 51,
+          "options": [],
+          "unavailable": null,
+          "min": 0,
+          "max": 1000000,
+          "step": 1
+        }
+      ]
+    },
+    {
+      "id": "server-management",
+      "label": "Server Management",
+      "fields": [
+        {
+          "key": "Framework integration",
+          "label": "Framework integration",
+          "type": "select",
+          "default": "Standalone",
+          "options": ["Standalone", "QBCore", "ESX", "Qbox"],
+          "description": "Optional economy adapter. Standalone does not access any roleplay framework. Missing selected resources are reported; core protection keeps running."
+        },
+        {
+          "key": "Framework money guard",
+          "label": "Framework money guard",
+          "type": "boolean",
+          "default": false,
+          "description": "Enable selected framework precommit money guard and balance tracking. Money gain limit zero disables gain rejection."
+        },
+        {"key": "QBCore resource", "label": "QBCore resource", "type": "text", "default": "qb-core"},
+        {"key": "ESX resource", "label": "ESX resource", "type": "text", "default": "es_extended"},
+        {"key": "Qbox resource", "label": "Qbox resource", "type": "text", "default": "qbx_core"},
+        {
+          "key": "Inventory integration",
+          "label": "Inventory integration",
+          "type": "select",
+          "default": "Standalone",
+          "options": ["Standalone", "ox_inventory"],
+          "description": "Optional inventory authorization adapter, independent of the selected framework. Custom inventories call standalone exports."
+        },
+        {"key": "Inventory resource", "label": "Inventory resource", "type": "text", "default": "ox_inventory"},
+        {
+          "key": "Global ban expiration",
+          "label": "Global ban expiration",
+          "type": "select",
+          "default": "No expiration",
+          "options": [
+            "No expiration",
+            "90 days",
+            "180 days"
+          ],
+          "unavailable": "Requires the Fini global-ban network; AXIOM manages local bans only."
+        },
+        {
+          "key": "Required TrustScore",
+          "label": "Required TrustScore",
+          "type": "select",
+          "default": "Off",
+          "options": [
+            "Off",
+            "Orange",
+            "Yellow",
+            "Lime",
+            "Green"
+          ],
+          "unavailable": null,
+          "description": "Independent local score: 100 minus 60 per active local ban and up to 40 from recent high detections. Not the Fini network TrustScore."
+        },
+        {
+          "key": "TrustScore whitelist",
+          "label": "TrustScore whitelist",
+          "type": "array",
+          "default": [],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "TrustScore rejection message",
+          "label": "TrustScore rejection message",
+          "type": "text",
+          "default": "",
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Admin identifier list",
+          "label": "Admin identifier list",
+          "type": "array",
+          "default": [
+            "ace:command",
+            "ace:finiac"
+          ],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Admins bypass anti-cheat",
+          "label": "Admins bypass anti-cheat",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Block NUI DevTools",
+          "label": "Block NUI DevTools",
+          "type": "boolean",
+          "default": false,
+          "options": [],
+          "unavailable": "FiveM does not expose a reliable per-resource DevTools blocking API. No fake anti-debug toggle is applied."
+        },
+        {
+          "key": "Ban rejection message",
+          "label": "Ban rejection message",
+          "type": "text",
+          "default": "If you think this is a mistake, please contact a server admin.",
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Default ban message",
+          "label": "Default ban message",
+          "type": "text",
+          "default": "[AXIOM GUARD] Local ban: {reason}",
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Default kick message",
+          "label": "Default kick message",
+          "type": "text",
+          "default": "[AXIOM GUARD] {reason}",
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Required identifier types",
+          "label": "Required identifier types",
+          "type": "array",
+          "default": [
+            "license",
+            "discord"
+          ],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Discord account min age (days)",
+          "label": "Discord account min age (days)",
+          "type": "number",
+          "default": 14,
+          "options": [],
+          "unavailable": null,
+          "min": 0,
+          "max": 1000000,
+          "step": 1
+        },
+        {
+          "key": "Cfx account min age (days)",
+          "label": "Cfx account min age (days)",
+          "type": "number",
+          "default": 0,
+          "options": [],
+          "unavailable": "Cfx account creation dates are not exposed by the installed server runtime.",
+          "min": 0,
+          "max": 1000000,
+          "step": 1
+        },
+        {
+          "key": "Account min age (days)",
+          "label": "Account min age (days)",
+          "type": "number",
+          "default": 0,
+          "options": [],
+          "unavailable": "Rockstar account creation dates are not exposed by the installed server runtime.",
+          "min": 0,
+          "max": 1000000,
+          "step": 1
+        },
+        {
+          "key": "Account age whitelist",
+          "label": "Account age whitelist",
+          "type": "array",
+          "default": [],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Player damage tracking",
+          "label": "Player damage tracking",
+          "type": "boolean",
+          "default": false,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Server-event logs",
+          "label": "Server-event logs",
+          "type": "select",
+          "default": "File",
+          "options": [
+            "File",
+            "Full",
+            "Light",
+            "None"
+          ],
+          "unavailable": null
+        },
+        {
+          "key": "Player money tracking",
+          "label": "Player money tracking",
+          "type": "boolean",
+          "default": false,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti VPN",
+          "label": "Anti VPN",
+          "type": "boolean",
+          "default": false,
+          "options": [],
+          "unavailable": null,
+          "description": "Server-side proxycheck.io reputation. Optional GUARD_PROXYCHECK_KEY; unregistered API quota applies. Provider failures report unavailable and do not deny."
+        },
+        {
+          "key": "Anti VPN whitelist",
+          "label": "Anti VPN whitelist",
+          "type": "array",
+          "default": [],
+          "options": [],
+          "unavailable": null,
+          "description": "Native identifier or IP/CIDR bypass for the configured VPN reputation check."
+        },
+        {
+          "key": "Enable IP bans",
+          "label": "Enable IP bans",
+          "type": "select",
+          "default": "Disabled",
+          "options": [
+            "Disabled",
+            "Yes, exact IP",
+            "Yes, /24 subnet",
+            "Yes, entire subnet"
+          ],
+          "unavailable": null,
+          "description": "Local ban IP matching only. Entire subnet means IPv4 /16; disabled by default. Shared networks can match unrelated players."
+        },
+        {
+          "key": "IP ban expiration (days)",
+          "label": "IP ban expiration (days)",
+          "type": "number",
+          "default": 14,
+          "options": [],
+          "unavailable": null,
+          "min": 0,
+          "max": 1000000,
+          "step": 1
+        },
+        {
+          "key": "IP ban whitelist",
+          "label": "IP ban whitelist",
+          "type": "array",
+          "default": [],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Rewind Settings",
+          "label": "Rewind Settings",
+          "type": "object",
+          "default": [],
+          "options": [],
+          "unavailable": "Requires a rolling game-video capture service; periodic screenshots are available in Apollo."
+        },
+        {
+          "key": "Apollo audio stream connect endpoint",
+          "label": "Apollo audio stream connect endpoint",
+          "type": "text",
+          "default": "127.0.0.1:30120",
+          "options": [],
+          "unavailable": "Requires a Mumble audio relay; none is installed."
+        },
+        {
+          "key": "Detection settings",
+          "label": "Detection settings",
+          "type": "object",
+          "default": {},
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Detection whitelisting zones",
+          "label": "Detection whitelisting zones",
+          "type": "object",
+          "default": [],
+          "options": [],
+          "unavailable": null
+        }
+      ]
+    },
+    {
+      "id": "menu-detections",
+      "label": "Menu Detections",
+      "fields": [
+        {
+          "key": "Blacklisted commands",
+          "label": "Blacklisted commands",
+          "type": "array",
+          "default": [],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Blacklisted textures",
+          "label": "Blacklisted textures",
+          "type": "array",
+          "default": [
+            "mp_leaderboard_01",
+            "mp_leaderboard_02",
+            "mp_leaderboard_03",
+            "mp_leaderboard_04",
+            "mp_leaderboard_05",
+            "mp_leaderboard_06",
+            "mp_leaderboard_07",
+            "mp_leaderboard_08",
+            "mp_leaderboard_09",
+            "mp_leaderboard_10"
+          ],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Menu detection strings",
+          "label": "Menu detection strings",
+          "type": "array",
+          "default": [
+            "cheat menu",
+            "explode menu",
+            "teleport menu",
+            "kill all",
+            "teleport to player",
+            "explode player",
+            "enable aimbot",
+            "enable noclip",
+            "enable godmode",
+            "infinite health",
+            "infinite ammo",
+            "infinite money",
+            "infinite weapon",
+            "infinite vehicle"
+          ],
+          "options": [],
+          "unavailable": null
+        }
+      ]
+    },
+    {
+      "id": "entities",
+      "label": "Entities",
+      "fields": [
+        {
+          "key": "Resource entity whitelist",
+          "label": "Resource entity whitelist",
+          "type": "array",
+          "default": [],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Entity Firewall (BETA)",
+          "label": "Entity Firewall (BETA)",
+          "type": "object",
+          "default": [],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Entity Firewall: Delete entities",
+          "label": "Entity Firewall: Delete entities",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Entity list type",
+          "label": "Entity list type",
+          "type": "select",
+          "default": "Blacklist",
+          "options": [
+            "Blacklist",
+            "Whitelist"
+          ],
+          "unavailable": null
+        },
+        {
+          "key": "Entity list (blacklist/whitelist)",
+          "label": "Entity list (blacklist/whitelist)",
+          "type": "array",
+          "default": [
+            "tug",
+            "prop_rub_wreckage_7",
+            "prop_dock_moor_05",
+            "prop_ventsystem_03",
+            "prop_aircon_s_03a",
+            "prop_ventsystem_04",
+            "tr_prop_tr_cabine_01a",
+            "des_trailerparkd_01",
+            "des_trailerparkd_01",
+            "reh_prop_reh_cabine_01a",
+            "prop_trailr_base",
+            "prop_portacabin01",
+            "prop_portacabin01",
+            "xm_cabin",
+            "gr_prop_inttruck_empty_02",
+            "gr_prop_inttruck_empty_03",
+            "cs1_01_shed03",
+            "prop_rail_boxcar4",
+            "prop_rail_boxcar5",
+            "cs1_11b_cs1_build02",
+            "cs2_11_shark_sign_legs",
+            "prop_trials_seesaw"
+          ],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Minimum play time for entity spawning (minutes)",
+          "label": "Minimum play time for entity spawning (minutes)",
+          "type": "number",
+          "default": 0,
+          "options": [],
+          "unavailable": null,
+          "min": 0,
+          "max": 1000000,
+          "step": 1
+        },
+        {
+          "key": "Minimum play time spawn whitelist",
+          "label": "Minimum play time spawn whitelist",
+          "type": "array",
+          "default": [],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Entity ratelimit",
+          "label": "Entity ratelimit",
+          "type": "number",
+          "default": 35,
+          "options": [],
+          "unavailable": null,
+          "min": 0,
+          "max": 1000000,
+          "step": 1
+        },
+        {
+          "key": "Entity ratelimit timer",
+          "label": "Entity ratelimit timer",
+          "type": "number",
+          "default": 10,
+          "options": [],
+          "unavailable": null,
+          "min": 0,
+          "max": 1000000,
+          "step": 1
+        },
+        {
+          "key": "Entity ratelimit whitelist",
+          "label": "Entity ratelimit whitelist",
+          "type": "array",
+          "default": [],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Entity create max distance",
+          "label": "Entity create max distance",
+          "type": "number",
+          "default": 0,
+          "options": [],
+          "unavailable": null,
+          "min": 0,
+          "max": 1000000,
+          "step": 1
+        },
+        {
+          "key": "Entity max create distance whitelist",
+          "label": "Entity max create distance whitelist",
+          "type": "array",
+          "default": [],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti entity attach",
+          "label": "Anti entity attach",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti entity attach whitelist",
+          "label": "Anti entity attach whitelist",
+          "type": "array",
+          "default": [],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti remote entity attach",
+          "label": "Anti remote entity attach",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti armed peds",
+          "label": "Anti armed peds",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Armed ped whitelist",
+          "label": "Armed ped whitelist",
+          "type": "array",
+          "default": [
+            "WEAPON_ANIMAL"
+          ],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Player ped list type",
+          "label": "Player ped list type",
+          "type": "select",
+          "default": "Blacklist",
+          "options": [
+            "Blacklist",
+            "Whitelist"
+          ],
+          "unavailable": null
+        },
+        {
+          "key": "Player ped list (blacklist/whitelist)",
+          "label": "Player ped list (blacklist/whitelist)",
+          "type": "array",
+          "default": [],
+          "options": [],
+          "unavailable": null
+        }
+      ]
+    },
+    {
+      "id": "explosions",
+      "label": "Explosions",
+      "fields": [
+        {
+          "key": "Explosion AI",
+          "label": "Explosion AI",
+          "type": "boolean",
+          "default": false,
+          "options": [],
+          "unavailable": "The Fini trained explosion classifier is private. Explicit explosion lists, limits and modifier checks are available."
+        },
+        {
+          "key": "Explosion list type",
+          "label": "Explosion list type",
+          "type": "select",
+          "default": "Whitelist",
+          "options": [
+            "Whitelist",
+            "Blacklist"
+          ],
+          "unavailable": null
+        },
+        {
+          "key": "Explosion list (blacklist/whitelist)",
+          "label": "Explosion list (blacklist/whitelist)",
+          "type": "array",
+          "default": [
+            "EXP_TAG_DIR_WATER_HYDRANT",
+            "EXP_TAG_CAR",
+            "EXP_TAG_TRUCK",
+            "EXP_TAG_PETROL_PUMP",
+            "EXP_TAG_BIKE",
+            "EXP_TAG_PLANE",
+            "EXP_TAG_TANKER",
+            "EXP_TAG_PROPANE",
+            "EXP_TAG_SNOWBALL",
+            "EXP_TAG_GAS_TANK",
+            "EXP_TAG_DIR_STEAM",
+            "EXP_TAG_MOLOTOV",
+            "EXP_TAG_HI_OCTANE",
+            "EXP_TAG_EXTINGUISHER",
+            "EXP_TAG_GRENADE",
+            "EXP_TAG_BARREL",
+            "EXP_TAG_GAS_CANISTER",
+            "EXP_TAG_DIR_FLAME",
+            "EXP_TAG_DIR_FLAME_EXPLODE",
+            "EXP_TAG_BOAT",
+            "EXP_TAG_STICKYBOMB",
+            "EXP_TAG_DIR_GAS_CANISTER",
+            "EXP_TAG_FLARE",
+            "EXP_TAG_FIREWORK"
+          ],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Block explosion modifiers",
+          "label": "Block explosion modifiers",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Explosion modifier whitelist",
+          "label": "Explosion modifier whitelist",
+          "type": "array",
+          "default": [],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Explosion ratelimit",
+          "label": "Explosion ratelimit",
+          "type": "number",
+          "default": 12,
+          "options": [],
+          "unavailable": null,
+          "min": 0,
+          "max": 1000000,
+          "step": 1
+        },
+        {
+          "key": "Explosion ratelimit timer",
+          "label": "Explosion ratelimit timer",
+          "type": "number",
+          "default": 10,
+          "options": [],
+          "unavailable": null,
+          "min": 0,
+          "max": 1000000,
+          "step": 1
+        },
+        {
+          "key": "Explosion ratelimit whitelist",
+          "label": "Explosion ratelimit whitelist",
+          "type": "array",
+          "default": [
+            "EXP_TAG_DIR_WATER_HYDRANT",
+            "EXP_TAG_DIR_STEAM",
+            "EXP_TAG_MOLOTOV",
+            "EXP_TAG_EXTINGUISHER",
+            "EXP_TAG_BARREL",
+            "EXP_TAG_GAS_CANISTER",
+            "EXP_TAG_DIR_FLAME",
+            "EXP_TAG_DIR_FLAME_EXPLODE",
+            "EXP_TAG_DIR_GAS_CANISTER",
+            "EXP_TAG_PETROL_PUMP"
+          ],
+          "options": [],
+          "unavailable": null
+        }
+      ]
+    },
+    {
+      "id": "weapons",
+      "label": "Weapons",
+      "fields": [
+        {
+          "key": "Anti bad damage",
+          "label": "Anti bad damage",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Blacklisted weapons",
+          "label": "Blacklisted weapons",
+          "type": "array",
+          "default": [
+            "weapon_grenadelauncher",
+            "weapon_hominglauncher",
+            "weapon_minigun",
+            "weapon_railgun",
+            "weapon_rpg",
+            "weapon_raycarbine",
+            "weapon_rayminigun",
+            "weapon_railgun",
+            "weapon_raypistol"
+          ],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti infinite ammo",
+          "label": "Anti infinite ammo",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Client max ammo",
+          "label": "Client max ammo",
+          "type": "number",
+          "default": 250,
+          "options": [],
+          "unavailable": null,
+          "min": 0,
+          "max": 1000000,
+          "step": 1
+        },
+        {
+          "key": "Infinite ammo weapon whitelist",
+          "label": "Infinite ammo weapon whitelist",
+          "type": "array",
+          "default": [
+            "weapon_bzgas",
+            "weapon_firework",
+            "weapon_petrol",
+            "weapon_stungun",
+            "weapon_petrolcan",
+            "weapon_fireextinguisher"
+          ],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti give weapon",
+          "label": "Anti give weapon",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti remove weapon",
+          "label": "Anti remove weapon",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti client weapon spoofing",
+          "label": "Anti client weapon spoofing",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti client weapon spoofing V2",
+          "label": "Anti client weapon spoofing V2",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Max weapon damage modifier",
+          "label": "Max weapon damage modifier",
+          "type": "number",
+          "default": 1,
+          "options": [],
+          "unavailable": null,
+          "min": 0,
+          "max": 1000000,
+          "step": 0.1
+        },
+        {
+          "key": "Anti weapon damage modification",
+          "label": "Anti weapon damage modification",
+          "type": "boolean",
+          "default": false,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti weapon damage whitelist",
+          "label": "Anti weapon damage whitelist",
+          "type": "array",
+          "default": [],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti taze",
+          "label": "Anti taze",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti taze (max distance)",
+          "label": "Anti taze (max distance)",
+          "type": "number",
+          "default": 20,
+          "options": [],
+          "unavailable": null,
+          "min": 0,
+          "max": 1000000,
+          "step": 1
+        }
+      ]
+    },
+    {
+      "id": "misc",
+      "label": "Misc",
+      "fields": [
+        {"key":"Server weapon authorization","label":"Server weapon authorization","type":"boolean","default":false,"description":"Require equipped weapon in the selected authoritative inventory before damage/projectile events. Standalone grants are server-resource scoped; unavailable inventory reports diagnostic."},
+        {"key":"Server weapon authorization resources","label":"Server weapon authorization resources","type":"array","default":[]},
+        {"key":"Server weapon authorization whitelist","label":"Server weapon authorization whitelist","type":"array","default":["WEAPON_UNARMED"]},
+        {"key":"Server weapon authorization vehicle whitelist","label":"Server weapon authorization vehicle whitelist","type":"array","default":[]},
+        {"key":"Server weapon authorization indirect damage whitelist","label":"Server weapon authorization indirect damage whitelist","type":"array","default":["WEAPON_EXPLOSION","WEAPON_RUN_OVER_BY_CAR","WEAPON_RAMMED_BY_CAR"]},
+        {"key":"Server vehicle request guard","label":"Server vehicle request guard","type":"boolean","default":false,"description":"Validate QBCore server vehicle callbacks before spawning: model policy, server player distance and request rate."},
+        {"key":"Server vehicle request distance","label":"Server vehicle request distance","type":"number","default":100,"min":1,"max":10000,"step":1},
+        {"key":"Server vehicle request limit","label":"Server vehicle request limit","type":"number","default":5,"min":1,"max":1000,"step":1},
+        {"key":"Server vehicle request window","label":"Server vehicle request window","type":"number","default":15,"min":1,"max":300,"step":1},
+        {
+          "key": "Anti weapon spawn",
+          "label": "Anti weapon spawn",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti weapon spawn whitelist",
+          "label": "Anti weapon spawn whitelist",
+          "type": "array",
+          "default": [],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Anti open inventory",
+          "label": "Anti open inventory",
+          "type": "boolean",
+          "default": false,
+          "options": [],
+          "unavailable": "Requires inventory-specific server authorization hooks; no universal inventory-open native exists."
+        },
+        {
+          "key": "Block remote particles",
+          "label": "Block remote particles",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Allowed particles",
+          "label": "Allowed particles",
+          "type": "array",
+          "default": [],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Max particle scale",
+          "label": "Max particle scale",
+          "type": "number",
+          "default": 1.2,
+          "options": [],
+          "unavailable": null,
+          "min": 0,
+          "max": 1000000,
+          "step": 0.1
+        }
+      ]
+    },
+    {
+      "id": "event-protection",
+      "label": "Event Protection",
+      "fields": [
+        {
+          "key": "EP: Blacklisted events",
+          "label": "EP: Blacklisted events",
+          "type": "array",
+          "default": [],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "EP: Whitelisted events",
+          "label": "EP: Whitelisted events",
+          "type": "array",
+          "default": [
+            "InteractSound_SV:PlayWithinDistance",
+            "InteractSound_SV:PlayOnSource",
+            "QBCore:ToggleDuty"
+          ],
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "EP: Block bad events",
+          "label": "EP: Block bad events",
+          "type": "boolean",
+          "default": true,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "EP: Log all events",
+          "label": "EP: Log all events",
+          "type": "boolean",
+          "default": false,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "EP: Log event stats",
+          "label": "EP: Log event stats",
+          "type": "boolean",
+          "default": false,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Event AI",
+          "label": "Event AI",
+          "type": "boolean",
+          "default": false,
+          "options": [],
+          "unavailable": null,
+          "description": "AXIOM local rate-anomaly baseline for configured/integrated events; not Fini private AI."
+        },
+        {
+          "key": "Log all statebag events",
+          "label": "Log all statebag events",
+          "type": "boolean",
+          "default": false,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Event AI whitelist",
+          "label": "Event AI whitelist",
+          "type": "array",
+          "default": [],
+          "options": [],
+          "unavailable": null,
+          "description": "AXIOM local rate-anomaly baseline for configured/integrated events; not Fini private AI."
+        }
+      ]
+    },
+    {
+      "id": "experimental",
+      "label": "Experimental",
+      "fields": [
+        {
+          "key": "Entity Protection",
+          "label": "Entity Protection",
+          "type": "boolean",
+          "default": false,
+          "options": [],
+          "unavailable": null
+        },
+        {
+          "key": "Entity Protection whitelist",
+          "label": "Entity Protection whitelist",
+          "type": "array",
+          "default": [
+            "player_zero",
+            "xm_prop_x17_tem_control_01",
+            "p_bloodsplat_s",
+            "prop_wheel_01",
+            "hei_prop_heist_cash_pile",
+            "prop_sgun_casing",
+            "prop_cs_credit_card",
+            "prop_atm_01",
+            "sf_prop_sf_phonebox_01b_s",
+            "bkr_prop_coke_bakingsoda_o",
+            "gr_prop_gr_bench_03a",
+            "bkr_prop_coke_fullmetalbowl_02",
+            "bkr_prop_coke_fullscoop_01a",
+            "bkr_prop_coke_box_01a",
+            "prop_cs_hand_radio",
+            "bkr_prop_weed_leaf_01a",
+            "bkr_prop_weed_dry_01a",
+            "bkr_prop_weed_bucket_open_01a",
+            "bkr_prop_weed_bag_01a",
+            "bkr_prop_weed_bud_02b",
+            "bkr_prop_weed_bag_pile_01a",
+            "prop_anim_cash_pile_01",
+            "hei_prop_heist_binbag",
+            "prop_cs_tablet",
+            "hei_prop_hei_keypad_01",
+            "p_parachute1_mp_s",
+            "ex_prop_crate_expl_bc",
+            "ex_prop_crate_ammo_sc",
+            "ex_prop_crate_ammo_bc",
+            "ex_prop_crate_expl_sc"
+          ],
+          "options": [],
+          "unavailable": null
+        },
+        {"key":"Money gain budget","label":"Money gain budget","type":"number","default":0,"min":0,"max":1000000000000,"step":1,"description":"Rolling positive net gains from committed transactions. Zero disables; rejected proposals consume no budget and deductions do not refund it."},
+        {"key":"Money gain window seconds","label":"Money gain window seconds","type":"number","default":60,"min":1,"max":3600,"step":1},
+        {"key":"Money trusted resources","label":"Money trusted resources","type":"array","default":[],"description":"Explicit server-only payout callers exempt from gain budget. Never trust client reason strings; avoid broad framework exemptions."},
+        {
+          "key": "Money gain limit",
+          "label": "Money gain limit",
+          "type": "number",
+          "default": 0,
+          "options": [],
+          "unavailable": null,
+          "min": 0,
+          "max": 1000000,
+          "step": 1
+        }
+      ]
+    }
+  ]
+}

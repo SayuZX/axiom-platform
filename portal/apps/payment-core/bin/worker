@@ -1,0 +1,85 @@
+# frozen_string_literal: true
+ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../Gemfile',__dir__)
+require 'bundler/setup'
+require_relative '../lib/axiom/config'
+require_relative '../lib/axiom/infrastructure/persistence/database'
+require_relative '../lib/axiom/infrastructure/persistence/payment_store'
+require_relative '../lib/axiom/infrastructure/persistence/outbox_store'
+require_relative '../lib/axiom/infrastructure/integrations/mail_delivery'
+require_relative '../lib/axiom/application/notifications/telegram_worker'
+require_relative '../lib/axiom/infrastructure/persistence/operations_store'
+
+config=Axiom::Config.new
+db=Axiom::Database.new(File.join(config.data_dir,'payments.sqlite'));db.migrate!
+outbox=Axiom::OutboxStore.new(db);payments=Axiom::PaymentStore.new(db);mail=Axiom::MailDelivery.new
+telegram=Axiom::TelegramWorker.new(db,config)
+operations=Axiom::OperationsStore.new(db);payment_service=Axiom::Payments.new(db,config)
+stopping=false
+trap('TERM') { stopping=true };trap('INT') { stopping=true }
+channel=ARGV.find{|value|value.start_with?('--channel=')}&.split('=',2)&.last || 'all'
+raise 'Unknown worker channel' unless %w[all email telegram payments].include?(channel)
+if %w[all payments].include?(channel)
+  db.connection.execute("INSERT OR IGNORE INTO payment_checks(payment_id,next_check_at) SELECT id,? FROM payments WHERE status<>'PAID' AND provider_terminal=0 AND (provider_id IS NOT NULL OR trx_id LIKE 'AXP-%')",[Axiom.now])
+end
+begin
+  loop do
+    if %w[all payments].include?(channel)
+      payments.expire
+    end
+    if %w[all telegram].include?(channel)
+    begin
+      telegram.poll if ENV['TELEGRAM_MODE']=='polling'
+    rescue Axiom::TelegramAPI::DeliveryError=>e
+      warn "Telegram polling unavailable: #{e.code}"
+    end
+    telegram.tick
+    end
+    if %w[all payments].include?(channel)
+    5.times do
+      row=operations.claim_payment_check;break unless row
+      verified=false
+      begin
+        payment_service.verify(id:row['id'],customer_id:row['customer_id'])
+        verified=true
+      rescue Axiom::Error=>e
+        warn "Provider check unavailable: #{e.status}"
+      ensure
+        operations.finish_payment_check(row['id'],verified:verified)
+      end
+    end
+    end
+    if %w[all email].include?(channel)
+    50.times do
+      break if stopping
+      row=outbox.claim;break unless row
+      payload=JSON.parse(row['payload_json']);payment=payload['kind']=='payment'
+      label={'payment'=>'Transaksi','withdrawal'=>'Penarikan','support'=>'Bantuan','security'=>'Keamanan akun'}[payload['kind']] || 'Pemberitahuan'
+      status={'PENDING'=>'Menunggu pembayaran','PAID'=>payment ? 'Pembayaran terkonfirmasi' : 'Transfer manual dicatat selesai','EXPIRED'=>'Kedaluwarsa','REQUESTED'=>'Diajukan','PROCESSING'=>'Sedang diproses','REJECTED'=>'Ditolak','REPLIED'=>'Balasan pengelola','RECEIVED'=>'Pesan diterima'}[payload['status']] || payload['status']
+      lines=["#{label} Axiom Payment",'',"Referensi: #{payload['reference']}","Status: #{status}"]
+      lines << "Nominal: Rp#{payload['amount']}" if payload['amount']
+      if payment
+        lines.concat(["Komisi: Rp#{payload['fee_amount']}","Neto: Rp#{payload['net_amount']}"])
+      elsif payload['kind']=='withdrawal'
+        lines << "Rekening: #{payload['bank_name']} ••••#{payload['account_last4']}"
+        lines << "Referensi transfer: #{payload['transfer_reference']}" if payload['transfer_reference']
+        lines << "Alasan: #{payload['rejection_reason']}" if payload['rejection_reason']
+        lines << 'Estimasi pengajuan 1–2 hari kalender. Transfer dilakukan manual oleh administrator.'
+      end
+      lines << payload['message'] if payload['message']
+      route={'payment'=>'transaksi','withdrawal'=>'penarikan','support'=>'bantuan','security'=>'akun'}[payload['kind']]
+      target=payload['kind']=='policy' ? "#{config.origin}/terms-of-service?version=#{payload['id']}" : "#{config.origin}/dashboard/#{route}#{payload['kind']=='security' ? '' : '/'+payload['id'].to_s}"
+      lines.concat(['',target])
+      begin
+        mail.deliver(to:row['recipient'],subject:"#{label} #{status} — Axiom Payment",text:lines.join("\n"),message_id:"event-#{Axiom.digest(row['event_key'])}@#{URI(config.origin).host}")
+        outbox.accepted(row)
+      rescue Axiom::Error
+        outbox.failed(row,mail.last_error || 'MailUnavailable')
+      end
+    end
+    end
+    break if ARGV.include?('--once') || stopping
+    sleep(channel=='telegram' ? 0.1 : 2) unless stopping
+  end
+ensure
+  db.close
+end

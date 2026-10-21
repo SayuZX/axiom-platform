@@ -1,0 +1,55 @@
+.customer-workspace .billing-workspace{display:grid;gap:28px;min-width:0}
+.customer-workspace .billing-workspace h2{display:flex;align-items:center;gap:8px;font:600 15px/1.4 system-ui,sans-serif;letter-spacing:-.25px;margin:0}
+.customer-workspace .billing-workspace p{font-size:13px;line-height:1.7;color:var(--dash-muted);margin:0}
+.customer-workspace .billing-summary{display:grid;grid-template-columns:1fr 1fr;gap:32px;padding:4px 0 24px;border-bottom:1px solid var(--dash-border)}
+.customer-workspace .billing-wallet,.customer-workspace .billing-package{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.customer-workspace .billing-wallet{padding-right:32px;border-right:1px solid var(--dash-border)}
+.customer-workspace .billing-wallet h2{font-size:12px;font-weight:500;color:var(--dash-muted)}
+.customer-workspace .billing-balance{font-size:clamp(30px,3.4vw,40px);font-weight:600;line-height:1.2;letter-spacing:-1.4px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.customer-workspace .billing-caption{font-size:11px;color:var(--dash-muted)}
+.customer-workspace .billing-package .dash-form{width:100%;gap:14px}
+.customer-workspace .billing-package select{width:100%;min-width:0}
+.customer-workspace .billing-workspace .billing-primary{background:var(--dash-accent);color:var(--dash-accent-ink,#191a12);border-color:var(--dash-accent);font-weight:600;min-height:42px}
+.customer-workspace .billing-quota{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;font-size:13px}
+.customer-workspace .billing-quota span{font-size:12px;color:var(--dash-muted)}
+.customer-workspace .billing-pending{border-bottom:1px solid var(--dash-border);padding-bottom:20px;display:grid;gap:12px}
+.customer-workspace .billing-pending ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.customer-workspace .billing-pending a{display:flex;align-items:center;flex-wrap:wrap;gap:8px 18px;padding:12px 0;border-bottom:1px solid var(--dash-border);text-decoration:none;font-size:12px}
+.customer-workspace .billing-pending a span:last-child{margin-left:auto;text-decoration:underline;text-underline-offset:3px}
+.customer-workspace .billing-history{min-width:0}
+.customer-workspace .billing-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--dash-border);padding-bottom:12px}
+.customer-workspace .billing-tabs{display:flex;gap:20px;align-self:stretch}
+.customer-workspace .billing-tabs button{border:0;border-bottom:2px solid transparent;background:transparent;color:var(--dash-muted);padding:8px 0;min-height:42px;cursor:pointer;font-size:13px}
+.customer-workspace .billing-tabs button[aria-selected=true]{color:var(--dash-text);border-bottom-color:var(--dash-accent);font-weight:600}
+.customer-workspace .billing-filter{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:20px 0}
+.customer-workspace .billing-filter label{display:flex;align-items:center;gap:10px;font-size:12px}
+.customer-workspace .billing-filter select{min-width:155px}
+.customer-workspace .billing-table-scroll{overflow-x:auto;max-width:100%;overscroll-behavior-x:contain}
+.customer-workspace .billing-history table{border-collapse:collapse;width:100%;font-size:12px;text-align:left;font-variant-numeric:tabular-nums}
+.customer-workspace .billing-history th{font-weight:500;color:var(--dash-muted);white-space:nowrap}
+.customer-workspace .billing-history :is(th,td){padding:15px 16px;border-bottom:1px solid var(--dash-border)}
+.customer-workspace .billing-history tr:last-child td{border-bottom:0}
+.customer-workspace .billing-history td{vertical-align:middle}
+.customer-workspace .billing-history td:not(:first-child){white-space:nowrap}
+.customer-workspace .billing-history td strong{display:block;font-weight:500;min-width:130px}
+.customer-workspace .billing-history td small{display:block;color:var(--dash-muted);font-size:10px;margin-top:4px;max-width:240px;overflow-wrap:anywhere}
+.customer-workspace .billing-credit{color:var(--dash-success)}
+.customer-workspace .billing-status{display:inline-block;padding:3px 8px;border-radius:4px;background:var(--dash-soft);font-size:11px}
+.customer-workspace .billing-empty{padding:32px 0;text-align:center;color:var(--dash-muted)}
+.customer-workspace .billing-pagination{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;padding-top:16px}
+.customer-workspace .billing-pagination p{font-size:11px}
+.customer-workspace .billing-pagination>div{display:flex;gap:8px}
+.customer-workspace .billing-dialog{margin:auto;width:min(540px,calc(100% - 32px));max-height:calc(100svh - 48px);overflow-y:auto;overscroll-behavior:contain;border:1px solid var(--dash-border);border-radius:12px;padding:26px;background:var(--dash-bg);color:var(--dash-text);box-shadow:0 24px 90px #0005}
+.customer-workspace .billing-dialog::backdrop{background:#080d1680}
+.customer-workspace .billing-dialog-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}
+.customer-workspace .billing-dialog .dash-form{gap:20px}
+.customer-workspace .billing-dialog .dash-form input{width:100%}
+.customer-workspace .billing-facts{display:grid;gap:0;margin:0 0 20px;font-size:13px}
+.customer-workspace .billing-facts>div{display:grid;grid-template-columns:1fr 1.2fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--dash-border)}
+.customer-workspace .billing-facts dt{color:var(--dash-muted);font-size:12px;font-weight:400}
+.customer-workspace .billing-facts dd{margin:0;text-align:right;font-weight:500;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.customer-workspace .billing-warning{padding:15px;border:1px solid var(--dash-border);border-radius:6px;background:var(--dash-soft)}
+.customer-workspace .billing-warning .dash-button{margin-top:12px}
+.customer-workspace .billing-dialog .dash-alert{margin-bottom:20px}
+@media(max-width:850px){.customer-workspace .billing-summary{grid-template-columns:1fr;gap:24px}.customer-workspace .billing-wallet{padding:0 0 24px;border-right:0;border-bottom:1px solid var(--dash-border)}}
+@media(max-width:540px){.customer-workspace .billing-toolbar{align-items:flex-start}.customer-workspace .billing-tabs{gap:16px}.customer-workspace .billing-dialog{padding:20px}.customer-workspace .billing-dialog-head h2{font-size:16px}.customer-workspace .billing-pagination>div{width:100%}.customer-workspace .billing-pagination button{flex:1}.customer-workspace .billing-filter label{width:100%;justify-content:space-between}.customer-workspace .billing-filter select{flex:1}.customer-workspace .billing-facts>div{grid-template-columns:1fr 1fr}.customer-workspace .billing-history thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.customer-workspace .billing-history tbody{display:block}.customer-workspace .billing-history tr{display:grid;gap:8px;padding:16px 0;border-bottom:1px solid var(--dash-border)}.customer-workspace .billing-history td{display:flex;justify-content:space-between;gap:16px;border:0;padding:0;white-space:normal!important;overflow-wrap:anywhere}.customer-workspace .billing-history td:first-child{display:block}.customer-workspace .billing-history td[data-label]:before{content:attr(data-label);color:var(--dash-muted);flex-shrink:0}.customer-workspace .billing-history td:last-child{justify-content:flex-end}.customer-workspace .billing-history td small{max-width:100%}}

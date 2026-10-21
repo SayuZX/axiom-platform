@@ -1,0 +1,6 @@
+/* Mobile's unlayered native-control reset must not replace SDK component styles.
+   Keep the SDK color, pseudo-element backgrounds and Switch track/thumb together. */
+.m-app button.d-sdk-button[data-sdk-control]{all:revert-layer;--button-font-size:14px;--button-size:42px;--button-radius:999px;font-family:inherit}
+.m-app .d-sdk-switch>button[role=switch]{all:revert-layer}
+.m-app .d-sdk-input{width:100%;--input-font-size:16px;--input-size:48px;--input-radius:12px;font-family:inherit}
+.m-app .d-sdk-input[data-size][data-variant]>input{all:revert-layer;font-family:inherit}

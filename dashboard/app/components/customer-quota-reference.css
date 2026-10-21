@@ -1,0 +1,39 @@
+/* MAULA Google Sans content + Oxlyn/MAULA Geist floating navigation across customer dashboards. */
+@font-face{font-family:QuotaGoogleSans;src:url('/fonts/quota-google-sans-400.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:QuotaGoogleSans;src:url('/fonts/quota-google-sans-700.ttf') format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:QuotaGeist;src:url('/fonts/quota-Geist-Variable.woff2') format('woff2');font-weight:100 900;font-display:swap}
+.axiom-site.dashboard.customer-workspace.quota-reference{--dash-bg:#f5f6f8;--dash-surface:#fff;--dash-soft:#eceef2;--dash-text:#181b22;--dash-muted:#535b68;--dash-border:#d1d6df;--dash-accent:#775510;font-family:QuotaGoogleSans,sans-serif;padding-top:96px;background:var(--dash-bg)}
+html.dark .axiom-site.dashboard.customer-workspace.quota-reference{--dash-bg:#121212;--dash-surface:#181818;--dash-soft:#202020;--dash-text:#fff;--dash-muted:#a3a3a3;--dash-border:#ffffff18;--dash-accent:#f4d77a}
+.quota-reference .customer-header{inset:14px 24px auto;height:62px;border:1px solid var(--dash-border);border-radius:20px;background:var(--dash-surface);padding:0 22px;box-shadow:inset 0 1px #ffffff12,0 20px 50px -34px #00000080;font-family:QuotaGeist,sans-serif}
+.quota-reference .customer-brand{font-family:QuotaGeist,sans-serif;font-size:22px;font-weight:850;letter-spacing:-.04em}.quota-reference .customer-brand span{color:var(--dash-accent);font-weight:650}
+.quota-reference .customer-header-label{font-size:13px}.quota-reference .customer-header-tools{font-size:13px;font-weight:600}
+.quota-reference .customer-sidebar{top:96px;left:24px;bottom:24px;width:248px;padding:20px 14px;border:1px solid var(--dash-border);border-radius:18px;background:var(--dash-surface);font-family:QuotaGeist,sans-serif}
+.quota-reference .customer-wallet{padding:4px 12px 24px}.quota-reference .customer-wallet strong{font:700 28px/1.2 QuotaGoogleSans,sans-serif;letter-spacing:-.04em}
+.quota-reference .customer-sidebar nav h2{font:600 12px/1.5 QuotaGeist,sans-serif;color:var(--dash-muted);letter-spacing:0}
+.quota-reference .customer-sidebar nav a{border-radius:11px;font:550 13px/1.5 QuotaGeist,sans-serif;margin-bottom:3px;padding:10px 12px}
+.quota-reference .customer-sidebar nav a[aria-current=page]{background:#d5ae6218;color:var(--dash-accent);border-color:#d5ae6240;box-shadow:inset 2px 0 #d5ae62}
+.axiom-site.dashboard.customer-workspace.quota-reference .dash-main{margin-left:292px;width:calc(100% - 292px)}
+.axiom-site.dashboard.customer-workspace.quota-reference .wrap{max-width:1280px;padding-inline:40px}
+.axiom-site.dashboard.customer-workspace.quota-reference .dash-page-heading{padding-top:40px}
+.axiom-site.dashboard.customer-workspace.quota-reference .dash-page-heading h1{font:700 clamp(36px,4vw,56px)/1.03 QuotaGoogleSans,sans-serif;letter-spacing:-.055em;margin-bottom:18px}
+.axiom-site.dashboard.customer-workspace.quota-reference .dash-page-heading p{font:400 16px/1.6 QuotaGoogleSans,sans-serif;max-width:40rem}
+.axiom-site.dashboard.customer-workspace.quota-reference .dash-content{padding-top:32px}
+.axiom-site.dashboard.customer-workspace.quota-reference :is(.dash-button,.dash-text-button){font:650 13px/1.5 QuotaGeist,sans-serif;min-height:44px;border-radius:12px;padding:11px 18px;background:var(--dash-surface);border:1px solid var(--dash-border);color:var(--dash-text);box-shadow:none}
+.axiom-site.dashboard.customer-workspace.quota-reference .dash-button-primary{background:linear-gradient(135deg,#f4d77a,#d4af37);border-color:#d4af37;color:#211b0c}
+.axiom-site.dashboard.customer-workspace.quota-reference .dash-button-primary:hover{background:#f4d77a;color:#211b0c}
+.quota-reference .dash-footer{margin-left:292px;width:calc(100% - 292px);font-family:QuotaGeist,sans-serif;border-color:var(--dash-border)}
+@media(max-width:900px){.axiom-site.dashboard.customer-workspace.quota-reference{padding-top:90px}.quota-reference .customer-header{inset:10px 12px auto;height:60px;padding-inline:12px}.quota-reference .customer-header-label{display:none}.quota-reference .customer-sidebar{top:82px;left:12px;bottom:12px;width:min(280px,calc(100% - 24px));display:none}.quota-reference .customer-sidebar.is-open{display:block;z-index:70;box-shadow:0 20px 70px #0006}.quota-reference .customer-menu{display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;border-radius:12px}.axiom-site.dashboard.customer-workspace.quota-reference .dash-main{margin-left:0;width:100%}.axiom-site.dashboard.customer-workspace.quota-reference .wrap{padding-inline:24px}.quota-reference .dash-footer{margin-left:0;width:100%}.axiom-site.dashboard.customer-workspace.quota-reference .dash-page-heading{padding-top:28px}}
+@media(max-width:480px){.axiom-site.dashboard.customer-workspace.quota-reference .wrap{padding-inline:20px}.axiom-site.dashboard.customer-workspace.quota-reference .dash-page-heading h1{font-size:38px}.axiom-site.dashboard.customer-workspace.quota-reference .dash-page-heading p{font-size:15px}.quota-reference .customer-header-tools{gap:8px}.quota-reference .customer-brand{font-size:20px}}
+@media(prefers-reduced-motion:reduce){.quota-reference *{animation:none!important;transition:none!important}}
+.quota-reference .customer-header{display:flex;gap:16px;inset:14px auto auto 50%;transform:translateX(-50%);width:min(760px,calc(100% - 48px));height:56px}
+.quota-reference .customer-header-tools{margin-left:auto}
+.axiom-site.dashboard.customer-workspace.quota-reference :is(h2,h3,input,select,textarea){font-family:QuotaGoogleSans,sans-serif}
+@media(max-width:1100px){.quota-reference .customer-header{gap:12px;width:min(520px,calc(100% - 24px));inset:10px auto auto 50%;height:56px}.quota-reference .customer-header-tools>a{display:none}.quota-reference .customer-menu{display:flex;align-items:center;justify-content:center;min-height:44px;min-width:44px}.quota-reference .customer-sidebar{position:fixed;top:82px;left:12px;bottom:12px;width:min(280px,calc(100% - 24px));max-height:none;display:none;z-index:70}.quota-reference .customer-sidebar.is-open{display:block;box-shadow:0 20px 70px #0006}.axiom-site.dashboard.customer-workspace.quota-reference .dash-main{margin-left:0;width:100%}.quota-reference .dash-footer{margin-left:0;width:100%;padding-bottom:32px}}
+html:not(.dark) .axiom-site.dashboard.customer-workspace.quota-reference{--dash-danger:#a61b32;--dash-danger-bg:#fff0f2;--dash-success:#16643a;--dash-success-bg:#eaf7ef;color-scheme:light}
+html:not(.dark) .quota-reference .customer-header{box-shadow:0 3px 14px #17203308;border-color:#d1d6df}
+html:not(.dark) .quota-reference .customer-sidebar nav a[aria-current=page]{background:#faf1db;color:#70500c;box-shadow:inset 2px 0 #a17920}
+html:not(.dark) .axiom-site.dashboard.customer-workspace.quota-reference :is(.dash-button:not(.dash-button-primary),.customer-menu){background:#fff;border:1px solid #828c9a;color:#242b35}
+html:not(.dark) .axiom-site.dashboard.customer-workspace.quota-reference :is(input:not([type=checkbox]):not([type=radio]),select,textarea){background:#fff;color:#181b22;border-color:#828c9a}
+html:not(.dark) .quota-reference :is(input,textarea)::placeholder{color:#626c79;opacity:1}
+html:not(.dark) .quota-reference :is(a,button,input,select,textarea):focus-visible{outline:2px solid #775510;outline-offset:3px}
+html:not(.dark) .axiom-site.dashboard.customer-workspace.quota-reference .dash-button:disabled{background:#eceef2;color:#606875;border-color:#d1d6df;opacity:1;box-shadow:none;cursor:not-allowed}

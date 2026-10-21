@@ -1,0 +1,10 @@
+.filters { display: grid; grid-template-columns: minmax(0, 1fr) minmax(150px, 220px); gap: 16px; padding: 20px 24px; border-bottom: 1px solid var(--line, #e5e5e1); }
+.filters label { display: grid; gap: 8px; font-size: 13px; }
+.limit { margin: 0; padding: 16px 24px; font-size: 13px; background: #fbf0eb; color: #773c28; }
+.dialog { width: min(520px, calc(100vw - 32px)); max-height: calc(100dvh - 48px); overflow-y: auto; margin: auto; padding: 28px; border: 1px solid var(--line, #e5e5e1); border-radius: 16px; background: var(--canvas, #f8f8f6); color: var(--ink, #121212); box-shadow: 0 24px 90px #12121233; }
+.dialog::backdrop { background: #12121280; }
+.dialog h2 { margin: 0; font-size: 23px; }
+.dialog p { line-height: 1.6; overflow-wrap: anywhere; }
+.actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+.secret { width: 100%; min-height: 100px; font-family: monospace; overflow-wrap: anywhere; resize: vertical; }
+@media (max-width: 560px) { .filters { grid-template-columns: 1fr; padding: 16px; } .dialog { padding: 22px; } }

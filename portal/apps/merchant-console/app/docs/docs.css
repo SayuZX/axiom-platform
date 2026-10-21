@@ -1,0 +1,325 @@
+.api-docs {
+  min-height: 100svh;
+}
+.api-docs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 80px;
+  padding: 16px max(24px, calc((100vw - 1280px) / 2));
+  border-bottom: 1px solid var(--line);
+}
+.api-docs-header > nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 13px;
+}
+.api-docs-header > nav > a:not(.button) {
+  text-decoration: none;
+}
+.api-docs-layout {
+  display: grid;
+  grid-template-columns: 224px minmax(0, 1fr);
+  gap: 64px;
+  max-width: 1248px;
+  margin: auto;
+  padding: 64px 24px 0;
+}
+.api-docs-nav {
+  position: sticky;
+  top: 112px;
+  align-self: start;
+  max-height: calc(100svh - 136px);
+  overflow-y: auto;
+  padding-right: 16px;
+  font-size: 12px;
+}
+.api-docs-nav > p {
+  margin-bottom: 24px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.api-docs-nav details {
+  margin-bottom: 20px;
+}
+.api-docs-nav summary {
+  padding: 8px 0;
+  font-weight: 500;
+  cursor: pointer;
+}
+.api-docs-nav nav {
+  display: grid;
+  gap: 4px;
+  margin: 8px 0 0 4px;
+  padding-left: 12px;
+  border-left: 1px solid var(--mist);
+}
+.api-docs-nav a {
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: var(--muted);
+  text-decoration: none;
+}
+.api-docs-nav a:hover,
+.api-docs-nav a:focus-visible {
+  background: var(--stone);
+  color: var(--ink);
+}
+.api-docs-content {
+  min-width: 0;
+  max-width: 880px;
+}
+.api-docs-intro {
+  padding-bottom: 64px;
+  border-bottom: 1px solid var(--ink);
+}
+.api-docs-intro > p:first-of-type {
+  display: inline-block;
+  margin: 0 0 24px 12px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.section-marker {
+  display: inline-block;
+  width: 24px;
+  height: 2px;
+  background: var(--clay);
+  vertical-align: middle;
+}
+.api-docs-intro h1 {
+  font-size: 30px;
+  margin-bottom: 24px;
+}
+.api-docs-intro > p:last-child {
+  max-width: 70ch;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--secondary);
+}
+.api-docs-content > section {
+  scroll-margin-top: 112px;
+  margin-top: 64px;
+}
+.api-docs-content h2 {
+  margin-bottom: 24px;
+}
+.api-docs-content h3 {
+  margin: 24px 0 16px;
+}
+.api-docs-content p {
+  max-width: 78ch;
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+.api-docs-content ul {
+  padding-left: 24px;
+  margin: 16px 0 24px;
+}
+.api-docs-content li {
+  margin-bottom: 12px;
+  line-height: 1.7;
+}
+.api-docs-content p code,
+.api-docs-content li code {
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: var(--stone);
+  font-size: 0.9em;
+  overflow-wrap: anywhere;
+}
+.api-steps {
+  list-style: decimal;
+  padding-left: 24px;
+  margin: 24px 0;
+}
+.api-steps li {
+  padding: 20px 0 20px 16px;
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+.api-steps li::marker {
+  color: var(--muted);
+  font-size: 11px;
+}
+.api-steps li:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.api-steps strong {
+  font-weight: 550;
+}
+.api-steps p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+.api-callout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 24px 0;
+  padding: 20px 24px;
+  border-left: 2px solid var(--ink);
+  border-radius: 0 8px 8px 0;
+  background: var(--stone);
+  font-size: 13px;
+}
+.api-callout p {
+  margin: 0;
+}
+.api-callout > a {
+  white-space: nowrap;
+}
+.api-code {
+  margin: 24px 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+  overflow: hidden;
+}
+.api-code-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--muted);
+}
+.api-code-heading button {
+  min-width: 52px;
+  min-height: 36px;
+  border: 1px solid var(--mist);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--secondary);
+  font-size: 12px;
+}
+.api-code-heading button:hover {
+  background: var(--stone);
+}
+.api-code pre {
+  margin: 0;
+  padding: 24px;
+  border: 0;
+  border-radius: 0;
+  background: var(--paper);
+  font-size: 12px;
+  line-height: 1.8;
+  tab-size: 2;
+}
+.api-copy-status {
+  display: block;
+  min-height: 0;
+  padding: 0 20px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.api-copy-status:not(:empty) {
+  padding-bottom: 12px;
+}
+.api-endpoint {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  margin: 20px 0;
+  background: var(--stone);
+  border-radius: 8px;
+}
+.api-endpoint > span,
+.api-method {
+  font-size: 11px;
+  font-weight: 550;
+  white-space: nowrap;
+}
+.api-docs-content .table-wrap {
+  margin: 24px 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.api-docs-content table {
+  white-space: normal;
+  min-width: 540px;
+}
+.api-docs-content th,
+.api-docs-content td {
+  padding: 16px;
+  vertical-align: top;
+}
+.api-docs-content td code {
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+.api-docs-content td:first-child {
+  min-width: 96px;
+}
+.api-reference-group {
+  margin-top: 32px;
+}
+.api-reference-group table {
+  min-width: 720px;
+}
+.api-reference-group td:nth-child(2) {
+  min-width: 240px;
+}
+.api-docs-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 80px;
+  padding: 32px max(24px, calc((100% - 1200px) / 2));
+  border-top: 1px solid var(--mist);
+  font-size: 12px;
+  color: var(--muted);
+}
+.api-docs-footer .policy-links {
+  flex-basis: 100%;
+}
+@media (max-width: 1100px) {
+  .api-docs-layout {
+    grid-template-columns: 190px minmax(0, 1fr);
+    gap: 40px;
+  }
+}
+@media (max-width: 800px) {
+  .api-docs-header {
+    padding: 16px 24px;
+  }
+  .api-docs-header > nav {
+    gap: 16px;
+  }
+  .api-docs-header > nav > a:not(.button) {
+    display: none;
+  }
+  .api-docs-layout {
+    display: block;
+    padding: 32px 24px 0;
+  }
+  .api-docs-nav {
+    position: static;
+    max-height: 280px;
+    margin-bottom: 40px;
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--paper);
+  }
+  .api-docs-intro {
+    padding-bottom: 40px;
+  }
+  .api-docs-content > section {
+    margin-top: 48px;
+  }
+  .api-code pre {
+    padding: 20px;
+  }
+  .api-docs-content .table-wrap {
+    max-width: 100%;
+  }
+}

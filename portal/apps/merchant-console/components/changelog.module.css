@@ -1,0 +1,32 @@
+.panel { min-width: 0; padding: 24px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); }
+.header { margin-bottom: 24px; }
+.header h2 { font-size: 25px; }
+.header p { margin-top: 6px; color: var(--muted); font-size: 13px; }
+.timeline { list-style: none; margin: 0; padding: 0 0 0 18px; }
+.timeline > li { position: relative; min-width: 0; padding: 0 0 26px 20px; border-left: 1px solid var(--line); overflow-wrap: anywhere; scroll-margin-top: 24px; }
+.timeline > li:last-child { padding-bottom: 0; border-left-color: transparent; }
+.timeline > li::before { content: ''; position: absolute; top: 5px; left: -5px; width: 9px; height: 9px; border-radius: 50%; background: var(--line); box-shadow: 0 0 0 4px var(--paper); }
+.timeline > li:first-child::before { background: var(--clay); }
+.date { display: flex; flex-direction: column; gap: 3px; margin-bottom: 10px; font-size: 11px; color: var(--muted); }
+.date time { color: var(--secondary); font-size: 12px; }
+.timeline h3 { font-family: inherit; font-size: 14px; line-height: 1.5; font-weight: 600; }
+.timeline h3 a { text-decoration: none; }
+.timeline h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.summary { margin-top: 8px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.viewAll { display: block; margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 13px; text-underline-offset: 4px; }
+.viewAll:focus-visible, .timeline a:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.page { display: grid; gap: 28px; min-width: 0; }
+.page > :global(.page-heading) { margin-bottom: 0; }
+.back { width: fit-content; font-size: 13px; text-underline-offset: 4px; }
+.detailed { padding: 28px 28px 28px 32px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); }
+.detailed > li { padding-left: 28px; padding-bottom: 40px; }
+.detailed h2 { font-size: clamp(23px, 3vw, 32px); line-height: 1.25; }
+.detailed .date { flex-direction: row; flex-wrap: wrap; gap: 6px 16px; }
+.detailed .summary { max-width: 75ch; font-size: 14px; }
+.section { max-width: 75ch; margin-top: 22px; }
+.section ul { display: grid; gap: 8px; margin: 10px 0 0; padding-left: 18px; color: var(--secondary); font-size: 14px; line-height: 1.7; }
+@media (max-width: 600px) {
+  .panel { padding: 20px; }
+  .detailed { padding: 22px 18px 22px 22px; }
+  .detailed > li { padding-left: 20px; }
+}
