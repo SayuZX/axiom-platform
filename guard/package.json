@@ -1,0 +1,8 @@
+{
+  "name": "axiom-guard",
+  "version": "1.7.1",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24.0.0" },
+  "scripts": { "start": "node server.mjs", "sync-ui": "node sync-ui.mjs", "check": "node check.mjs && node management.check.mjs && node automation.check.mjs && node protection.check.mjs && node logs.check.mjs && node fullconfig.check.mjs && node drains.check.mjs && node script-worker.check.mjs" }
+}
