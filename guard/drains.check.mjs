@@ -1,0 +1,111 @@
+import assert from 'node:assert/strict';
+import {DatabaseSync} from 'node:sqlite';
+import {EventEmitter} from 'node:events';
+import {createHmac} from 'node:crypto';
+import dns from 'node:dns/promises';
+import https from 'node:https';
+import {createDrains} from './drains.mjs';
+
+const db=new DatabaseSync(':memory:'),audits=[],owner={id:'owner',role:'owner'},viewer={id:'viewer',role:'viewer'};
+const fail=(status,message)=>{throw Object.assign(Error(message),{status});};
+const drains=createDrains({db,fail,text:(value,max)=>{if(typeof value!=='string'||value.length>max||value.includes('\0'))fail(400,'Invalid text');return value;},audit:(action,details)=>audits.push({action,details}),now:()=> '2026-10-04T12:00:00.000Z'});
+const route=(suffix='',body,user=owner)=>drains.routes('/api/event-drains'+suffix,body===undefined?'GET':'POST',body,new URL('http://local/api/event-drains'+suffix),user);
+const config={name:'Receiver',endpoint:'https://receiver.guard-check.net/events',kinds:['detection'],enabled:true,confirm:true};
+const event=(key,kind='detection',details={})=>({key,kind,at:'2026-10-04T12:00:00.000Z',details});
+const originalLookup=dns.lookup,originalRequest=https.request;
+let answers=[{address:'93.184.216.34',family:4}],status=204,sent=[],lookupCount=0,gate=null;
+try{
+  dns.lookup=async()=>{lookupCount++;return answers.map(x=>({...x}));};
+  https.request=(options,onResponse)=>{
+    const req=new EventEmitter();req.destroy=()=>{};
+    req.end=body=>{
+      const record={options,body};sent.push(record);
+      const respond=()=>{
+        options.lookup(options.hostname,{all:true},(error,addresses)=>{assert.ifError(error);record.pinned=addresses;});
+        options.lookup(options.hostname,{},(error,address,family)=>{assert.ifError(error);record.address=address;record.family=family;});
+        const res=new EventEmitter();res.statusCode=status;res.headers={location:'https://127.0.0.1/private'};res.destroy=()=>{};onResponse(res);
+      };
+      if(gate)gate(respond);else queueMicrotask(respond);
+    };return req;
+  };
+  await assert.rejects(route('',undefined,null),e=>e.status===401);
+  await assert.rejects(route('',config,viewer),e=>e.status===403);
+  await assert.rejects(route('',{...config,confirm:false}),e=>e.status===400);
+  for(const endpoint of ['http://receiver.guard-check.net','https://a:b@receiver.guard-check.net','https://receiver.guard-check.net:444','https://receiver.guard-check.net/#','https://localhost','https://node.internal','https://127.0.0.1','https://2130706433','https://0x7f000001','https://0177.0.0.1','https://10.0.0.1','https://169.254.169.254','https://168.63.129.16','https://100.100.100.200','https://192.0.2.1','https://[::1]','https://[::ffff:8.8.8.8]','https://[64:ff9b::808:808]','https://[2002:0808:0808::1]','https://[2001:db8::1]','https://[fc00::1]','https://[fe80::1]'])await assert.rejects(route('',{...config,endpoint}),e=>e.status===400,endpoint);
+  for(const address of ['127.0.0.1','10.1.2.3','172.16.0.1','192.168.1.1','169.254.169.254','198.18.1.1','0.0.0.0','224.0.0.1','240.0.0.1','::ffff:93.184.216.34','2001:db8::1']){
+    answers=[{address:'93.184.216.34',family:4},{address,family:address.includes(':')?6:4}];
+    await assert.rejects(route('',config),e=>e.status===400,address);
+  }
+  assert.equal(sent.length,0);
+  answers=[{address:'93.184.216.34',family:4}];
+  const created=await route('',config),id=created.drain.id,key=created.secret;
+  assert.match(key,/^[a-f0-9]{64}$/);
+  assert.ok(!JSON.stringify(await route('',undefined,viewer)).includes(key));
+  assert.ok(!JSON.stringify(audits).includes(key));
+  drains.ingest({},[event('one'),event('one'),event('ignored','connection')]);
+  assert.equal((await route()).drains[0].queued,1);
+  await drains.flush();
+  assert.equal(sent.length,1);const first=sent[0];
+  assert.equal(first.options.rejectUnauthorized,true);assert.equal(first.options.agent,false);
+  assert.equal(first.options.servername,'receiver.guard-check.net');
+  assert.equal(first.options.hostname,'receiver.guard-check.net');
+  assert.equal(first.address,'93.184.216.34');assert.equal(first.family,4);
+  const timestamp=first.options.headers['x-guard-timestamp'];
+  assert.equal(timestamp,String(Date.parse('2026-10-04T12:00:00Z')/1000));
+  assert.equal(first.options.headers['x-guard-signature'],'sha256='+createHmac('sha256',Buffer.from(key,'hex')).update(timestamp+'.'+first.body).digest('hex'));
+  assert.equal(first.options.headers['content-length'],Buffer.byteLength(first.body));
+  assert.equal(JSON.parse(first.body).event.key,'one');
+  assert.equal((await route()).drains[0].history[0].status,'delivered');
+  drains.ingest({},[event('one')]);await drains.flush();assert.equal(sent.length,1);
+  const reloaded=createDrains({db,fail,text:()=>{throw Error('unused');},audit:()=>{},now:()=>Date.now()});
+  reloaded.ingest({},[event('one')]);assert.equal((await route()).drains[0].queued,0);
+  answers=[{address:'127.0.0.1',family:4}];
+  drains.ingest({},[event('rebound')]);await drains.flush();
+  assert.equal(sent.length,1);assert.equal((await route()).drains[0].history[0].status,'failed');
+  answers=[{address:'93.184.216.34',family:4}];
+  let respond,started;
+  const ready=new Promise(resolve=>{started=resolve;});gate=fn=>{respond=fn;started();};
+  drains.ingest({},[event('pin')]);const flushing=drains.flush();await ready;
+  const resolutions=lookupCount;answers=[{address:'127.0.0.1',family:4}];
+  await drains.flush();
+  await assert.rejects(route('/'+id,{enabled:false,confirm:true}),e=>e.status===409);
+  await assert.rejects(route('/'+id+'/remove',{confirm:true}),e=>e.status===409);
+  respond();await flushing;gate=null;
+  assert.equal(lookupCount,resolutions);assert.equal(sent.at(-1).address,'93.184.216.34');
+  assert.deepEqual(sent.at(-1).pinned,[{address:'93.184.216.34',family:4}]);
+  answers=[{address:'93.184.216.34',family:4}];status=302;
+  const beforeRedirect=sent.length;
+  const redirect=await route('/'+id+'/test',{confirm:true});
+  assert.equal(redirect.delivery.status,'redirect-blocked');assert.equal(redirect.delivery.httpStatus,302);
+  assert.equal(sent.length,beforeRedirect+1);status=204;
+  for(const suffix of ['/'+id,'/'+id+'/remove','/'+id+'/test']){
+    await assert.rejects(route(suffix,{},owner),e=>e.status===400);
+    await assert.rejects(route(suffix,{confirm:true},viewer),e=>e.status===403);
+  }
+  const rotated=await route('/'+id,{rotate:true,confirm:true});assert.notEqual(rotated.secret,key);
+  await route('/'+id+'/test',{confirm:true});
+  const signed=sent.at(-1),stamp=signed.options.headers['x-guard-timestamp'];
+  assert.equal(signed.options.headers['x-guard-signature'],'sha256='+createHmac('sha256',Buffer.from(rotated.secret,'hex')).update(stamp+'.'+signed.body).digest('hex'));
+  assert.ok(!JSON.stringify(await route()).includes(rotated.secret));assert.ok(!JSON.stringify(audits).includes(rotated.secret));
+  drains.ingest({},Array.from({length:230},(_,n)=>event('full-'+n)));
+  let current=(await route()).drains[0];assert.equal(current.queued,100);assert.equal(current.history.length,100);assert.equal(current.history[0].status,'queue-full');
+  drains.ingest({},[event('large','detection',{message:'é'.repeat(20000)})]);
+  assert.equal((await route()).drains[0].history[0].status,'payload-too-large');
+  await route('/'+id,{enabled:false,confirm:true});
+  current=(await route()).drains[0];assert.equal(current.queued,0);assert.equal(current.enabled,false);assert.equal(current.history[0].status,'cancelled-config-change');
+  drains.ingest({},[event('disabled')]);await drains.flush();assert.equal((await route()).drains[0].queued,0);
+  const beforeTest=sent.length;await route('/'+id+'/test',{confirm:true});assert.equal(sent.length,beforeTest+1);
+  await route('/'+id,{enabled:true,kinds:['connection'],confirm:true});
+  drains.ingest({},[event('not-selected'),event('joined','connection')]);assert.equal((await route()).drains[0].queued,1);
+  await drains.flush();assert.equal(JSON.parse(sent.at(-1).body).event.key,'joined');
+  const second=await route('',{...config,name:'Second',endpoint:'https://[2606:4700:4700::1111]/events',kinds:['connection']});
+  drains.ingest({},[event('shared','connection'),event('shared','connection')]);
+  assert.deepEqual((await route()).drains.map(d=>d.queued).sort(),[1,1]);
+  const beforeShared=sent.length;await drains.flush();assert.equal(sent.length,beforeShared+2);
+  assert.equal(sent.find(s=>s.options.hostname==='2606:4700:4700::1111').family,6);
+  await route('/'+second.drain.id+'/remove',{confirm:true});
+  await route('/'+id+'/remove',{confirm:true});assert.deepEqual((await route()).drains,[]);
+  for(const table of ['ed_queue','ed_seen','ed_history'])assert.equal(db.prepare(`SELECT count(*) n FROM ${table}`).get().n,0);
+  await assert.rejects(route('/'+id+'/test',{confirm:true}),e=>e.status===404);
+  console.log('Event drain URL/DNS isolation, pinned TLS, signatures, authorization, deduplication, bounds, rotation and delivery checks passed.');
+}finally{dns.lookup=originalLookup;https.request=originalRequest;db.close();}

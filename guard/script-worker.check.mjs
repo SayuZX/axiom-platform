@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {runScript} from './script-worker.mjs';
+const player={id:7,name:'Lua smoke',health:200,armor:50,position:{x:1,y:2,z:3}};
+const value=await runScript('print(player.name); freeze(true); teleport(4,5,6); return inspect()',player);
+assert.equal(value.result.health,200);assert.equal(value.result.name,player.name);
+assert.deepEqual(value.operations,[{type:'freeze',value:true},{type:'teleport',x:4,y:5,z:6}]);
+assert.match(value.output,/Lua smoke/);
+await assert.rejects(runScript('while true do end',player),/limit|timeout/);
+await assert.rejects(runScript('local s="a";while true do s=s..s end',player),/memory|limit/);
+await assert.rejects(runScript('return io.open("secret")',player),/nil/);
+await assert.rejects(runScript('return os.execute("bad")',player),/nil/);
+await assert.rejects(runScript('teleport(0/0,0,0)',player),/coordinates/);
+await assert.rejects(runScript('for i=1,17 do disarm() end',player),/Operation limit/);
+console.log('PASS: native worker snapshot, operations, output, CPU/memory limits, OS/file isolation, validation');

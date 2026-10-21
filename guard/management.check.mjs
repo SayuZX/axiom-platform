@@ -1,0 +1,84 @@
+import assert from 'node:assert/strict';
+import { DatabaseSync } from 'node:sqlite';
+import { createManagement } from './management.mjs';
+
+const db=new DatabaseSync(':memory:');
+let clock='2026-10-01T12:00:00.000Z';
+const fail=(status,message)=>{throw Object.assign(new Error(message),{status});};
+const options={db,fail,text:(value,max)=>{if(typeof value!=='string'||value.length>max) fail(400,'Invalid text');return value;},audit:()=>{},now:()=>clock,getLive:()=>({}),getMode:()=> 'monitor'};
+let management=createManagement(options);
+const admin={name:'Owner',role:'owner'}, viewer={name:'Reader',role:'viewer'};
+const route=(path,body,user=admin)=>management.routes(path.split('?')[0],body===undefined?'GET':'POST',body,new URL(path,'http://local'),user);
+const players=[
+  {id:1,name:'Same name',identifiers:['license:aa','steam:111','ip:127.0.0.1']},
+  {id:2,name:'Linked B',identifiers:['license:bb','steam:111','discord:222']},
+  {id:3,name:'Linked C',identifiers:['license:cc','discord:222']},
+  {id:4,name:'Same name',identifiers:['license:dd','ip:127.0.0.1']},
+  {id:5,name:'No license',identifiers:['ip:127.0.0.1']}
+];
+const event={key:'one',at:clock,kind:'connection',playerId:1,playerName:'Earlier name',rule:'player_joined',severity:'info',details:{uid:'forged',identifiers:players[0].identifiers}};
+management.ingest({players,uptime:10},[event]);
+management.ingest({players,uptime:11},[event]);
+assert.equal(event.details.uid,'aa');
+assert.equal(management.summary().uniquePlayers,4);
+assert.equal(management.summary().retention,null);
+const person=await route('/api/identities/aa');
+assert.equal(person.identity.connections,1);
+assert.equal(person.sessions.length,1);
+assert.deepEqual(person.aliases.map(item=>item.uid),['bb','cc']);
+assert.deepEqual((await route('/api/identities?q=Earlier%20name')).identities.map(item=>item.uid).sort(),['aa','bb','cc']);
+assert.equal((await route('/api/identities?q=ip%3A127.0.0.1')).total,0);
+const ban={uid:'aa',reason:'Reviewed local evidence',expiresAt:'2026-10-01T14:00:00.000Z',confirmed:true};
+await assert.rejects(route('/api/threats',{...ban,identifiers:['license:dd']}),error=>error.status===400);
+await assert.rejects(route('/api/threats',{...ban,confirmed:false}),error=>error.status===400);
+await assert.rejects(route('/api/threats',ban,viewer),error=>error.status===403);
+const created=await route('/api/threats',ban);
+assert.deepEqual(management.policy().bans[0].identifiers,['discord:222','license:aa','license:bb','license:cc','steam:111']);
+assert.equal(management.policy().bans[0].identifiers.includes('license:dd'),false);
+management.ingest({players,uptime:12},[{...event,details:{identifiers:['license:aa','license:dd']}}]);
+assert.equal(management.policy().bans[0].identifiers.includes('license:dd'),false);
+clock='2026-10-01T12:00:20.000Z';
+management.ingest({players,uptime:32},[]);
+await assert.rejects(route('/api/whitelist',{uid:'cc',reason:'Expired already',expiresAt:clock}),error=>error.status===400);
+const bypass=await route('/api/whitelist',{uid:'cc',reason:'Verified appeal',expiresAt:'2026-10-01T13:00:00.000Z'});
+assert.deepEqual(management.policy().whitelist.map(item=>item.uid).sort(),['aa','bb','cc']);
+clock='2026-10-01T13:00:00.000Z';
+assert.deepEqual(management.policy().whitelist,[]);
+assert.equal(management.policy().bans[0].id,created.threat.id);
+await route(`/api/whitelist/${bypass.entry.id}`,{reason:'Extended review',expiresAt:null});
+assert.equal(management.policy().whitelist.find(item=>item.uid==='aa').expiresAt,null);
+await route(`/api/whitelist/${bypass.entry.id}/remove`,{});
+assert.deepEqual(management.policy().whitelist,[]);
+management=createManagement(options);
+assert.equal((await route('/api/identities/aa')).identity.connections,1);
+assert.equal(management.policy().bans[0].uid,'aa');
+clock='2026-10-01T14:00:00.000Z';
+assert.deepEqual(management.policy().bans,[]);
+assert.equal((await route('/api/threats')).threats[0].status,'expired');
+const renewed=await route('/api/threats',{...ban,expiresAt:null});
+await route(`/api/threats/${renewed.threat.id}/revoke`,{});
+assert.deepEqual(management.policy().bans,[]);
+assert.equal((await route('/api/threats')).threats[0].status,'revoked');
+management.ingest({players:[],uptime:15},[{key:'disconnect',at:clock,kind:'disconnection',playerId:1,playerName:'Same name',rule:'player_left',severity:'info',details:{identifiers:['license:aa'],reason:'Timed out'}}]);
+assert.deepEqual(management.summary().disconnectReasons.map(item=>({...item})),[{reason:'Timed out',count:1}]);
+assert.ok((await route('/api/identities/aa')).sessions[0].endedAt);
+assert.equal(management.summary().retention,0.3);
+db.exec('CREATE TABLE events(id INTEGER PRIMARY KEY,event_key TEXT,at TEXT,kind TEXT,player_id INTEGER,player_name TEXT,rule TEXT,severity TEXT,details TEXT)');
+db.prepare('INSERT INTO events VALUES(1,?,?,?,?,?,?,?,?)').run('legacy','2026-09-30T10:00:00.000Z','connection',9,'Before upgrade','player_joined','info',JSON.stringify({identifiers:['license:ee','ip:127.0.0.1']}));
+management=createManagement(options);
+assert.equal((await route('/api/identities/ee')).identity.connections,1);
+assert.equal((await route('/api/identities/ee')).sessions.length,0);
+management=createManagement(options);
+assert.equal((await route('/api/identities/ee')).identity.connections,1);
+const luaBan={id:'lua-1',name:'Lua player',reason:'Server-native detection',createdAt:clock,identifiers:['license:ff'],evidence:{damage:900}};
+management.ingest({players:[],uptime:20,luaBans:[luaBan]},[]);
+management.ingest({players:[],uptime:21,luaBans:[luaBan]},[]);
+const mirrored=(await route('/api/threats')).threats.filter(b=>b.uid==='ff');
+assert.equal(mirrored.length,1,'repeated Lua snapshot is idempotent');
+assert.equal(management.policy().bans.some(b=>b.uid==='ff'),false,'Lua ban is not fed back as dashboard-owned');
+await route(`/api/threats/${mirrored[0].id}/revoke`,{});
+assert.deepEqual(management.policy().luaRevocations,['lua-1']);
+management.ingest({players:[],uptime:22,luaBans:[luaBan]},[]);
+assert.equal((await route('/api/threats')).threats.find(b=>b.uid==='ff').status,'revoked','stale Lua snapshot cannot resurrect panel revocation');
+db.close();
+console.log('Management graph, ban expiry/revocation, permissions and whitelist boundaries passed.');
