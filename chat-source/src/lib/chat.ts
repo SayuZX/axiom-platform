@@ -1,0 +1,5 @@
+export type Message={role:'user'|'assistant';content:string;reference?:boolean};
+export type Chat={title:string;messages:Message[]};
+export type ApiConfig={url:string;model:string;key:string};
+export function readJSON<T>(storage:Storage,key:string,fallback:T):T{try{return JSON.parse(storage.getItem(key)||'null')??fallback}catch{return fallback}}
+export async function answer(messages:Message[],config:ApiConfig|null):Promise<string>{if(!config)throw Error('Konfigurasikan endpoint sebelum mengirim pesan.');const response=await fetch(config.url.replace(/\/$/,'')+'/chat/completions',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+config.key},body:JSON.stringify({model:config.model,messages:messages.map(({role,content})=>({role,content}))})});const json=await response.json();if(!response.ok)throw Error(json.error?.message||'API gagal');if(typeof json.choices?.[0]?.message?.content!=='string')throw Error('Format jawaban API tidak valid');return json.choices[0].message.content;}
