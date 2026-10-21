@@ -1,0 +1,12 @@
+{
+  "operator_name": "dj, pengelola Axiom Payment",
+  "support_hours": "Pengaduan dapat diajukan setiap saat melalui tiket bantuan. Balasan ditangani manual sesuai ketersediaan pengelola; tidak tersedia jaminan dukungan 24 jam",
+  "withdrawal_schedule": "Pengajuan diterima melalui dashboard dan diproses manual setelah pemeriksaan saldo serta rekening tujuan",
+  "retention_accounts": "Selama akun aktif dan selama masih diperlukan untuk penyelesaian kewajiban, sengketa, atau permintaan penutupan akun",
+  "retention_financial": "Selama diperlukan untuk pencatatan transaksi, penyelesaian hak pelanggan, audit, sengketa, dan kewajiban hukum yang berlaku",
+  "retention_support": "Selama diperlukan untuk menangani pengaduan dan menelusuri penyelesaiannya; penghapusan dapat diminta melalui tiket bantuan",
+  "retention_logs": "Selama diperlukan untuk keamanan dan penelusuran gangguan. Penghapusan ditinjau manual; aplikasi belum menerapkan penghapusan otomatis berdasarkan umur data",
+  "version": "2026-10-12.1",
+  "effective_at": "2026-10-12",
+  "updated_at": "2026-10-12"
+}
